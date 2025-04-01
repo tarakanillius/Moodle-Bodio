@@ -1,17 +1,24 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+    Route,
+    Navigate,
+    RouterProvider,
+    createRoutesFromElements, createBrowserRouter
+} from "react-router-dom";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 
 function App() {
+    const routeDefinitions = createRoutesFromElements(
+        <Route>
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/main" element={<Main />} />
+        </Route>
+    )
+
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Navigate to="/login" />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/main" element={<Main />} />
-            </Routes>
-        </Router>
+        <RouterProvider router={createBrowserRouter(routeDefinitions)}/>
     );
 }
 
