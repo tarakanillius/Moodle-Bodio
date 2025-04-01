@@ -3,7 +3,6 @@ import { GlobalContext } from "../context/GlobalContext";
 import "../styles/main.css";
 import Settings from "./Settings";
 import Sidebar from "../components/Sidebar";
-import {useNavigate} from "react-router-dom";
 import UserData from "./UserData";
 
 export default function Main()  {
