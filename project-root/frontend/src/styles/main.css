@@ -17,8 +17,8 @@ html, body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Ensure buttons are at the top and account is at the bottom */
-    height: 100%;
+    justify-content: space-between;
+    height: 95%;
     overflow: hidden;
 }
 
@@ -66,7 +66,6 @@ html, body {
     background-color: #f0f0f0;
     border-radius: 8px;
     cursor: pointer;
-    width: calc(100% - 20px); /* Ensure it stays within sidebar bounds */
 }
 
 .account:hover {

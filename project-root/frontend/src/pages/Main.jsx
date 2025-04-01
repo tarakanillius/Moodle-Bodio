@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
-import { GlobalContext } from "../context/GlobalContext"; // Adjust path if needed
-import "../styles/main.css"; // Import CSS
+import { GlobalContext } from "../context/GlobalContext";
+import "../styles/main.css";
 
 const Main = () => {
     const { selectedComponent, setSelectedComponent } = useContext(GlobalContext);
 
-    // Dummy user data (Replace with actual user data from context or API)
     const user = {
         name: "Mario Rossi",
         role: "Student",
-        avatar: "/favicon.ico", // Correct way to reference public assets
+        avatar: "/favicon.ico",
     };
 
     return (
