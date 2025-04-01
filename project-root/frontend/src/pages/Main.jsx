@@ -4,7 +4,7 @@ import "../styles/main.css";
 import Settings from "./Settings";
 import Sidebar from "../components/Sidebar";
 
-const Main = () => {
+export default function Main()  {
     const { selectedComponent } = useContext(GlobalContext);
 
     return (
@@ -22,5 +22,3 @@ const Main = () => {
         </div>
     );
 };
-
-export default Main;

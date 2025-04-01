@@ -8,7 +8,7 @@ import {
 import Login from "./pages/Login";
 import Main from "./pages/Main";
 
-function App() {
+export default function  App() {
     const routeDefinitions = createRoutesFromElements(
         <Route>
             <Route path="/" element={<Navigate to="/login" />} />
@@ -21,5 +21,3 @@ function App() {
         <RouterProvider router={createBrowserRouter(routeDefinitions)}/>
     );
 }
-
-export default App;
