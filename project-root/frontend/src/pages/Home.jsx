@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/home.module.css";
 import SubjectContainer from "../components/SubjectContainer.jsx";
 
-const Home = () => {
+export default function Home() {
     return (
         <div className={styles.body}>
             <SubjectContainer image={"/assets/Antracite.jpeg"} schoolSubject={"Modulo 320"} description={"Programmare in base a un modello orientato agli oggetti"}/>
@@ -13,5 +13,3 @@ const Home = () => {
         </div>
     );
 };
-
-export default Home;

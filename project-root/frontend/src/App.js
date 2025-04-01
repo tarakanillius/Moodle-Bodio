@@ -5,7 +5,7 @@ import Quiz from "./pages/Quiz";
 import Home from "./pages/Home";
 import Main from "./pages/Main";
 
-function App() {
+export default function App() {
   return (
       <Router>
         <Routes>
@@ -19,4 +19,3 @@ function App() {
   );
 }
 
-export default App;

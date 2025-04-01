@@ -10,9 +10,7 @@ export default function Main() {
 
     return (
         <div className={styles.wrapper}>
-            {/* Sidebar on the left */}
             <Sidebar/>
-            {/* Main content area */}
             <div className={styles.content}>
                 {selectedComponent === "home" && <Home />}
                 {selectedComponent === "teachers" && <h2>Docenti Component</h2>}
