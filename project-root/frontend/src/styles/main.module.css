@@ -1,17 +1,17 @@
-.main-wrapper {
+.wrapper {
     height: 100vh;
     display: flex;
     overflow: hidden;
 }
 
-.main-container {
+.container {
     display: flex;
     height: 100vh;
     overflow: hidden;
 }
 
-.main-wrapper .sidebar {
-    width: 150px;
+.sidebar {
+    min-width: 150px;
     background-color: #ffffff;
     padding: 20px;
     display: flex;
@@ -25,7 +25,7 @@
     margin-bottom: 20px;
 }
 
-.sidebar-buttons {
+.sidebarButtons {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -51,7 +51,7 @@
     font-weight: bold;
 }
 
-.sidebar-account {
+.sidebarAccount {
     margin-top: auto;
 }
 
@@ -76,7 +76,7 @@
     background-color: black;
 }
 
-.account-info {
+.accountInfo {
     display: flex;
     flex-direction: column;
 }
@@ -91,10 +91,10 @@
     color: gray;
 }
 
-.main-wrapper .content {
+.content {
     flex-grow: 1;
-    background-color: #000000;
-    color: white;
+    background-color: #f4f4f4;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
