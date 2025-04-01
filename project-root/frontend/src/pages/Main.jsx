@@ -12,7 +12,7 @@ const Main = () => {
     };
 
     return (
-        <div className="main-container">
+        <div className="main-wrapper">
             {/* Sidebar on the left */}
             <div className="sidebar">
                 <h1>m0.0dle</h1>
