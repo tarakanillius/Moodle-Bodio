@@ -3,7 +3,7 @@ import "../styles/login.css";
 import {useNavigate} from "react-router-dom";
 
 
-const Login = () => {
+export default function Login () {
     const navigate = useNavigate();
 
     const handleLogin = () => {
@@ -35,5 +35,3 @@ const Login = () => {
             </div>
     );
 };
-
-export default Login;
