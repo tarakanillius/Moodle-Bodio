@@ -60,7 +60,7 @@ export default function Sidebar() {
                 </button>
             </div>
             <div className={styles.sidebarAccount}>
-                <div className={styles.account}>
+                <div className={styles.account} onClick={() => setSelectedComponent("userData")}>
                     <img
                         src={getAvatarImage(user.role, user.gender)}
                         alt="User"

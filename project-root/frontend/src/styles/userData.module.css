@@ -1,9 +1,10 @@
-.user-data-container {
-    width: 40%;
+.userDataContainer {
+    width: 100%;
+    padding: 20px;
     background-color: #fff;
 }
 
-.user-data-container h2 {
+.userDataContainer h2 {
     color: #333;
 }
 
@@ -12,12 +13,12 @@
     flex-direction: column;
     gap: 10px;
     margin-top: 15px;
-    opacity: 0.6; /* Scolorito inizialmente */
+    opacity: 0.6;
     transition: opacity 0.3s;
 }
 
 .data.editable {
-    opacity: 1; /* Quando si abilita la modifica, torna normale */
+    opacity: 1;
 }
 
 .data label {
@@ -26,7 +27,7 @@
 }
 
 .data input, .data select {
-    width: 100%;
+    width: auto;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -39,7 +40,7 @@
     cursor: not-allowed;
 }
 
-.edit-button {
+.editButton {
     background-color: #bfbfbf;
     color: white;
     padding: 10px 15px;
@@ -50,20 +51,20 @@
     margin-top: 25px;
 }
 
-.edit-button:hover {
+.editButton:hover {
     background-color: #7f7f7f;
 }
 
-.password-container {
+.passwordContainer {
     display: flex;
     align-items: center;
 }
 
-.password-container input {
+.passwordContainer input {
     flex: 1;
 }
 
-.show-password-btn {
+.showPasswordBtn {
     margin-left: 10px;
     background-color: #ccc;
     border: none;
@@ -72,6 +73,6 @@
     cursor: pointer;
 }
 
-.show-password-btn:hover {
+.showPasswordBtn:hover {
     background-color: #bbb;
 }
