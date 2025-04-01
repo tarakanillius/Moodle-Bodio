@@ -1,23 +1,19 @@
 import React from "react";
-import {
-    Route,
-    Navigate,
-    RouterProvider,
-    createRoutesFromElements, createBrowserRouter
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
-import Main from "./pages/Main";
+import Quiz from "./pages/Quiz"; // Assicurati che il percorso sia corretto
 
-export default function  App() {
-    const routeDefinitions = createRoutesFromElements(
-        <Route>
+function App() {
+  return (
+      <Router>
+        <Routes>
+            {/* La pagina di login sarà la prima visualizzata */}
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/main" element={<Main />} />
-        </Route>
-    )
-
-    return (
-        <RouterProvider router={createBrowserRouter(routeDefinitions)}/>
-    );
+            <Route path="/quiz" element={<Quiz />} />
+        </Routes>
+      </Router>
+  );
 }
+
+export default App;
