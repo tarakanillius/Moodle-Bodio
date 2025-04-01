@@ -1,0 +1,58 @@
+import React, { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
+import styles from "../../styles/settings.module.css";
+
+const GeneralSettings = () => {
+    const {
+        theme,
+        setTheme,
+        language,
+        setLanguage,
+        saveStatus,
+        handleSave
+    } = useContext(GlobalContext);
+
+    return (
+        <div className={styles.settingsSection}>
+            <h2>General Settings</h2>
+            <div className={styles.settingItem}>
+                <div className={styles.settingItem}>
+                    <label>Email Address</label>
+                    <input type="email" value="mario.rossi@example.com" disabled />
+                </div>
+                <div className={styles.settingItem}>
+                    <label>Account Info</label>
+                    <input
+                        type="text"
+                        value="Mario Rossi registered 12.01.2024 by Admin123"
+                        disabled
+                    />
+                </div>
+                <label>Theme</label>
+                <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+                    <option>Light</option>
+                    <option>Dark</option>
+                    <option>System Default</option>
+                </select>
+            </div>
+            <div className={styles.settingItem}>
+                <label>Language</label>
+                <select
+                    value={language}
+                    onChange={(e) => setLanguage(e.target.value)}
+                >
+                    <option>English</option>
+                    <option>Italian</option>
+                    <option>French</option>
+                    <option>German</option>
+                </select>
+            </div>
+            <button className={styles.saveButton} onClick={handleSave}>
+                Save Changes
+            </button>
+            {saveStatus && <p>{saveStatus}</p>}
+        </div>
+    );
+};
+
+export default GeneralSettings;

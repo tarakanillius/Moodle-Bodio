@@ -2,13 +2,12 @@ import React from "react";
 import styles from "../styles/home.module.css";
 import SubjectContainer from "../components/SubjectContainer.jsx";
 
+export default function Home() {
 const scroller = (event) => {
     event.preventDefault();
     const container = event.currentTarget;
     container.scrollLeft += event.deltaY;
 };
-
-function Home() {
     return (
         <div className={styles.body}>
             <div className={styles.header}>
@@ -24,5 +23,3 @@ function Home() {
         </div>
     );
 }
-
-export default Home;

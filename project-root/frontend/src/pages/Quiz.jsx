@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/quiz.module.css";
 
-const Quiz = () => {
+export default function Quiz() {
     return (
         <div className={styles.body}>
             <div className={styles.container}>
@@ -23,5 +23,3 @@ const Quiz = () => {
         </div>
     );
 };
-
-export default Quiz;
