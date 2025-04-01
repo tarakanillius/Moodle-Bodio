@@ -1,9 +1,8 @@
-// Sidebar.jsx
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import "../styles/main.css";
 
-const Sidebar = () => {
+export default function Sidebar() {
     const { selectedComponent, setSelectedComponent } = useContext(GlobalContext);
 
     const user = {
@@ -77,4 +76,3 @@ const Sidebar = () => {
     );
 };
 
-export default Sidebar;
