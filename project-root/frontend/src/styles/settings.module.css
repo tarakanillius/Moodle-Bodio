@@ -1,0 +1,277 @@
+.settingsWrapper {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 30px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    font-family: 'Inter', Arial, sans-serif;
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+.settingsNav {
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 10;
+    padding-top: 10px;
+}
+
+.settingsNav button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    padding: 12px 20px;
+    cursor: pointer;
+    color: #555;
+    transition: all 0.2s ease;
+    position: relative;
+    white-space: nowrap;
+    border-radius: 6px;
+}
+
+.settingsNav button:hover {
+    color: #636363;
+    background-color: #f5f5f5;
+}
+
+.settingsNav .active {
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.settingsNav .active::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #636363;
+    border-radius: 3px;
+}
+
+.settingsContent {
+    animation: fadeIn 0.3s ease-in-out;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.settingsSection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.settingsSection h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #1f2937;
+    font-weight: 600;
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 10px;
+}
+
+.settingItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.settingItem label {
+    font-size: 15px;
+    color: #4b5563;
+    font-weight: 500;
+}
+
+.settingItem input[type="text"],
+.settingItem input[type="email"],
+.settingItem input[type="password"],
+.settingItem select {
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    background-color: #f9fafb;
+    width: 100%;
+    max-width: 100%;
+}
+
+.settingItem input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    accent-color: #636363;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal !important;
+}
+
+.settingItem input[type="text"]:disabled,
+.settingItem input[type="email"]:disabled {
+    background-color: #f3f4f6;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+.settingItem input:focus,
+.settingItem select:focus {
+    outline: none;
+    border-color: #636363;
+    box-shadow: 0 0 0 3px rgba(99, 99, 99, 0.1);
+}
+
+.saveButton {
+    background-color: #636363;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 20px;
+    align-self: flex-start;
+    max-width: 200px;
+}
+
+.saveButton:hover {
+    background-color: #4b5563;
+}
+
+.saveButton:active {
+    transform: translateY(1px);
+}
+
+.history,
+.sessions {
+    background: #f9fafb;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    width: 100%;
+}
+
+.history ul,
+.sessions ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.history ul li,
+.sessions ul li {
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history ul li:last-child,
+.sessions ul li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.sessionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.sessionItem button {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.sessionItem button:hover {
+    background-color: #dc2626;
+}
+
+.deviceBadge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 8px;
+}
+
+.deviceActive {
+    background-color: #10b981;
+    color: white;
+}
+
+.deviceIdle {
+    background-color: #f59e0b;
+    color: white;
+}
+
+/* Add responsive styles */
+@media (max-width: 768px) {
+    .settingsWrapper {
+        padding: 20px 15px;
+    }
+
+    .settingsNav {
+        gap: 10px;
+    }
+
+    .settingsNav button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .settingItem input[type="text"],
+    .settingItem input[type="email"],
+    .settingItem input[type="password"],
+    .settingItem select {
+        padding: 10px;
+    }
+
+    .saveButton {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

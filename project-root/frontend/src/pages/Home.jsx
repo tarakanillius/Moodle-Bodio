@@ -1,10 +1,10 @@
 import React from "react";
-import "../styles/home.css";
+import styles from "../styles/home.module.css";
 import SubjectContainer from "../components/SubjectContainer.jsx";
 
 const Home = () => {
     return (
-        <div className="body">
+        <div className={styles.body}>
             <SubjectContainer image={"/assets/Antracite.jpeg"} schoolSubject={"Modulo 320"} description={"Programmare in base a un modello orientato agli oggetti"}/>
             <SubjectContainer image={"/assets/Vetro_vulcanico.jpeg"} schoolSubject={"Modulo 322"} description={"Sviluppare e implementare interfacce grafiche"}/>
             <SubjectContainer image={"/assets/Quercia.jpeg"} schoolSubject={"Modulo 165"} description={"Utilizzare banche dati NoSQL"}/>

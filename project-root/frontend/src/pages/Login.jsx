@@ -1,9 +1,8 @@
 import React from "react";
-import "../styles/login.css";
+import styles from "../styles/login.module.css";
 import {useNavigate} from "react-router-dom";
 
-
-export default function Login () {
+export default function Login() {
     const navigate = useNavigate();
 
     const handleLogin = () => {
@@ -11,27 +10,25 @@ export default function Login () {
     };
 
     return (
-        <div className="login-container">
-                <div className="body">
-                    <div className="container">
-                        <div className="content">
-                            <h2 className="title">Login</h2>
-                            <input
-                                type="text"
-                                placeholder="Username"
-                                className="input"
-                            />
-                            <input
-                                type="password"
-                                placeholder="Password"
-                                className="input"
-                            />
-                            <button className="button" onClick={handleLogin}>
-                                Accedi
-                            </button>
-                        </div>
-                    </div>
+        <div className={styles.body}>
+            <div className={styles.container}>
+                <div className={styles.content}>
+                    <h2 className={styles.title}>Login</h2>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        className={styles.input}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        className={styles.input}
+                    />
+                    <button className={styles.button} onClick={handleLogin}>
+                        Accedi
+                    </button>
                 </div>
             </div>
+        </div>
     );
 };

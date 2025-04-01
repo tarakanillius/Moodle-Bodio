@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/settings.css";
+import styles from "../styles/settings.module.css";
 
 const Settings = () => {
     const [activeTab, setActiveTab] = useState("general");
@@ -38,29 +38,29 @@ const Settings = () => {
     };
 
     return (
-        <div className="settings-wrapper">
+        <div className={styles.settingsWrapper}>
             {/* Navigation Tabs */}
-            <nav className="settings-nav">
+            <nav className={styles.settingsNav}>
                 <button
-                    className={activeTab === "general" ? "active" : ""}
+                    className={activeTab === "general" ? styles.active : ""}
                     onClick={() => setActiveTab("general")}
                 >
                     General
                 </button>
                 <button
-                    className={activeTab === "notifications" ? "active" : ""}
+                    className={activeTab === "notifications" ? styles.active : ""}
                     onClick={() => setActiveTab("notifications")}
                 >
                     Notifications
                 </button>
                 <button
-                    className={activeTab === "security" ? "active" : ""}
+                    className={activeTab === "security" ? styles.active : ""}
                     onClick={() => setActiveTab("security")}
                 >
                     Security
                 </button>
                 <button
-                    className={activeTab === "privacy" ? "active" : ""}
+                    className={activeTab === "privacy" ? styles.active : ""}
                     onClick={() => setActiveTab("privacy")}
                 >
                     Privacy
@@ -68,17 +68,17 @@ const Settings = () => {
             </nav>
 
             {/* Settings Content */}
-            <div className="settings-content">
+            <div className={styles.settingsContent}>
                 {/* General Settings */}
                 {activeTab === "general" && (
-                    <div className="settings-section">
+                    <div className={styles.settingsSection}>
                         <h2>General Settings</h2>
-                        <div className="setting-item">
-                            <div className="setting-item">
+                        <div className={styles.settingItem}>
+                            <div className={styles.settingItem}>
                                 <label>Email Address</label>
                                 <input type="email" value="mario.rossi@example.com" disabled/>
                             </div>
-                            <div className="setting-item">
+                            <div className={styles.settingItem}>
                                 <label>Account Info</label>
                                 <input type="text" value="Mario Rossi registered 12.01.2024 by Admin123" disabled/>
                             </div>
@@ -92,7 +92,7 @@ const Settings = () => {
                                 <option>System Default</option>
                             </select>
                         </div>
-                        <div className="setting-item">
+                        <div className={styles.settingItem}>
                             <label>Language</label>
                             <select
                                 value={language}
@@ -104,7 +104,7 @@ const Settings = () => {
                                 <option>German</option>
                             </select>
                         </div>
-                        <button className="save-button" onClick={handleSave}>
+                        <button className={styles.saveButton} onClick={handleSave}>
                             Save Changes
                         </button>
                         {saveStatus && <p>{saveStatus}</p>}
@@ -113,10 +113,10 @@ const Settings = () => {
 
                 {/* Notification Settings */}
                 {activeTab === "notifications" && (
-                    <div className="settings-section">
+                    <div className={styles.settingsSection}>
                         <h2>Notification Settings</h2>
-                        <div className="setting-item">
-                            <label className="checkbox-label">
+                        <div className={styles.settingItem}>
+                            <label className={styles.checkboxLabel}>
                                 <input
                                     type="checkbox"
                                     checked={notifications.messages}
@@ -125,8 +125,8 @@ const Settings = () => {
                                 New Messages
                             </label>
                         </div>
-                        <div className="setting-item">
-                            <label className="checkbox-label">
+                        <div className={styles.settingItem}>
+                            <label className={styles.checkboxLabel}>
                                 <input
                                     type="checkbox"
                                     checked={notifications.courseUpdates}
@@ -135,8 +135,8 @@ const Settings = () => {
                                 Course Updates
                             </label>
                         </div>
-                        <div className="setting-item">
-                            <label className="checkbox-label">
+                        <div className={styles.settingItem}>
+                            <label className={styles.checkboxLabel}>
                                 <input
                                     type="checkbox"
                                     checked={notifications.assignments}
@@ -145,8 +145,8 @@ const Settings = () => {
                                 New Assignment Alerts
                             </label>
                         </div>
-                        <div className="setting-item">
-                            <label className="checkbox-label">
+                        <div className={styles.settingItem}>
+                            <label className={styles.checkboxLabel}>
                                 <input
                                     type="checkbox"
                                     checked={notifications.announcements}
@@ -155,7 +155,7 @@ const Settings = () => {
                                 Announcements
                             </label>
                         </div>
-                        <div className="setting-item">
+                        <div className={styles.settingItem}>
                             <label>Notification Method</label>
                             <select>
                                 <option>Email & In-App</option>
@@ -164,7 +164,7 @@ const Settings = () => {
                                 <option>None</option>
                             </select>
                         </div>
-                        <button className="save-button" onClick={handleSave}>
+                        <button className={styles.saveButton} onClick={handleSave}>
                             Save Changes
                         </button>
                         {saveStatus && <p>{saveStatus}</p>}
@@ -173,9 +173,9 @@ const Settings = () => {
 
                 {/* Security Settings */}
                 {activeTab === "security" && (
-                    <div className="settings-section">
+                    <div className={styles.settingsSection}>
                         <h2>Security Settings</h2>
-                        <div className="setting-item">
+                        <div className={styles.settingItem}>
                             <label>New Password</label>
                             <input
                                 type="password"
@@ -184,7 +184,7 @@ const Settings = () => {
                                 onChange={(e) => setNewPassword(e.target.value)}
                             />
                         </div>
-                        <div className="setting-item">
+                        <div className={styles.settingItem}>
                             <label>Confirm Password</label>
                             <input
                                 type="password"
@@ -193,7 +193,7 @@ const Settings = () => {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             />
                         </div>
-                        <div className="setting-item">
+                        <div className={styles.settingItem}>
                             <label>Two-Factor Authentication</label>
                             <select
                                 value={twoFactor}
@@ -205,9 +205,9 @@ const Settings = () => {
                                 <option>Email</option>
                             </select>
                         </div>
-                        <div className="setting-item">
+                        <div className={styles.settingItem}>
                             <label>Login History</label>
-                            <div className="history">
+                            <div className={styles.history}>
                                 <ul>
                                     <li>
                                         <span>March 25, 2025 - 12:30 PM</span>
@@ -224,32 +224,32 @@ const Settings = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className="setting-item">
+                        <div className={styles.settingItem}>
                             <label>Active Sessions</label>
-                            <div className="sessions">
+                            <div className={styles.sessions}>
                                 <ul>
-                                    <li className="session-item">
+                                    <li className={styles.sessionItem}>
                                         <span>
                                             MacBook Pro
-                                            <span className="device-badge device-active">Active</span>
+                                            <span className={`${styles.deviceBadge} ${styles.deviceActive}`}>Active</span>
                                         </span>
                                         <button onClick={() => terminateSession("MacBook Pro")}>
                                             Terminate
                                         </button>
                                     </li>
-                                    <li className="session-item">
+                                    <li className={styles.sessionItem}>
                                         <span>
                                             iPhone 12
-                                            <span className="device-badge device-idle">Idle</span>
+                                            <span className={`${styles.deviceBadge} ${styles.deviceIdle}`}>Idle</span>
                                         </span>
                                         <button onClick={() => terminateSession("iPhone 12")}>
                                             Terminate
                                         </button>
                                     </li>
-                                    <li className="session-item">
+                                    <li className={styles.sessionItem}>
                                         <span>
                                             iPad Air
-                                            <span className="device-badge device-idle">Idle</span>
+                                            <span className={`${styles.deviceBadge} ${styles.deviceIdle}`}>Idle</span>
                                         </span>
                                         <button onClick={() => terminateSession("iPad Air")}>
                                             Terminate
@@ -258,7 +258,7 @@ const Settings = () => {
                                 </ul>
                             </div>
                         </div>
-                        <button className="save-button" onClick={handleSave}>
+                        <button className={styles.saveButton} onClick={handleSave}>
                             Save Changes
                         </button>
                         {saveStatus && <p>{saveStatus}</p>}
@@ -267,27 +267,27 @@ const Settings = () => {
 
                 {/* Privacy Settings */}
                 {activeTab === "privacy" && (
-                    <div className="settings-section">
+                    <div className={styles.settingsSection}>
                         <h2>Privacy Settings</h2>
-                        <div className="setting-item">
-                            <label className="checkbox-label">
+                        <div className={styles.settingItem}>
+                            <label className={styles.checkboxLabel}>
                                 <input type="checkbox" />
                                 Allow profile to be visible to other users
                             </label>
                         </div>
-                        <div className="setting-item">
-                            <label className="checkbox-label">
+                        <div className={styles.settingItem}>
+                            <label className={styles.checkboxLabel}>
                                 <input type="checkbox" />
                                 Show online status
                             </label>
                         </div>
-                        <div className="setting-item">
-                            <label className="checkbox-label">
+                        <div className={styles.settingItem}>
+                            <label className={styles.checkboxLabel}>
                                 <input type="checkbox" />
                                 Allow data collection for service improvement
                             </label>
                         </div>
-                        <div className="setting-item">
+                        <div className={styles.settingItem}>
                             <label>Data Sharing</label>
                             <select>
                                 <option>Minimal (Required Only)</option>
@@ -295,11 +295,11 @@ const Settings = () => {
                                 <option>Full Access</option>
                             </select>
                         </div>
-                        <div className="setting-item">
+                        <div className={styles.settingItem}>
                             <label>Download Your Data</label>
-                            <button className="save-button">Request Data Export</button>
+                            <button className={styles.saveButton}>Request Data Export</button>
                         </div>
-                        <button className="save-button" onClick={handleSave}>
+                        <button className={styles.saveButton} onClick={handleSave}>
                             Save Changes
                         </button>
                         {saveStatus && <p>{saveStatus}</p>}
