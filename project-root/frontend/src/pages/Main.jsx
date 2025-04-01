@@ -1,25 +1,23 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
-import "../styles/main.css";
+import styles from "../styles/main.module.css";
 import Settings from "./Settings";
 import Sidebar from "../components/Sidebar";
-import UserData from "./UserData";
+import Home from "./Home";
+import Courses from "./Courses";
 
-export default function Main()  {
+export default function Main() {
     const { selectedComponent } = useContext(GlobalContext);
 
     return (
-        <div className="main-wrapper">
-            {/* Sidebar on the left */}
+        <div className={styles.wrapper}>
             <Sidebar/>
-            {/* Main content area */}
-            <div className={`content ${selectedComponent === "userData" ? "userData-style" : ""}`}>
-                {selectedComponent === "home" && <h2>Home Component</h2>}
+            <div className={styles.content}>
+                {selectedComponent === "home" && <Home />}
                 {selectedComponent === "teachers" && <h2>Docenti Component</h2>}
                 {selectedComponent === "students" && <h2>Studenti Component</h2>}
-                {selectedComponent === "modules" && <h2>Moduli Component</h2>}
+                {selectedComponent === "modules" && <Courses/>}
                 {selectedComponent === "settings" && <Settings/>}
-                {selectedComponent === "userData" && <UserData/>}
             </div>
         </div>
     );
