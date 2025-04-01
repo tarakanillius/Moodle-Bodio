@@ -1,21 +1,20 @@
 import React from "react";
-import "../styles/home.css";
+import styles from "../styles/home.module.css";
 import SubjectContainer from "../components/SubjectContainer.jsx";
 
-const Home = (event) => {
-    const container = event.target;
-    const scrollAmount = event.deltaY;
-    container.scrollTo({
-        top: 0,
-        left: container.scrollLeft + scrollAmount,
-        behavior: 'smooth'
-    });
+const scroller = (event) => {
+    event.preventDefault();
+    const container = event.currentTarget;
+    container.scrollLeft += event.deltaY;
+};
+
+function Home() {
     return (
-        <div className="page-home">
-            <div className="header">
-                <img id="logo_ameti" src="/assets/logo_ameti.jpeg"/>
+        <div className={styles.body}>
+            <div className={styles.header}>
+                <img className={styles.logo_ameti} src="/assets/logo_ameti.jpeg"/>
             </div>
-            <div className="home-body">
+            <div className={styles.home_body} onWheel={scroller}>
                 <SubjectContainer image={"/assets/Antracite.jpeg"} schoolSubject={"Modulo 320"} description={"Programmare in base a un modello orientato agli oggetti"}/>
                 <SubjectContainer image={"/assets/Vetro_vulcanico.jpeg"} schoolSubject={"Modulo 322"} description={"Sviluppare e implementare interfacce grafiche"}/>
                 <SubjectContainer image={"/assets/Quercia.jpeg"} schoolSubject={"Modulo 165"} description={"Utilizzare banche dati NoSQL"}/>
@@ -24,6 +23,6 @@ const Home = (event) => {
             </div>
         </div>
     );
-};
+}
 
 export default Home;
