@@ -4,6 +4,7 @@ import styles from "../styles/main.module.css";
 import Settings from "./Settings";
 import Sidebar from "../components/Sidebar";
 import Home from "./Home";
+import Courses from "./Courses";
 
 export default function Main() {
     const { selectedComponent } = useContext(GlobalContext);
@@ -15,7 +16,7 @@ export default function Main() {
                 {selectedComponent === "home" && <Home />}
                 {selectedComponent === "teachers" && <h2>Docenti Component</h2>}
                 {selectedComponent === "students" && <h2>Studenti Component</h2>}
-                {selectedComponent === "modules" && <h2>Moduli Component</h2>}
+                {selectedComponent === "modules" && <Courses/>}
                 {selectedComponent === "settings" && <Settings/>}
             </div>
         </div>
