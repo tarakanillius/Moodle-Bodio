@@ -2,6 +2,7 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import "../styles/main.css";
+import {useNavigate} from "react-router-dom";
 
 const Sidebar = () => {
     const { selectedComponent, setSelectedComponent } = useContext(GlobalContext);
@@ -10,6 +11,12 @@ const Sidebar = () => {
         name: "Mario Rossi",
         role: "student",
         gender: "male",
+    };
+
+    const navigate = useNavigate();
+
+    const goToUserData = () => {
+        navigate("/userData");
     };
 
     const getAvatarImage = (role, gender) => {
@@ -61,11 +68,12 @@ const Sidebar = () => {
                 </button>
             </div>
             <div className="sidebar-account">
-                <div className="account">
+                <div className="account" onClick={() => setSelectedComponent("userData")}>
                     <img
                         src={getAvatarImage(user.role, user.gender)}
                         alt="User"
                         className="avatar"
+
                     />
                     <div className="account-info">
                         <span className="name">{user.name}</span>

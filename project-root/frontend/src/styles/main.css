@@ -19,6 +19,7 @@
     justify-content: space-between;
     height: 95%;
     overflow: hidden;
+    border-right: 1px solid black;
 }
 
 .sidebar h1 {
@@ -101,4 +102,11 @@
     font-size: 24px;
     overflow-y: auto;
     height: 100vh;
+}
+
+.main-wrapper .content.userData-style {
+    background-color: #ffffff;
+    color: black;
+    display: block;
+    padding: 20px;
 }
