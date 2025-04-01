@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import "../styles/main.css";
+import Settings from "./Settings";
 
 const Main = () => {
     const { selectedComponent, setSelectedComponent } = useContext(GlobalContext);
@@ -50,7 +51,7 @@ const Main = () => {
                 {selectedComponent === "teachers" && <h2>Docenti Component</h2>}
                 {selectedComponent === "students" && <h2>Studenti Component</h2>}
                 {selectedComponent === "modules" && <h2>Moduli Component</h2>}
-                {selectedComponent === "settings" && <h2>Impostazioni Component</h2>}
+                {selectedComponent === "settings" && <Settings/>}
             </div>
         </div>
     );
