@@ -43,7 +43,7 @@
     width: 150px;
     padding: 10px;
     font-size: 20px;
-    background-color: #bfbfbf;
+    background-color: #636363;
     color: white;
     border: none;
     border-radius: 5px;
@@ -52,5 +52,5 @@
 }
 
 .button:hover {
-    background-color: #7f7f7f;
+    background-color: #4b5563;
 }
