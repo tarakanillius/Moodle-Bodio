@@ -1,0 +1,38 @@
+.body {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    gap: 10px;
+}
+
+.container {
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.heading {
+    margin-top: 0;
+    margin-bottom: 0;
+    float: left
+}
+
+.paragraph {
+    margin-top: 7px;
+    float: left;
+    text-align: left;
+}
+
+.content {
+    padding: 10px;
+}
+
+.container img {
+    padding: 0;
+    margin: 0;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    width: 100%;
+    height: 56px;
+}

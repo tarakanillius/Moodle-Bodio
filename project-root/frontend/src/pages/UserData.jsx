@@ -24,11 +24,11 @@ export default function UserData() {
     };
 
     return (
-        <div className="user-data-container">
+        <div className={styles.userDataContainer}>
             <h2>Il Mio Profilo</h2>
             <p>Modifica le tue informazioni personali.</p>
 
-            <div className={`data ${isEditing ? "editable" : ""}`}>
+            <div className={`${styles.data} ${isEditing ? styles.editable : ""}`}>
                 <label>Nome:</label>
                 <input type="text" name="name" value={user.name} onChange={handleChange} disabled={!isEditing} />
 
@@ -47,6 +47,14 @@ export default function UserData() {
 
                 <label>Email:</label>
                 <input type="email" name="email" value={user.email} onChange={handleChange} disabled={!isEditing} />
+
+                <label>Password:</label>
+                <div className="password-container">
+                    <input type={showPassword ? "text" : "password"} value={user.password} disabled />
+                    <button type="button" className="show-password-btn" onClick={() => setShowPassword(!showPassword)}>
+                        {showPassword ? "Nascondi" : "Mostra"}
+                    </button>
+                </div>
             </div>
 
             {/* Bottone per attivare la modifica */}
