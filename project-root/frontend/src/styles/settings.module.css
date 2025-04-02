@@ -1,13 +1,11 @@
 .settingsWrapper {
     height: 100%;
     width: 100%;
-    margin: 0 auto;
     background: #ffffff;
-    padding: 30px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    font-family: 'Inter', Arial, sans-serif;
     overflow-y: auto;
     max-height: 100vh;
+    margin: 10px;
+    gap: 10px;
 }
 
 .settingsNav {
@@ -136,7 +134,14 @@
     box-shadow: 0 0 0 3px rgba(99, 99, 99, 0.1);
 }
 
-.saveButton {
+.buttonContainer {
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button {
     background-color: #636363;
     color: white;
     border: none;
@@ -148,14 +153,13 @@
     transition: all 0.2s ease;
     margin-top: 20px;
     align-self: flex-start;
-    max-width: 200px;
 }
 
-.saveButton:hover {
+.button:hover {
     background-color: #4b5563;
 }
 
-.saveButton:active {
+.button:active {
     transform: translateY(1px);
 }
 
@@ -257,7 +261,7 @@
         padding: 10px;
     }
 
-    .saveButton {
+    .button {
         padding: 10px 20px;
         font-size: 14px;
         width: 100%;

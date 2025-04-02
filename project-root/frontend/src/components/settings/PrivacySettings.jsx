@@ -54,13 +54,14 @@ const PrivacySettings = () => {
                     <option>Full Access</option>
                 </select>
             </div>
-            <div className={styles.settingItem}>
-                <label>Download Your Data</label>
-                <button className={styles.saveButton}>Request Data Export</button>
+            <div className={styles.buttonContainer}>
+                <button className={styles.button} onClick={handleSave}>
+                    Salvare
+                </button>
+                <button className={styles.button}>
+                    Request Data Export
+                </button>
             </div>
-            <button className={styles.saveButton} onClick={handleSave}>
-                Save Changes
-            </button>
             {saveStatus && <p>{saveStatus}</p>}
         </div>
     );

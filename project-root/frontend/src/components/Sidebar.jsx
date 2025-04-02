@@ -1,28 +1,10 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import styles from "../styles/main.module.css";
+import getAvatarImage from "../utils/getAvatar";
 
 export default function Sidebar() {
-    const { selectedComponent, setSelectedComponent } = useContext(GlobalContext);
-
-    const user = {
-        name: "Mario Rossi",
-        role: "student",
-        gender: "male",
-    };
-
-    const getAvatarImage = (role, gender) => {
-        if (role === "teacher" && gender === "female") {
-            return "/assets/teacher-female.png";
-        } else if (role === "teacher" && gender === "male") {
-            return "/assets/teacher-male.png";
-        } else if (role === "student" && gender === "female") {
-            return "/assets/student-female.png";
-        } else if (role === "student" && gender === "male") {
-            return "/assets/student-male.png";
-        }
-        return null;
-    };
+    const { selectedComponent, setSelectedComponent, user } = useContext(GlobalContext);
 
     return (
         <div className={styles.sidebar}>
@@ -67,7 +49,7 @@ export default function Sidebar() {
                         className={styles.avatar}
                     />
                     <div className={styles.accountInfo}>
-                        <span className={styles.name}>{user.name}</span>
+                        <span className={styles.name}>{user.name} {user.surname}</span>
                         <span className={styles.role}>{user.role}</span>
                     </div>
                 </div>

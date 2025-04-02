@@ -1,9 +1,13 @@
 .body {
-    font-family: Arial, sans-serif;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    background: #ffffff;
+    overflow-y: auto;
+    max-height: 100vh;
+    margin: 10px;
 }
 .container {
     max-width: 600px;

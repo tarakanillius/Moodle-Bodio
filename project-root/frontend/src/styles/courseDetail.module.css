@@ -1,0 +1,485 @@
+.courseDetailContainer {
+    height: 100%;
+    width: 100%;
+    background: #ffffff;
+    overflow-y: auto;
+    max-height: 100vh;
+    margin: 10px;
+    gap: 10px;
+}
+
+.courseHeader {
+    margin-bottom: 30px;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #4a6fa5;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.courseTitle {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.courseDescription {
+    font-size: 16px;
+    color: #4a5568;
+    line-height: 1.5;
+}
+
+.courseStats {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: #f7fafc;
+    border-radius: 8px;
+}
+
+.statItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.statIcon {
+    color: #4a6fa5;
+    font-size: 20px;
+}
+
+.courseNav {
+    display: flex;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 30px;
+}
+
+.courseNav button {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #4a5568;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.courseNav button:hover {
+    color: #4a6fa5;
+}
+
+.courseNav button.active {
+    color: #4a6fa5;
+    font-weight: 600;
+}
+
+.courseNav button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #4a6fa5;
+    border-radius: 3px 3px 0 0;
+}
+
+/* Sections Tab */
+.courseContent {
+    display: flex;
+    gap: 30px;
+    min-height: 500px;
+}
+
+.sectionsSidebar {
+    flex: 0 0 250px;
+    border-right: 1px solid #e2e8f0;
+    padding-right: 20px;
+}
+
+.sidebarTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.addSectionButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.2s;
+}
+
+.addSectionButton:hover {
+    background-color: #3a5a8a;
+}
+
+.sectionsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sectionItem {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.sectionItem:hover {
+    background-color: #edf2f7;
+}
+
+.activeSection {
+    background-color: #ebf8ff;
+    color: #4a6fa5;
+    font-weight: bold;
+}
+
+.completionIndicator {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.completedIcon {
+    color: #48bb78;
+}
+
+.incompleteIcon {
+    color: #a0aec0;
+}
+
+.sectionActions {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.sectionItem:hover .sectionActions {
+    opacity: 1;
+}
+
+.editIcon, .deleteIcon {
+    color: #a0aec0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.editIcon:hover {
+    color: #4a6fa5;
+}
+
+.deleteIcon:hover {
+    color: #e53e3e;
+}
+
+.noSections {
+    padding: 12px 15px;
+    color: #a0aec0;
+    font-style: italic;
+}
+
+.sectionContent {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sectionTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.addFileButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.addFileButton:hover {
+    background-color: #3a5a8a;
+}
+
+.filesTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.filesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fileItem {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.2s;
+}
+
+.fileItem:hover {
+    background-color: #f7fafc;
+}
+
+.fileIcon {
+    color: #4a5568;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.fileLink {
+    color: #4a6fa5;
+    text-decoration: none;
+    flex: 1;
+}
+
+.fileLink:hover {
+    text-decoration: underline;
+}
+
+.deleteFileIcon {
+    color: #a0aec0;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.deleteFileIcon:hover {
+    color: #e53e3e;
+}
+
+.noFiles {
+    color: #a0aec0;
+    font-style: italic;
+    padding: 15px 0;
+}
+
+.noSectionSelected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    color: #a0aec0;
+    font-style: italic;
+    background-color: #f7fafc;
+    border-radius: 8px;
+}
+
+/* Students Tab */
+.studentsContainer {
+    padding: 20px;
+}
+
+.studentsTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.studentsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.studentItem {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.2s;
+}
+
+.studentItem:hover {
+    background-color: #f7fafc;
+}
+
+.studentAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.studentInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.studentName {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.studentEmail {
+    color: #718096;
+    font-size: 14px;
+}
+
+.noStudents {
+    color: #a0aec0;
+    font-style: italic;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Settings Tab */
+.settingsContainer {
+    padding: 20px;
+}
+
+.settingsTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.settingsForm {
+    margin-bottom: 30px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.formGroup input, .formGroup textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.formGroup textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background-color: #3a5a8a;
+}
+
+.courseActions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.exportButton, .deleteButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.exportButton {
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+}
+
+.exportButton:hover {
+    background-color: #3a5a8a;
+}
+
+.deleteButton {
+    background-color: white;
+    color: #e53e3e;
+    border: 1px solid #e53e3e;
+}
+
+.deleteButton:hover {
+    background-color: #fff5f5;
+}
+
+.loadingMessage, .errorMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    font-size: 18px;
+}
+
+.errorMessage {
+    color: #e53e3e;
+}

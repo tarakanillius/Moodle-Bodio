@@ -62,9 +62,11 @@ const NotificationSettings = () => {
                     <option>None</option>
                 </select>
             </div>
-            <button className={styles.saveButton} onClick={handleSave}>
-                Save Changes
-            </button>
+            <div className={styles.buttonContainer}>
+                <button className={styles.button} onClick={handleSave}>
+                    Salvare
+                </button>
+            </div>
             {saveStatus && <p>{saveStatus}</p>}
         </div>
     );
