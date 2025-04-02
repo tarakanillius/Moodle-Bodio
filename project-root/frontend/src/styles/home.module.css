@@ -3,6 +3,10 @@
     flex-direction: row;
     margin: 10px;
     gap: 10px;
+    width: 100%;
+    background: #ffffff;
+    overflow-y: auto;
+    max-height: 100vh;
 }
 
 .container {

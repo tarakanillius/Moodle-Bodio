@@ -80,6 +80,7 @@
 
 .courseFooter {
     display: flex;
+    position: relative;
     gap: 10px;
     padding-top: 15px;
 }
@@ -113,7 +114,6 @@
     background-color: #d9d9d9;
 }
 
-/* List View Styles */
 .courseCardList {
     background-color: white;
     border-radius: 10px;
@@ -125,9 +125,11 @@
     grid-template-areas: "info sections actions";
     align-items: center;
     gap: 15px;
+    cursor: pointer;
 }
 
 .courseCardList:hover {
+    background-color: #f8f9fa;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
@@ -173,15 +175,67 @@
     justify-content: flex-end;
 }
 
-.menuButton {
-    background-color: transparent;
-    color: #555;
-    padding: 8px;
+.menuContainer {
+    position: relative;
+}
+
+.dropdownMenu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    min-width: 160px;
+    overflow: hidden;
+}
+
+.dropdownMenu button {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #4a5568;
+    transition: background-color 0.2s;
+}
+
+.dropdownMenu button:hover {
+    background-color: #f7fafc;
+}
+
+.dropdownMenu button.deleteButton {
+    color: #e53e3e;
+}
+
+.dropdownMenu button.deleteButton:hover {
+    background-color: #fff5f5;
+}
+
+.menuButton {
+    background: none;
+    border: none;
+    color: #718096;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
 }
 
 .menuButton:hover {
-    background-color: #f0f0f0;
+    background-color: #edf2f7;
+    color: #4a5568;
+}
+
+.menuIcon {
+    margin-left: 5px;
+    font-size: 14px;
 }

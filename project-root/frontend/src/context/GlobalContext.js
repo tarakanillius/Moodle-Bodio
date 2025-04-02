@@ -1,9 +1,74 @@
-import { createContext, useState } from "react";
+import {createContext, useEffect, useState} from "react";
 
 export const GlobalContext = createContext(undefined, undefined);
 
 export default function GlobalProvider({ children }) {
     const [selectedComponent, setSelectedComponent] = useState("home");
+    const [selectedCourseId, setSelectedCourseId] = useState(null);
+
+    // Add user state to the context
+    const [user, setUser] = useState({
+        id: "",
+        name: "",
+        surname: "",
+        email: "",
+        role: "",
+        gender: "",
+    });
+
+    // Load user data from localStorage on initial render
+    useEffect(() => {
+        if (localStorage.getItem("userId")) {
+            const userId = localStorage.getItem("userId");
+            const userName = localStorage.getItem("userName");
+            const userSurname = localStorage.getItem("userSurname");
+            const userEmail = localStorage.getItem("userEmail");
+            const userRole = localStorage.getItem("userRole");
+            const userGender = localStorage.getItem("userGender");
+            setUser({
+                id: userId,
+                name: userName || "",
+                surname: userSurname || "",
+                email: userEmail || "",
+                role: userRole || "",
+                gender: userGender || "male",
+            });
+        }
+    }, []);
+
+    // Function to update user data
+    const updateUser = (userData) => {
+        setUser(userData);
+
+        // Also update localStorage
+        localStorage.setItem("userId", userData.id);
+        localStorage.setItem("userName", userData.name);
+        localStorage.setItem("userSurname", userData.surname);
+        localStorage.setItem("userEmail", userData.email);
+        localStorage.setItem("userRole", userData.role);
+        localStorage.setItem("userGender", userData.gender);
+    };
+
+    // Function to clear user data (for logout)
+    const clearUser = () => {
+        setUser({
+            id: "",
+            name: "",
+            surname: "",
+            email: "",
+            role: "",
+            gender: "",
+        });
+
+        // Clear localStorage
+        localStorage.removeItem("userId");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userSurname");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("userGender");
+        localStorage.removeItem("isLoggedIn");
+    };
 
     // Settings state
     const [theme, setTheme] = useState("Light");
@@ -57,6 +122,11 @@ export default function GlobalProvider({ children }) {
         <GlobalContext.Provider value={{
             selectedComponent,
             setSelectedComponent,
+            selectedCourseId,
+            setSelectedCourseId,
+            user,
+            updateUser,
+            clearUser,
             theme,
             setTheme,
             language,

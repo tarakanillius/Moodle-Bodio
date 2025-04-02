@@ -1,19 +1,29 @@
 import React, { useState } from "react";
 import styles from "../styles/settings.module.css";
-import SettingsNav from "../components/settings/SettingsNav";
 import GeneralSettings from "../components/settings/GeneralSettings";
 import NotificationSettings from "../components/settings/NotificationSettings";
 import SecuritySettings from "../components/settings/SecuritySettings";
 import PrivacySettings from "../components/settings/PrivacySettings";
+import TabNav from "../components/TabNav";
 
 export default function Settings() {
     const [activeTab, setActiveTab] = useState("general");
 
+    const tabs = [
+        { id: "general", label: "Generale" },
+        { id: "notifications", label: "Notifiche" },
+        { id: "security", label: "Sicurezza" },
+        { id: "privacy", label: "Privacy" }
+    ];
+
     return (
         <div className={styles.settingsWrapper}>
-            {/* Navigation Tabs */}
-            <SettingsNav activeTab={activeTab} setActiveTab={setActiveTab} />
-            {/* Settings Content */}
+            <TabNav
+                tabs={tabs}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                className={styles.settingsNav}
+            />
             <div className={styles.settingsContent}>
                 {activeTab === "general" && <GeneralSettings />}
                 {activeTab === "notifications" && <NotificationSettings />}

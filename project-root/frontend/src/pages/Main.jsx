@@ -6,21 +6,38 @@ import Sidebar from "../components/Sidebar";
 import Home from "./Home";
 import Courses from "./Courses";
 import UserData from "./UserData";
+import CourseDetail from "./CourseDetails";
 
 export default function Main() {
-    const { selectedComponent } = useContext(GlobalContext);
+    const { selectedComponent, selectedCourseId } = useContext(GlobalContext);
+
+    const renderComponent = () => {
+        switch (selectedComponent) {
+            case "home":
+                return <Home />;
+            case "teachers":
+                return <h2>Docenti Component</h2>;
+            case "students":
+                return <h2>Studenti Component</h2>;
+            case "modules":
+                return <Courses />;
+            case "settings":
+                return <Settings />;
+            case "userData":
+                return <UserData />;
+            case "course":
+                return <CourseDetail courseId={selectedCourseId} />;
+            default:
+                return <Home />;
+        }
+    };
 
     return (
         <div className={styles.wrapper}>
-            <Sidebar/>
+            <Sidebar />
             <div className={styles.content}>
-                {selectedComponent === "home" && <Home />}
-                {selectedComponent === "teachers" && <h2>Docenti Component</h2>}
-                {selectedComponent === "students" && <h2>Studenti Component</h2>}
-                {selectedComponent === "modules" && <Courses/>}
-                {selectedComponent === "settings" && <Settings/>}
-                {selectedComponent === "userData" && <UserData/>}
+                {renderComponent()}
             </div>
         </div>
     );
-};
+}
