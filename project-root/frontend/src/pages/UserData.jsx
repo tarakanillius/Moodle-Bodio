@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styles from "../styles/userData.module.css";
 
 export default function UserData() {
@@ -15,7 +15,6 @@ export default function UserData() {
 
     // Stato per gestire la modalità modifica
     const [isEditing, setIsEditing] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
 
     // Funzione per gestire i cambiamenti nei campi input
     const handleChange = (e) => {
