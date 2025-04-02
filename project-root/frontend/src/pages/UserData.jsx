@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "../styles/userData.css";
+import styles from "../styles/userData.module.css";
 
 export default function UserData() {
-    // Dati utente fittizi
+
     const [user, setUser] = useState({
         name: "Mario",
         surname: "Rossi",
@@ -29,36 +29,41 @@ export default function UserData() {
             <p>Modifica le tue informazioni personali.</p>
 
             <div className={`${styles.data} ${isEditing ? styles.editable : ""}`}>
-                <label>Nome:</label>
-                <input type="text" name="name" value={user.name} onChange={handleChange} disabled={!isEditing} />
-
-                <label>Cognome:</label>
-                <input type="text" name="surname" value={user.surname} onChange={handleChange} disabled={!isEditing} />
-
-                <label>Genere:</label>
-                <select name="gender" value={user.gender} onChange={handleChange} disabled={!isEditing}>
-                    <option value="male">Maschio</option>
-                    <option value="female">Femmina</option>
-                    <option value="other">Altro</option>
-                </select>
-
-                <label>Data di nascita:</label>
-                <input type="date" name="birthDate" value={user.birthDate} onChange={handleChange} disabled={!isEditing} />
-
-                <label>Email:</label>
-                <input type="email" name="email" value={user.email} onChange={handleChange} disabled={!isEditing} />
-
-                <label>Password:</label>
-                <div className="password-container">
-                    <input type={showPassword ? "text" : "password"} value={user.password} disabled />
-                    <button type="button" className="show-password-btn" onClick={() => setShowPassword(!showPassword)}>
-                        {showPassword ? "Nascondi" : "Mostra"}
-                    </button>
+                <div className={styles.info}>
+                    <label>Nome:</label>
+                    <input type="text" name="name" value={user.name} onChange={handleChange} disabled={!isEditing}/>
                 </div>
+
+                <div className={styles.info}>
+                    <label>Cognome:</label>
+                    <input type="text" name="surname" value={user.surname} onChange={handleChange}
+                           disabled={!isEditing}/>
+                </div>
+
+                <div className={styles.info}>
+                    <label>Genere:</label>
+                    <select name="gender" value={user.gender} onChange={handleChange} disabled={!isEditing}>
+                        <option value="male">Maschio</option>
+                        <option value="female">Femmina</option>
+                        <option value="other">Altro</option>
+                    </select>
+                </div>
+
+                <div className={styles.info}>
+                    <label>Data di nascita:</label>
+                    <input type="date" name="birthDate" value={user.birthDate} onChange={handleChange}
+                           disabled={!isEditing}/>
+                </div>
+
+                <div className={styles.info}>
+                    <label>Email:</label>
+                    <input type="email" name="email" value={user.email} onChange={handleChange} disabled={!isEditing}/>
+                </div>
+
             </div>
 
             {/* Bottone per attivare la modifica */}
-            <button className="edit-button" onClick={() => setIsEditing(!isEditing)}>
+            <button className={styles.editButton} onClick={() => setIsEditing(!isEditing)}>
                 {isEditing ? "Salva" : "Modifica"}
             </button>
         </div>

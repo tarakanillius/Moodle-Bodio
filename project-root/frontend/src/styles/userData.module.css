@@ -1,8 +1,8 @@
 .userDataContainer {
-    width: 100%;
-    padding: 20px;
+    max-width: 800px;
     background-color: #fff;
-    margin: auto;
+    margin: 0 auto;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 .userDataContainer h2 {
@@ -12,14 +12,8 @@
 .data {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     margin-top: 15px;
-    opacity: 0.6;
-    transition: opacity 0.3s;
-}
-
-.data.editable {
-    opacity: 1;
 }
 
 .data label {
@@ -30,7 +24,7 @@
 
 .data input, .data select {
     width: auto;
-    padding: 8px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
@@ -44,18 +38,18 @@
 }
 
 .editButton {
-    background-color: #bfbfbf;
+    background-color: #636363;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 25px;
+    margin-top: 40px;
 }
 
 .editButton:hover {
-    background-color: #7f7f7f;
+    background-color: #4b5563;
 }
 
 .passwordContainer {
@@ -82,4 +76,12 @@
 
 .showPasswordBtn:hover {
     background-color: #bbb;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 100%;
 }

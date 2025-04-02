@@ -95,15 +95,15 @@
     flex-grow: 1;
     background-color: #ffffff;
     color: black;
-    display: flex;
     font-size: 24px;
     overflow-y: auto;
     height: 100vh;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 .main-wrapper .content.userData-style {
     background-color: #ffffff;
     color: black;
-    display: block;
     padding: 20px;
+    display: flex;
 }
