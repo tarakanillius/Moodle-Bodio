@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { FaSearch, FaList, FaTh } from 'react-icons/fa';
 import styles from "../styles/courses.module.css";
 import Course from "./Course";
@@ -47,60 +47,44 @@ export default function Courses() {
 
             <div className={`${styles.coursesList} ${styles[viewMode]}`}>
                 <Course
-                    viewMode={viewMode}
-                    name="111"
-                    description="Learn the basics of programming with this introductory course"
-                    teachers={["Dr. Jane Smith", "Prof. John Doe", "Dr. Alan Turing"]}
-                    students={123}
+                    name="M320"
+                    description="Programmazione orientata a oggetti"
+                    teachers={["Davide Krähenbühl"]}
+                    students={16}
                     sections={["Basics", "Variables", "Functions", "Objects"]}
+                    color={"rgba(0, 170, 255, 0.11)"}
                 />
                 <Course
-                    viewMode={viewMode}
-                    name="311"
-                    description="Master HTML, CSS, and JavaScript to build modern websites"
-                    teachers={["Dr. Tim Berners-Lee", "Ada Lovelace"]}
-                    students={87}
-                    sections={["HTML", "CSS", "JavaScript", "React"]}
+                    name="M293"
+                    description="Creare e pubblicare una pagina web"
+                    teachers={["Gionata Genazzi"]}
+                    students={8}
+                    sections={["Basics", "Variables", "Functions", "Objects"]}
+                    color={"rgba(120, 255, 0, 0.11)"}
                 />
                 <Course
-                    viewMode={viewMode}
-                    name="202"
-                    description="Learn to analyze and visualize data using Python"
-                    teachers={["Dr. Grace Hopper", "Dr. Katherine Johnson"]}
-                    students={65}
-                    sections={["Python", "Pandas", "NumPy", "Visualization"]}
+                    name="M426"
+                    description="Sviluppare software con metodi agili"
+                    teachers={["Gionata Genazzi"]}
+                    students={8}
+                    sections={["Basics", "Variables", "Functions", "Objects"]}
+                    color={"rgba(255, 189, 0, 0.11)"}
                 />
                 <Course
-                    viewMode={viewMode}
-                    name="204"
-                    description="Build native mobile applications for iOS and Android"
-                    teachers={["Steve Jobs", "Andy Rubin"]}
-                    students={92}
-                    sections={["Swift", "Kotlin", "React Native", "Flutter"]}
+                    name="M165"
+                    description="Utilizzare banche dati NoSQL"
+                    teachers={["Simone Debortoli"]}
+                    students={8}
+                    sections={["Basics", "Variables", "Functions", "Objects"]}
+                    color={"rgba(166, 0, 255, 0.11)"}
                 />
                 <Course
-                    viewMode={viewMode}
-                    name="501"
-                    description="Explore machine learning and neural networks"
-                    teachers={["Dr. Geoffrey Hinton", "Dr. Andrew Ng"]}
-                    students={78}
-                    sections={["ML Basics", "Neural Networks", "Deep Learning", "Applications"]}
-                />
-                <Course
-                    viewMode={viewMode}
-                    name="402"
-                    description="Learn SQL and NoSQL database design and implementation"
-                    teachers={["Dr. Edgar Codd", "Dr. Michael Stonebraker"]}
-                    students={56}
-                    sections={["SQL", "NoSQL", "Database Design", "Performance"]}
-                />
-                <Course
-                    viewMode={viewMode}
-                    name="205"
-                    description="Understand threats and implement security measures"
-                    teachers={["Bruce Schneier", "Dr. Whitfield Diffie"]}
-                    students={45}
-                    sections={["Network Security", "Cryptography", "Web Security", "Ethical Hacking"]}
+                    name="322"
+                    description="Sviluppare interfacce grafiche"
+                    teachers={["Davide Krähenbühl"]}
+                    students={8}
+                    sections={["Basics", "Variables", "Functions", "Objects"]}
+                    color={"rgba(255, 0, 0, 0.11)"}
                 />
             </div>
         </div>
