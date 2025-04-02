@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaSearch, FaList, FaTh } from 'react-icons/fa';
 import axios from 'axios';
 import styles from "../styles/courses.module.css";
@@ -86,7 +86,7 @@ export default function Courses() {
                     <FaSearch className={styles.searchIcon} />
                     <input
                         type="text"
-                        placeholder="Cerca corsi..."
+                        placeholder="Search courses..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className={styles.searchInput}
@@ -104,11 +104,53 @@ export default function Courses() {
                         className={styles.searchBtn}
                         onClick={handleSearch}
                     >
-                        Cerca
+                        Search
                     </button>
                 </div>
             </div>
 
+            <div className={`${styles.coursesList} ${styles[viewMode]}`}>
+                <Course
+                    name="M320"
+                    description="Programmazione orientata a oggetti"
+                    teachers={["Davide Krähenbühl"]}
+                    students={16}
+                    sections={["Basics", "Variables", "Functions", "Objects"]}
+                    color={"rgba(0, 170, 255, 0.11)"}
+                />
+                <Course
+                    name="M293"
+                    description="Creare e pubblicare una pagina web"
+                    teachers={["Gionata Genazzi"]}
+                    students={8}
+                    sections={["Basics", "Variables", "Functions", "Objects"]}
+                    color={"rgba(120, 255, 0, 0.11)"}
+                />
+                <Course
+                    name="M426"
+                    description="Sviluppare software con metodi agili"
+                    teachers={["Gionata Genazzi"]}
+                    students={8}
+                    sections={["Basics", "Variables", "Functions", "Objects"]}
+                    color={"rgba(255, 189, 0, 0.11)"}
+                />
+                <Course
+                    name="M165"
+                    description="Utilizzare banche dati NoSQL"
+                    teachers={["Simone Debortoli"]}
+                    students={8}
+                    sections={["Basics", "Variables", "Functions", "Objects"]}
+                    color={"rgba(166, 0, 255, 0.11)"}
+                />
+                <Course
+                    name="322"
+                    description="Sviluppare interfacce grafiche"
+                    teachers={["Davide Krähenbühl"]}
+                    students={8}
+                    sections={["Basics", "Variables", "Functions", "Objects"]}
+                    color={"rgba(255, 0, 0, 0.11)"}
+                />
+            </div>
             {loading ? (
                 <div className={styles.loadingMessage}>Loading courses...</div>
             ) : error ? (
