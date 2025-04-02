@@ -2,10 +2,10 @@ import React from 'react';
 import { FaEllipsisV, FaUsers, FaChalkboardTeacher } from 'react-icons/fa';
 import styles from "../styles/course.module.css";
 
-export default function Course({viewMode = 'grid', name, description, teachers, students,sections }) {
+export default function Course({viewMode = 'grid', name, description, teachers, students, sections, color }) {
     if (viewMode === 'list') {
         return (
-            <div className={styles.courseCardList}>
+            <div className={styles.courseCardList} style={{backgroundColor: color}}>
                 <div className={styles.courseInfoList}>
                     <h2 className={styles.courseNameList}>{name}</h2>
                     <p className={styles.courseDescriptionList}>{description}</p>
@@ -25,7 +25,7 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
     }
 
     return (
-        <div className={styles.courseCardGrid}>
+        <div className={styles.courseCardGrid} style={{backgroundColor: color}}>
             <div className={styles.courseHeader}>
                 <h2 className={styles.courseName}>{name}</h2>
                 <div className={styles.courseStats}>
