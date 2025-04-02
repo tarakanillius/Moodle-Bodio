@@ -47,14 +47,6 @@ export default function UserData() {
 
                 <label>Email:</label>
                 <input type="email" name="email" value={user.email} onChange={handleChange} disabled={!isEditing} />
-
-                <label>Password:</label>
-                <div className="password-container">
-                    <input type={showPassword ? "text" : "password"} value={user.password} disabled />
-                    <button type="button" className="show-password-btn" onClick={() => setShowPassword(!showPassword)}>
-                        {showPassword ? "Nascondi" : "Mostra"}
-                    </button>
-                </div>
             </div>
 
             {/* Bottone per attivare la modifica */}

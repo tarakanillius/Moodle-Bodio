@@ -13,17 +13,13 @@
     flex-direction: column;
     gap: 10px;
     margin-top: 15px;
-    opacity: 0.6; /* Scolorito inizialmente */
     transition: opacity 0.3s;
 }
 
-.data.editable {
-    opacity: 1; /* Quando si abilita la modifica, torna normale */
-}
-
 .data label {
-    font-weight: bold;
-    text-align: left;
+    font-size: 15px;
+    color: #4b5563;
+    font-weight: 500;
 }
 
 .data input, .data select {
@@ -42,7 +38,7 @@
 }
 
 .edit-button {
-    background-color: #bfbfbf;
+    background-color: #636363;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -53,7 +49,7 @@
 }
 
 .edit-button:hover {
-    background-color: #7f7f7f;
+    background-color: #4b5563;
 }
 
 .password-container {
@@ -72,6 +68,10 @@
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.show-password-btn:disabled{
+    cursor: not-allowed;
 }
 
 .show-password-btn:hover {
