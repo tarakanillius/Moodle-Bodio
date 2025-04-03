@@ -1,6 +1,6 @@
 # Moodle-Bodio
 Steps to run the project:
-1. run mongo on local machinev
+1. run mongo on local machine
 2. open file populate_db.py located in the backend/src/utils folder and change the database connection string and run it.
 3. open file the app.py located in the backend/src/utils folder and change the database connection string and run it.
 4. run the React app located in the frontend folder using the command: npm start or by pressing the run button in the IDE.

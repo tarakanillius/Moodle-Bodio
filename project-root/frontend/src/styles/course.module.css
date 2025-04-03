@@ -1,14 +1,13 @@
 .courseCardGrid {
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     padding: 12px;
     transition: transform 0.2s, box-shadow 0.2s;
     height: fit-content;
     display: flex;
     flex-direction: column;
     overflow: visible;
-    width: 100%;
+    width: 220px;
     position: relative;
 }
 

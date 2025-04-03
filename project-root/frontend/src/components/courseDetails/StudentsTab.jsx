@@ -37,7 +37,7 @@ export default function StudentsTab({ course }){
             {course.students && course.students.length > 0 ? (
                 <ul className={styles.studentsList}>
                     {course.students.map(student => (
-                        <li key={student.id} className={styles.studentItem} onClick={() => MyVerticallyCenteredModal(student)}>
+                        <li key={student.id} className={styles.studentItem}>
                             <img
                                 src={getAvatarImage("student", student.gender || "male")}
                                 alt={student.name}
