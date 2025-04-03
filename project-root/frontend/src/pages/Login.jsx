@@ -14,31 +14,24 @@ export default function Login() {
 
     useEffect(() => {
         const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-        if (isLoggedIn) {
-            navigate("/main");
-        }
+        if (isLoggedIn) navigate("/main");
     }, [navigate]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
         if (!email || !password) {
             setError("Please enter both email and password");
             return;
         }
-
         try {
             setLoading(true);
             setError("");
-
             const response = await axios.post("http://127.0.0.1:5000/login", {
                 email: email,
                 password: password
             });
-
             const userDetailsResponse = await axios.get(`http://127.0.0.1:5000/user/${response.data.user_id}`);
             const userData = userDetailsResponse.data.user;
-
             updateUser({
                 id: userData.id,
                 name: userData.name,
@@ -47,26 +40,16 @@ export default function Login() {
                 role: userData.role,
                 gender: userData.sex || "male",
             });
-
             localStorage.setItem("isLoggedIn", "true");
-
             navigate("/main");
         } catch (error) {
             console.error("Login error:", error);
-
             if (error.response) {
-                if (error.response.status === 404) {
-                    setError("User not found. Please check your email.");
-                } else if (error.response.status === 401) {
-                    setError("Invalid password. Please try again.");
-                } else {
-                    setError("Login failed: " + (error.response.data.error || "Unknown error"));
-                }
-            } else if (error.request) {
-                setError("No response from server. Please try again later.");
-            } else {
-                setError("Error: " + error.message);
-            }
+                if (error.response.status === 404) setError("User not found. Please check your email.");
+                else if (error.response.status === 401) setError("Invalid password. Please try again.");
+                else setError("Login failed: " + (error.response.data.error || "Unknown error"));
+            } else if (error.request) setError("No response from server. Please try again later.");
+            else setError("Error: " + error.message);
         } finally {
             setLoading(false);
         }
@@ -77,13 +60,11 @@ export default function Login() {
             <div className={styles.container}>
                 <div className={styles.content}>
                     <h2 className={styles.title}>Login</h2>
-
                     {error && (
                         <div className={styles.errorMessage}>
                             {error}
                         </div>
                     )}
-
                     <form onSubmit={handleLogin}>
                         <input
                             type="email"

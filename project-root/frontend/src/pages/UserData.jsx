@@ -7,7 +7,10 @@ import styles from "../styles/userData.module.css";
 export default function UserData() {
     const navigate = useNavigate();
     const { updateUser, clearUser } = useContext(GlobalContext);
-
+    const [isEditing, setIsEditing] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
     const [userData, setUserData] = useState({
         name: "",
         surname: "",
@@ -16,31 +19,19 @@ export default function UserData() {
         role: ""
     });
 
-    const [isEditing, setIsEditing] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
-
-
     useEffect(() => {
         const checkAuth = async () => {
             const isLoggedIn = localStorage.getItem("isLoggedIn");
             const userId = localStorage.getItem("userId");
-
             if (!isLoggedIn || !userId) {
                 navigate("/login");
                 return;
             }
-
             try {
                 setLoading(true);
                 const response = await axios.get(`http://127.0.0.1:5000/user/${userId}`);
-
                 let formattedBirthDate = "";
-                if (response.data.user.birth) {
-                    formattedBirthDate = response.data.user.birth.split('T')[0];
-                }
-
+                if (response.data.user.birth) formattedBirthDate = response.data.user.birth.split('T')[0];
                 setUserData({
                     name: response.data.user.name || "",
                     surname: response.data.user.surname || "",
@@ -55,10 +46,8 @@ export default function UserData() {
                 setLoading(false);
             }
         };
-
         checkAuth();
     }, [navigate]);
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -69,19 +58,16 @@ export default function UserData() {
         try {
             setLoading(true);
             const userId = localStorage.getItem("userId");
-
             if (!userId) {
                 setError("User not authenticated");
                 return;
             }
-
             await axios.put(`http://127.0.0.1:5000/update_user/${userId}`, {
                 name: userData.name,
                 surname: userData.surname,
                 sex: userData.gender,
                 birth: userData.birthDate,
             });
-
             updateUser({
                 id: userId,
                 name: userData.name,
@@ -89,13 +75,9 @@ export default function UserData() {
                 role: userData.role,
                 gender: userData.gender,
             });
-
             setSuccessMessage("Profile updated successfully");
             setIsEditing(false);
-
-            setTimeout(() => {
-                setSuccessMessage("");
-            }, 3000);
+            setTimeout(() => {setSuccessMessage("");}, 3000);
         }  catch (error) {
             console.error("Error updating user data:", error);
             setError("Failed to update profile. Please try again.");
@@ -110,16 +92,11 @@ export default function UserData() {
     };
 
     const toggleEditMode = () => {
-        if (isEditing) {
-            handleSave();
-        } else {
-            setIsEditing(true);
-        }
+        if (isEditing) handleSave();
+        setIsEditing(true)
     };
 
-    if (loading) {
-        return <div className={styles.loadingMessage}>Loading user data...</div>;
-    }
+    if (loading) return <div className={styles.loadingMessage}>Loading user data...</div>;
 
     return (
         <div className={styles.userDataContainer}>
@@ -129,28 +106,22 @@ export default function UserData() {
             </div>
             {error && <div className={styles.errorMessage}>{error}</div>}
             {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
-
             <div className={`${styles.data} ${isEditing ? styles.editable : ""}`}>
                 <label>Nome:</label>
                 <input type="text" name="name" value={userData.name} onChange={handleChange} disabled={!isEditing} />
-
                 <label>Cognome:</label>
                 <input type="text" name="surname" value={userData.surname} onChange={handleChange} disabled={!isEditing} />
-
                 <label>Genere:</label>
                 <select name="gender" value={userData.gender} onChange={handleChange} disabled={!isEditing}>
                     <option value="male">Maschio</option>
                     <option value="female">Femmina</option>
                     <option value="other">Altro</option>
                 </select>
-
                 <label>Data di nascita:</label>
                 <input type="date" name="birthDate" value={userData.birthDate} onChange={handleChange} disabled={!isEditing} />
-
                 <label>Ruolo:</label>
                 <input type="text" value={userData.role} disabled />
             </div>
-
             <div className={styles.buttonContainer}>
                 <button
                     className={styles.editButton}
@@ -159,7 +130,6 @@ export default function UserData() {
                 >
                     {isEditing ? "Salva" : "Modifica"}
                 </button>
-
                 <button
                     className={styles.logoutButton}
                     onClick={handleLogout}

@@ -16,7 +16,6 @@ export default function CourseDetail({ courseId }) {
     const [activeSection, setActiveSection] = useState(null);
     const [activeTab, setActiveTab] = useState("sections");
     const [completedSections, setCompletedSections] = useState([]);
-
     const courseTabs = [
         { id: "sections", label: "Sections" },
         { id: "students", label: "Students" },
@@ -27,28 +26,22 @@ export default function CourseDetail({ courseId }) {
         const fetchCourseDetails = async () => {
             try {
                 setLoading(true);
-
-                // First try to get the course from the GlobalContext
                 const cachedCourse = getCourse(courseId);
-
+                const tabToOpen = localStorage.getItem("openCourseTab");
+                if (tabToOpen) {
+                    setActiveTab(tabToOpen);
+                    localStorage.removeItem("openCourseTab");
+                }
                 if (cachedCourse) {
                     setCourse(cachedCourse);
-                    if (cachedCourse.sections && cachedCourse.sections.length > 0) {
-                        setActiveSection(cachedCourse.sections[0].id);
-                    }
+                    if (cachedCourse.sections && cachedCourse.sections.length > 0) setActiveSection(cachedCourse.sections[0].id);
                 } else {
-                    // If not in context, fetch from API
                     const response = await axios.get(`http://127.0.0.1:5000/course/${courseId}`);
                     setCourse(response.data.course);
 
-                    if (response.data.course.sections && response.data.course.sections.length > 0) {
-                        setActiveSection(response.data.course.sections[0].id);
-                    }
-
-                    // Refresh the courses in the context to include this one
+                    if (response.data.course.sections && response.data.course.sections.length > 0) setActiveSection(response.data.course.sections[0].id);
                     refreshCourses();
                 }
-
                 //TODO: fetch the completed sections from the backend
                 setCompletedSections([]);
             } catch (err) {
@@ -58,10 +51,7 @@ export default function CourseDetail({ courseId }) {
                 setLoading(false);
             }
         };
-
-        if (courseId) {
-            fetchCourseDetails();
-        }
+        if (courseId) {fetchCourseDetails();}
     }, [courseId, getCourse, refreshCourses]);
 
     const handleBackClick = () => {
@@ -69,24 +59,12 @@ export default function CourseDetail({ courseId }) {
     };
 
     const toggleSectionCompletion = (sectionId) => {
-        if (completedSections.includes(sectionId)) {
-            setCompletedSections(completedSections.filter(id => id !== sectionId));
-        } else {
-            setCompletedSections([...completedSections, sectionId]);
-        }
+        if (completedSections.includes(sectionId)) {setCompletedSections(completedSections.filter(id => id !== sectionId));} setCompletedSections([...completedSections, sectionId]);
     };
 
-    if (loading || coursesLoading) {
-        return <div className={styles.loadingMessage}>Loading course details...</div>;
-    }
-
-    if (error || coursesError) {
-        return <div className={styles.errorMessage}>{error || coursesError}</div>;
-    }
-
-    if (!course) {
-        return <div className={styles.errorMessage}>Course not found</div>;
-    }
+    if (loading || coursesLoading) return <div className={styles.loadingMessage}>Loading course details...</div>;
+    if (error || coursesError) return <div className={styles.errorMessage}>{error || coursesError}</div>;
+    if (!course) return <div className={styles.errorMessage}>Course not found</div>;
 
     return (
         <div className={styles.courseDetailContainer}>

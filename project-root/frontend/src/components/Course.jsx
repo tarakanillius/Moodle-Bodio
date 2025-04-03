@@ -1,24 +1,21 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import styles from "../styles/course.module.css";
-import { FaEllipsisV, FaUsers, FaChalkboardTeacher, FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
+import { FaEllipsisV, FaUsers, FaChalkboardTeacher, FaEdit, FaTrash } from 'react-icons/fa';
 import {GlobalContext} from "../context/GlobalContext";
+import axios from 'axios';
 
 export default function Course({viewMode = 'grid', name, description, teachers, students, sections, color, courseId }) {
-    const { setSelectedComponent, setSelectedCourseId } = useContext(GlobalContext);
+    const { setSelectedComponent, setSelectedCourseId, refreshCourses } = useContext(GlobalContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
     useEffect(() => {
         function handleClickOutside(event) {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setMenuOpen(false);
-            }
+            if (menuRef.current && !menuRef.current.contains(event.target)) setMenuOpen(false);
         }
 
         document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [menuRef]);
 
     const handleViewCourse = () => {
@@ -34,39 +31,54 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
     const handleEditCourse = (e) => {
         e.stopPropagation();
         setMenuOpen(false);
-        alert("Edit course functionality would be implemented here");
+        setSelectedCourseId(courseId);
+        setSelectedComponent("course");
+        localStorage.setItem("openCourseTab", "settings");
     };
 
-    const handleDeleteCourse = (e) => {
+    const handleDeleteCourse = async (e) => {
         e.stopPropagation();
         setMenuOpen(false);
         if (window.confirm("Are you sure you want to delete this course?")) {
-            alert("Delete course functionality would be implemented here");
+            try {
+                await axios.delete(`http://127.0.0.1:5000/delete_course/${courseId}`);
+                refreshCourses();
+                alert("Course deleted successfully");
+            } catch (error) {
+                console.error("Error deleting course:", error);
+                alert("Failed to delete course: " + (error.response?.data?.error || "Unknown error"));
+            }
         }
-    };
-
-    const handleEnrollStudents = (e) => {
-        e.stopPropagation();
-        setMenuOpen(false);
-        alert("Enroll students functionality would be implemented here");
     };
 
     if (viewMode === 'list') {
         return (
-            <div className={styles.courseCardList} style={{backgroundColor: color}}>
+            <div className={styles.courseCardList} style={{backgroundColor: color}} onClick={handleViewCourse}>
                 <div className={styles.courseInfoList}>
                     <h2 className={styles.courseNameList}>{name}</h2>
                     <p className={styles.courseDescriptionList}>{description}</p>
                 </div>
                 <div className={styles.sectionsListView}>
-                    {sections.map((section, index) => (
+                    {sections && sections.length > 0 ? sections.map((section, index) => (
                         <span key={index} className={styles.sectionItemList}>{section}</span>
-                    ))}
+                    )) : <span className={styles.sectionItemList}>No sections</span>}
                 </div>
                 <div className={styles.courseActionsList}>
-                    <button className={styles.menuButton}>
-                        <FaEllipsisV />
-                    </button>
+                    <div className={styles.menuContainer} ref={menuRef}>
+                        <button className={styles.menuButton} onClick={handleManageCourse}>
+                            <FaEllipsisV />
+                        </button>
+                        {menuOpen && (
+                            <div className={styles.dropdownMenu}>
+                                <button onClick={handleEditCourse}>
+                                    <FaEdit/> Edit Course
+                                </button>
+                                <button onClick={handleDeleteCourse} className={styles.deleteButton}>
+                                    <FaTrash/> Delete Course
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         );
@@ -89,12 +101,10 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                     </span>
                 </div>
             </div>
-
             <p className={styles.courseDescription}>{description}</p>
-
             <div className={styles.courseSections}>
                 <h3 className={styles.sectionTitle}>Sections:</h3>
-                {sections && sections.length > 0 ? (
+                {sections ? (
                     <ul className={styles.sectionsList}>
                         {sections.map((section, index) => (
                             <li key={index} className={styles.sectionItem}>{section}</li>
@@ -104,7 +114,6 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                     <p className={styles.noSections}>No sections available</p>
                 )}
             </div>
-
             <div className={styles.courseFooter}>
                 <button className={styles.viewButton} onClick={handleViewCourse}>Visualizza</button>
                 <div className={styles.menuContainer} ref={menuRef}>
@@ -112,12 +121,9 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                         Gestisci
                     </button>
                     {menuOpen && (
-                        <div className={styles.dropdownMenu} style={{ zIndex: 1000 }}>
+                        <div className={styles.dropdownMenu}>
                             <button onClick={handleEditCourse}>
                                 <FaEdit/> Edit Course
-                            </button>
-                            <button onClick={handleEnrollStudents}>
-                                <FaUserPlus/> Enroll Students
                             </button>
                             <button onClick={handleDeleteCourse} className={styles.deleteButton}>
                                 <FaTrash/> Delete Course
