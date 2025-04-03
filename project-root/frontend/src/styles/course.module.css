@@ -4,11 +4,11 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     padding: 12px;
     transition: transform 0.2s, box-shadow 0.2s;
-    height: 150px;
+    height: max-content;
+    width: 210px;
     display: flex;
     flex-direction: column;
     overflow: visible;
-    width: 100%;
     position: relative;
 }
 
