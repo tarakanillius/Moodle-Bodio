@@ -8,54 +8,6 @@
     gap: 10px;
 }
 
-.settingsNav {
-    display: flex;
-    gap: 20px;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 15px;
-    margin-bottom: 30px;
-    overflow-x: auto;
-    position: sticky;
-    top: 0;
-    background: #ffffff;
-    z-index: 10;
-    padding-top: 10px;
-}
-
-.settingsNav button {
-    background: none;
-    border: none;
-    font-size: 16px;
-    padding: 12px 20px;
-    cursor: pointer;
-    color: #555;
-    transition: all 0.2s ease;
-    position: relative;
-    white-space: nowrap;
-    border-radius: 6px;
-}
-
-.settingsNav button:hover {
-    color: #636363;
-    background-color: #f5f5f5;
-}
-
-.settingsNav .active {
-    font-weight: 600;
-    color: #4b5563;
-}
-
-.settingsNav .active::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #636363;
-    border-radius: 3px;
-}
-
 .settingsContent {
     animation: fadeIn 0.3s ease-in-out;
     max-width: 800px;
@@ -242,15 +194,6 @@
 @media (max-width: 768px) {
     .settingsWrapper {
         padding: 20px 15px;
-    }
-
-    .settingsNav {
-        gap: 10px;
-    }
-
-    .settingsNav button {
-        padding: 10px 15px;
-        font-size: 14px;
     }
 
     .settingItem input[type="text"],

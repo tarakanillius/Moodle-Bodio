@@ -22,7 +22,6 @@ export default function Settings() {
                 tabs={tabs}
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
-                className={styles.settingsNav}
             />
             <div className={styles.settingsContent}>
                 {activeTab === "general" && <GeneralSettings />}
