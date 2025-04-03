@@ -13,10 +13,10 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 UPLOAD_FOLDER = 'uploads/'
 ALLOWED_EXTENSIONS = {'docx', 'pptx', 'pdf', 'txt', 'py', 'js', 'html', 'css'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # CHANGE HERE CREDENTIALS
-client = MongoClient("mongodb://LOGIN:PASSWORD@localhost:27017/")
+client = MongoClient("mongodb://admin:admin@localhost:27017/")
 db = client["Moodle-Bodio"]
 users = db["users"]
 courses = db["courses"]
@@ -86,7 +86,8 @@ def add_course():
         "description": data["description"],
         "teacher": ObjectId(data["teacher_id"]),
         "sections": [],
-        "students": []
+        "students": [],
+        "color": data.get("color", "rgba(0, 0, 0, 0.05)")
     }
 
     course_id = courses.insert_one(new_course).inserted_id
@@ -204,7 +205,8 @@ def show_student_courses(student_id):
             course_list.append({
                 "id": str(course["_id"]),
                 "name": course["name"],
-                "description": course["description"]
+                "description": course["description"],
+                "color": course.get("color", "rgba(0, 0, 0, 0.05)")
             })
 
         return jsonify({"courses": course_list}), 200
@@ -242,7 +244,8 @@ def get_course(course_id):
             student_list.append({
                 "id": str(student["_id"]),
                 "name": f"{student['name']} {student['surname']}",
-                "email": student["email"]
+                "email": student["email"],
+                "gender": student.get("sex", "male")
             })
 
     course_details = {
@@ -251,7 +254,8 @@ def get_course(course_id):
         "description": course["description"],
         "teacher": teacher_info,
         "sections": course_sections,
-        "students": student_list
+        "students": student_list,
+        "color": course.get("color", "rgba(0, 0, 0, 0.05)")
     }
 
     return jsonify({"course": course_details}), 200
@@ -351,7 +355,8 @@ def get_courses():
             "description": course["description"],
             "teacher": {"id": str(course["teacher"]), "name": teacher_name},
             "sections": [str(section_id) for section_id in course["sections"]],
-            "students": [str(student_id) for student_id in course["students"]]
+            "students": [str(student_id) for student_id in course["students"]],
+            "color": course.get("color", "rgba(0, 0, 0, 0.05)")
         })
 
     return jsonify({"courses": course_list}), 200

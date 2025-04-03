@@ -1,14 +1,13 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
-import { GlobalContext } from "../context/GlobalContext";
-import { FaEllipsisV, FaUsers, FaChalkboardTeacher, FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import styles from "../styles/course.module.css";
+import { FaEllipsisV, FaUsers, FaChalkboardTeacher, FaEdit, FaTrash, FaUserPlus } from 'react-icons/fa';
+import {GlobalContext} from "../context/GlobalContext";
 
-export default function Course({viewMode = 'grid', name, description, teachers, students, sections, courseId }) {
+export default function Course({viewMode = 'grid', name, description, teachers, students, sections, color, courseId }) {
     const { setSelectedComponent, setSelectedCourseId } = useContext(GlobalContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
-    // Handle clicking outside to close the menu
     useEffect(() => {
         function handleClickOutside(event) {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -23,26 +22,23 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
     }, [menuRef]);
 
     const handleViewCourse = () => {
-        // Set the courseId in context
         setSelectedCourseId(courseId);
-        // Change the selected component to "course"
         setSelectedComponent("course");
     };
 
     const handleManageCourse = (e) => {
-        e.stopPropagation(); // Prevent triggering the card click
+        e.stopPropagation();
         setMenuOpen(!menuOpen);
     };
 
     const handleEditCourse = (e) => {
-        e.stopPropagation(); // Prevent triggering the card click
+        e.stopPropagation();
         setMenuOpen(false);
-        // You could set a different component or mode here
         alert("Edit course functionality would be implemented here");
     };
 
     const handleDeleteCourse = (e) => {
-        e.stopPropagation(); // Prevent triggering the card click
+        e.stopPropagation();
         setMenuOpen(false);
         if (window.confirm("Are you sure you want to delete this course?")) {
             alert("Delete course functionality would be implemented here");
@@ -50,64 +46,45 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
     };
 
     const handleEnrollStudents = (e) => {
-        e.stopPropagation(); // Prevent triggering the card click
+        e.stopPropagation();
         setMenuOpen(false);
         alert("Enroll students functionality would be implemented here");
     };
 
     if (viewMode === 'list') {
         return (
-            <div className={styles.courseCardList} onClick={handleViewCourse}>
+            <div className={styles.courseCardList} style={{backgroundColor: color}}>
                 <div className={styles.courseInfoList}>
                     <h2 className={styles.courseNameList}>{name}</h2>
                     <p className={styles.courseDescriptionList}>{description}</p>
                 </div>
                 <div className={styles.sectionsListView}>
-                    {sections && sections.length > 0 ? (
-                        sections.map((section, index) => (
-                            <span key={index} className={styles.sectionItemList}>{section}</span>
-                        ))
-                    ) : (
-                        <span className={styles.noSections}>No sections</span>
-                    )}
+                    {sections.map((section, index) => (
+                        <span key={index} className={styles.sectionItemList}>{section}</span>
+                    ))}
                 </div>
-                <div className={styles.courseActionsList} onClick={(e) => e.stopPropagation()}>
-                    <div className={styles.menuContainer} ref={menuRef}>
-                        <button className={styles.menuButton} onClick={handleManageCourse}>
-                            <FaEllipsisV />
-                        </button>
-                        {menuOpen && (
-                            <div className={styles.dropdownMenu}>
-                                <button onClick={handleEditCourse}>
-                                    <FaEdit /> Edit Course
-                                </button>
-                                <button onClick={handleEnrollStudents}>
-                                    <FaUserPlus /> Enroll Students
-                                </button>
-                                <button onClick={handleDeleteCourse} className={styles.deleteButton}>
-                                    <FaTrash /> Delete Course
-                                </button>
-                            </div>
-                        )}
-                    </div>
+                <div className={styles.courseActionsList}>
+                    <button className={styles.menuButton}>
+                        <FaEllipsisV />
+                    </button>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className={styles.courseCardGrid}>
+        <div className={styles.courseCardGrid} style={{backgroundColor: color}}>
             <div className={styles.courseHeader}>
                 <h2 className={styles.courseName}>{name}</h2>
                 <div className={styles.courseStats}>
                     <span className={styles.teacherCount}>
-                        <FaChalkboardTeacher className={styles.icon} />
+                        <FaChalkboardTeacher className={styles.icon}/>
                         {teachers && teachers.length > 0
                             ? `${teachers.length} instructor${teachers.length > 1 ? 's' : ''}`
                             : 'No instructor'}
                     </span>
                     <span className={styles.studentCount}>
-                        <FaUsers className={styles.icon} />
+                        <FaUsers className={styles.icon}/>
                         {students} student{students !== 1 ? 's' : ''}
                     </span>
                 </div>
@@ -132,18 +109,18 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                 <button className={styles.viewButton} onClick={handleViewCourse}>Visualizza</button>
                 <div className={styles.menuContainer} ref={menuRef}>
                     <button className={styles.manageButton} onClick={handleManageCourse}>
-                        Gestisci <FaEllipsisV className={styles.menuIcon} />
+                        Gestisci
                     </button>
                     {menuOpen && (
-                        <div className={styles.dropdownMenu}>
+                        <div className={styles.dropdownMenu} style={{ zIndex: 1000 }}>
                             <button onClick={handleEditCourse}>
-                                <FaEdit /> Edit Course
+                                <FaEdit/> Edit Course
                             </button>
                             <button onClick={handleEnrollStudents}>
-                                <FaUserPlus /> Enroll Students
+                                <FaUserPlus/> Enroll Students
                             </button>
                             <button onClick={handleDeleteCourse} className={styles.deleteButton}>
-                                <FaTrash /> Delete Course
+                                <FaTrash/> Delete Course
                             </button>
                         </div>
                     )}

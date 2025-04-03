@@ -239,7 +239,6 @@
     color: white;
 }
 
-/* Add responsive styles */
 @media (max-width: 768px) {
     .settingsWrapper {
         padding: 20px 15px;

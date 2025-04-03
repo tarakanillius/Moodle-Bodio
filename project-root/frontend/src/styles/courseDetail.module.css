@@ -95,7 +95,6 @@
     border-radius: 3px 3px 0 0;
 }
 
-/* Sections Tab */
 .courseContent {
     display: flex;
     gap: 30px;
@@ -317,7 +316,6 @@
     border-radius: 8px;
 }
 
-/* Students Tab */
 .studentsContainer {
     padding: 20px;
 }
@@ -378,7 +376,6 @@
     text-align: center;
 }
 
-/* Settings Tab */
 .settingsContainer {
     padding: 20px;
 }

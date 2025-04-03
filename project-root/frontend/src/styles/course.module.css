@@ -2,11 +2,14 @@
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 12px;
     transition: transform 0.2s, box-shadow 0.2s;
-    height: auto;
+    height: 150px;
     display: flex;
     flex-direction: column;
+    overflow: visible;
+    width: 100%;
+    position: relative;
 }
 
 .courseCardGrid:hover {
@@ -15,83 +18,90 @@
 }
 
 .courseHeader {
-    margin-bottom: 12px;
+    margin-bottom: 6px;
 }
 
 .courseName {
-    font-size: 1.3rem;
-    margin: 0 0 8px 0;
+    font-size: 1rem;
+    margin: 0 0 4px 0;
     color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .courseStats {
     display: flex;
-    gap: 15px;
-    font-size: 0.85rem;
+    gap: 8px;
+    font-size: 0.7rem;
     color: #666;
 }
 
 .teacherCount, .studentCount {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 3px;
 }
 
 .icon {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
 }
 
 .courseDescription {
     color: #555;
-    margin-bottom: 12px;
-    flex-grow: 1;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    max-height: 4.2em;
+    margin-bottom: 6px;
+    flex-grow: 0;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    max-height: 2.6em;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
 .sectionTitle {
-    font-size: 1rem;
-    margin: 0 0 8px 0;
+    font-size: 0.8rem;
+    margin: 0 0 4px 0;
     color: #444;
 }
 
 .sectionsList {
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 6px 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 4px;
+    max-height: 40px;
+    overflow: hidden;
 }
 
 .sectionItem {
-    background-color: #f0f0f0;
-    padding: 4px 10px;
-    border-radius: 15px;
-    font-size: 0.8rem;
+    background-color: #ffffff;
+    padding: 2px 5px;
+    border-radius: 8px;
+    font-size: 0.65rem;
     color: #555;
+    white-space: nowrap;
 }
 
 .courseFooter {
     display: flex;
-    position: relative;
-    gap: 10px;
-    padding-top: 15px;
+    gap: 5px;
+    padding-top: 6px;
+    margin-top: auto;
 }
 
-.viewButton, .manageButton, .menuButton {
-    padding: 8px 15px;
+.viewButton, .manageButton {
+    padding: 4px 8px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
     transition: background-color 0.2s;
+    font-size: 0.75rem;
 }
 
 .viewButton {
@@ -101,7 +111,7 @@
 }
 
 .manageButton {
-    background-color: #e9e9e9;
+    background-color: #ffffff;
     color: #333;
     flex: 1;
 }
@@ -111,7 +121,7 @@
 }
 
 .manageButton:hover {
-    background-color: #d9d9d9;
+    background-color: #ececec;
 }
 
 .courseCardList {
@@ -187,9 +197,8 @@
     border: 1px solid #e2e8f0;
     border-radius: 4px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 10;
+    z-index: 1000;
     min-width: 160px;
-    overflow: hidden;
 }
 
 .dropdownMenu button {
@@ -219,6 +228,7 @@
     background-color: #fff5f5;
 }
 
+
 .menuButton {
     background: none;
     border: none;
@@ -233,9 +243,4 @@
 .menuButton:hover {
     background-color: #edf2f7;
     color: #4a5568;
-}
-
-.menuIcon {
-    margin-left: 5px;
-    font-size: 14px;
 }

@@ -15,4 +15,4 @@ Steps to run the project:
 
     Student
     - email: anna.verdi@example.com
-    - securepass
+    - password: securepass

@@ -2,7 +2,7 @@ import React from 'react';
 import getAvatarImage from "../../utils/getAvatar";
 import styles from "../../styles/courseDetail.module.css";
 
-export default function  StudentsTab({ course }){
+export default function StudentsTab({ course }){
     return (
         <div className={styles.studentsContainer}>
             <h2 className={styles.studentsTitle}>Enrolled Students</h2>

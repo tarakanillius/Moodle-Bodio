@@ -14,7 +14,7 @@ export default function SettingsTab({course, userRole}){
     };
 
     const handleSave = () => {
-        // Save course data logic would go here
+        //TODO: Save course data logic
         alert("Course settings saved!");
     };
 
@@ -57,18 +57,18 @@ export default function SettingsTab({course, userRole}){
                     />
                 </div>
 
-                {userRole === "teacher" && (
-                    <button className={styles.saveButton} onClick={handleSave}>
-                        Salvare
-                    </button>
-                )}
+
             </div>
 
             <div className={styles.courseActions}>
-                <button className={styles.exportButton} onClick={handleExport}>
+                <button className={styles.button} onClick={handleExport}>
                     <FaDownload /> Export Course
                 </button>
-
+                {userRole === "teacher" && (
+                    <button className={styles.button} onClick={handleSave}>
+                        Salvare
+                    </button>
+                )}
                 {userRole === "teacher" && (
                     <button className={styles.deleteButton} onClick={handleDelete}>
                         <FaTrash /> Delete Course
