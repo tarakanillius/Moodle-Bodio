@@ -1,59 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styles from "../styles/home.module.css";
 import Course from "../components/Course";
 import Calendar from 'react-calendar';
-import { fetchUserCourses } from "../utils/courseService";
+import { GlobalContext } from "../context/GlobalContext";
 import 'react-calendar/dist/Calendar.css';
 
 export default function Home() {
     const [date, setDate] = useState(new Date());
-    const [recentCourses, setRecentCourses] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const loadCourses = async () => {
-            try {
-                setLoading(true);
-                const userId = localStorage.getItem('userId');
-
-                if (!userId) {
-                    setError("User not logged in");
-                    return;
-                }
-
-                const courses = await fetchUserCourses(userId);
-
-                setRecentCourses(courses.slice(0, 5));
-            } catch (err) {
-                console.error("Failed to load courses:", err);
-                setError("Failed to load courses. Please try again later.");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        loadCourses();
-    }, []);
+    const { courses, coursesLoading, coursesError } = useContext(GlobalContext);
 
     const onChange = newDate => {
         setDate(newDate);
     };
 
+    // Define fallback colors for courses that might not have a color
+    const fallbackColors = [
+        "rgba(0, 170, 255, 0.11)",
+        "rgba(120, 255, 0, 0.11)",
+        "rgba(255, 189, 0, 0.11)",
+        "rgba(166, 0, 255, 0.11)",
+        "rgba(255, 0, 0, 0.11)"
+    ];
+
     const renderCoursesContent = () => {
-        if (loading) {
+        if (coursesLoading) {
             return <div className={styles.loading_message}>Loading courses...</div>;
         }
 
-        if (error) {
-            return <div className={styles.error_message}>{error}</div>;
+        if (coursesError) {
+            return <div className={styles.error_message}>{coursesError}</div>;
         }
 
-        if (recentCourses.length === 0) {
+        if (!courses || courses.length === 0) {
             return <div className={styles.empty_message}>No courses found</div>;
         }
 
-        return recentCourses.map((course) => (
+        // Take only the first 5 courses for the recent courses section
+        const recentCourses = courses.slice(0, 5);
+
+        return recentCourses.map((course, index) => (
             <Course
                 key={course.id}
                 name={course.name}
@@ -61,7 +46,7 @@ export default function Home() {
                 teachers={course.teacher ? [course.teacher.name] : []}
                 students={course.students ? course.students.length : 0}
                 sections={course.sections ? course.sections.map(section => section.name) : []}
-                color={course.color}
+                color={course.color || fallbackColors[index % fallbackColors.length]}
                 courseId={course.id}
             />
         ));

@@ -17,18 +17,6 @@ export default function Sidebar() {
                     Home
                 </button>
                 <button
-                    className={selectedComponent === "teachers" ? styles.active : ""}
-                    onClick={() => setSelectedComponent("teachers")}
-                >
-                    Docenti
-                </button>
-                <button
-                    className={selectedComponent === "students" ? styles.active : ""}
-                    onClick={() => setSelectedComponent("students")}
-                >
-                    Studenti
-                </button>
-                <button
                     className={selectedComponent === "modules" ? styles.active : ""}
                     onClick={() => setSelectedComponent("modules")}
                 >

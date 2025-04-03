@@ -9,7 +9,7 @@ import SettingsTab from "../components/courseDetails/SettingsTab";
 import styles from "../styles/courseDetail.module.css";
 
 export default function CourseDetail({ courseId }) {
-    const { setSelectedComponent, user } = useContext(GlobalContext);
+    const { setSelectedComponent, user, getCourse, coursesLoading, coursesError, refreshCourses } = useContext(GlobalContext);
     const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -27,11 +27,26 @@ export default function CourseDetail({ courseId }) {
         const fetchCourseDetails = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://127.0.0.1:5000/course/${courseId}`);
-                setCourse(response.data.course);
 
-                if (response.data.course.sections && response.data.course.sections.length > 0) {
-                    setActiveSection(response.data.course.sections[0].id);
+                // First try to get the course from the GlobalContext
+                const cachedCourse = getCourse(courseId);
+
+                if (cachedCourse) {
+                    setCourse(cachedCourse);
+                    if (cachedCourse.sections && cachedCourse.sections.length > 0) {
+                        setActiveSection(cachedCourse.sections[0].id);
+                    }
+                } else {
+                    // If not in context, fetch from API
+                    const response = await axios.get(`http://127.0.0.1:5000/course/${courseId}`);
+                    setCourse(response.data.course);
+
+                    if (response.data.course.sections && response.data.course.sections.length > 0) {
+                        setActiveSection(response.data.course.sections[0].id);
+                    }
+
+                    // Refresh the courses in the context to include this one
+                    refreshCourses();
                 }
 
                 //TODO: fetch the completed sections from the backend
@@ -47,7 +62,7 @@ export default function CourseDetail({ courseId }) {
         if (courseId) {
             fetchCourseDetails();
         }
-    }, [courseId]);
+    }, [courseId, getCourse, refreshCourses]);
 
     const handleBackClick = () => {
         setSelectedComponent("modules");
@@ -61,12 +76,12 @@ export default function CourseDetail({ courseId }) {
         }
     };
 
-    if (loading) {
+    if (loading || coursesLoading) {
         return <div className={styles.loadingMessage}>Loading course details...</div>;
     }
 
-    if (error) {
-        return <div className={styles.errorMessage}>{error}</div>;
+    if (error || coursesError) {
+        return <div className={styles.errorMessage}>{error || coursesError}</div>;
     }
 
     if (!course) {
@@ -102,7 +117,14 @@ export default function CourseDetail({ courseId }) {
                 <StudentsTab course={course} />
             )}
             {activeTab === "settings" && user.role === "teacher" && (
-                <SettingsTab course={course} userRole={user.role} />
+                <SettingsTab
+                    course={course}
+                    userRole={user.role}
+                    onCourseUpdated={(updatedCourse) => {
+                        setCourse(updatedCourse);
+                        refreshCourses();
+                    }}
+                />
             )}
         </div>
     );

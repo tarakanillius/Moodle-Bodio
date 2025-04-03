@@ -375,5 +375,34 @@ def get_sections():
 
     return jsonify({"sections": section_list}), 200
 
+@app.route('/update_course/<course_id>', methods=['PUT'])
+def update_course(course_id):
+    try:
+        data = request.json
+
+        course = courses.find_one({"_id": ObjectId(course_id)})
+        if not course:
+            return jsonify({"error": "Course not found"}), 404
+
+        update_data = {}
+        if "name" in data:
+            update_data["name"] = data["name"]
+        if "description" in data:
+            update_data["description"] = data["description"]
+        if "color" in data:
+            update_data["color"] = data["color"]
+
+        if update_data:
+            courses.update_one(
+                {"_id": ObjectId(course_id)},
+                {"$set": update_data}
+            )
+
+        return jsonify({"message": "Course updated successfully"}), 200
+    except Exception as e:
+        print(f"Error in update_course: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+
+
 if __name__ == '__main__':
     app.run(debug=True)
