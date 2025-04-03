@@ -25,13 +25,11 @@ export default function Courses() {
             setFilteredCourses(courses);
             return;
         }
-
         const query = searchQuery.toLowerCase();
         const filtered = courses.filter(course =>
             course.name.toLowerCase().includes(query) ||
             course.description.toLowerCase().includes(query)
         );
-
         setFilteredCourses(filtered);
     };
 

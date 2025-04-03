@@ -47,13 +47,10 @@ export default function GlobalProvider({ children }) {
 
     const loadUserCourses = async () => {
         if (!user.id) return;
-
         try {
             setCoursesLoading(true);
             setCoursesError(null);
-
             const response = await axios.get(`http://127.0.0.1:5000/student_courses/${user.id}`);
-
             if (response.data.courses) {
                 const coursesWithDetails = await Promise.all(
                     response.data.courses.map(async (course) => {
@@ -66,7 +63,6 @@ export default function GlobalProvider({ children }) {
                         }
                     })
                 );
-
                 setCourses(coursesWithDetails);
                 setCoursesLoaded(true);
             } else {
@@ -86,7 +82,6 @@ export default function GlobalProvider({ children }) {
     const updateCourse = async (courseId, updatedData) => {
         try {
             await axios.put(`http://127.0.0.1:5000/update_course/${courseId}`, updatedData);
-
             setCourses(prevCourses =>
                 prevCourses.map(course =>
                     course.id === courseId
@@ -94,7 +89,6 @@ export default function GlobalProvider({ children }) {
                         : course
                 )
             );
-
             return { success: true };
         } catch (error) {
             console.error("Error updating course:", error);
@@ -111,7 +105,6 @@ export default function GlobalProvider({ children }) {
 
     const updateUser = (userData) => {
         setUser(userData);
-
         localStorage.setItem("userId", userData.id);
         localStorage.setItem("userName", userData.name);
         localStorage.setItem("userSurname", userData.surname);
@@ -129,10 +122,8 @@ export default function GlobalProvider({ children }) {
             role: "",
             gender: "",
         });
-
         setCourses([]);
         setCoursesLoaded(false);
-
         localStorage.removeItem("userId");
         localStorage.removeItem("userName");
         localStorage.removeItem("userSurname");

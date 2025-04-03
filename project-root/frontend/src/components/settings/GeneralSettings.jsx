@@ -3,14 +3,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 import styles from "../../styles/settings.module.css";
 
 const GeneralSettings = () => {
-    const {
-        theme,
-        setTheme,
-        language,
-        setLanguage,
-        saveStatus,
-        handleSave
-    } = useContext(GlobalContext);
+    const {theme, setTheme, language, setLanguage, saveStatus, handleSave} = useContext(GlobalContext);
 
     return (
         <div className={styles.settingsSection}>

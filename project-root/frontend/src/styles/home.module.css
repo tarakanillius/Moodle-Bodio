@@ -49,7 +49,7 @@
     margin-bottom: 30px;
 }
 
-.calendar {
+.calendarContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,7 +58,7 @@
     flex-direction: column;
 }
 
-:global(.react-calendar) {
+.calendarBody {
     width: 99% !important;
     height: auto !important;
     font-size: 1rem !important;
@@ -70,12 +70,12 @@
     margin: 0 auto !important;
 }
 
-:global(.react-calendar__month-view__days__day) {
+.calendarBody__month-view__days__day {
     padding: 1em 0.5em !important;
     height: 60px !important;
 }
 
-:global(.react-calendar__navigation button) {
+.calendarBody__navigation button {
     font-size: 1.2rem !important;
     padding: 10px !important;
 }

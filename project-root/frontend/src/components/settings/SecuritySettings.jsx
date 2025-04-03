@@ -3,17 +3,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 import styles from "../../styles/settings.module.css";
 
 const SecuritySettings = () => {
-    const {
-        newPassword,
-        setNewPassword,
-        confirmPassword,
-        setConfirmPassword,
-        twoFactor,
-        setTwoFactor,
-        saveStatus,
-        handleSave,
-        terminateSession
-    } = useContext(GlobalContext);
+    const {newPassword, setNewPassword, confirmPassword, setConfirmPassword, twoFactor, setTwoFactor, saveStatus, handleSave, terminateSession} = useContext(GlobalContext);
 
     return (
         <div className={styles.settingsSection}>

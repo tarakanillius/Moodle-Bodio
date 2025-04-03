@@ -2,14 +2,7 @@ import React from 'react';
 import { FaFile, FaEdit, FaTrash, FaPlus, FaCheck, FaRegCircle } from 'react-icons/fa';
 import styles from "../../styles/courseDetail.module.css";
 
-export default function SectionsTab({
-                         course,
-                         activeSection,
-                         setActiveSection,
-                         userRole,
-                         completedSections,
-                         toggleSectionCompletion
-                     }){
+export default function SectionsTab({course, activeSection, setActiveSection, userRole, completedSections, toggleSectionCompletion}){
     const currentSection = course.sections.find(section => section.id === activeSection);
 
     return (
@@ -57,7 +50,6 @@ export default function SectionsTab({
                     )}
                 </ul>
             </div>
-
             <div className={styles.sectionContent}>
                 {currentSection ? (
                     <>
@@ -69,7 +61,6 @@ export default function SectionsTab({
                                 </button>
                             )}
                         </div>
-
                         <div className={styles.sectionFiles}>
                             <h3 className={styles.filesTitle}>Files</h3>
                             {currentSection.files && currentSection.files.length > 0 ? (
