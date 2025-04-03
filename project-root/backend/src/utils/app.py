@@ -13,7 +13,7 @@ UPLOAD_FOLDER, ALLOWED_EXTENSIONS = 'uploads/', {'docx', 'pptx', 'pdf', 'txt', '
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 app.config.update(UPLOAD_FOLDER=UPLOAD_FOLDER, MAX_CONTENT_LENGTH=16*1024*1024)
-client = MongoClient("mongodb://admin:admin@localhost:27017/")
+client = MongoClient("mongodb+srv://julie:Passworddb123@cluster1.28syrfz.mongodb.net/")
 db = client["Moodle-Bodio"]
 users, courses, sections = db["users"], db["courses"], db["sections"]
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
