@@ -79,7 +79,6 @@ export default function CourseDetail({ courseId }) {
                 tabs={courseTabs}
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
-                className={styles.courseNav}
             />
             {activeTab === "sections" && (
                 <SectionsTab

@@ -102,21 +102,6 @@
     white-space: nowrap;
 }
 
-.logoutButton {
-    width: 100%;
-    padding: 10px !important;
-    text-align: center !important;
-    background-color: #f8d7da !important;
-    color: #721c24 !important;
-    border-radius: 5px;
-    margin-top: 10px;
-    transition: background-color 0.2s ease;
-}
-
-.logoutButton:hover {
-    background-color: #f5c6cb !important;
-}
-
 .content {
     flex-grow: 1;
     background-color: #ffffff;

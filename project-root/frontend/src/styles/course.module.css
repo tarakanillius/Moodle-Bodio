@@ -103,19 +103,19 @@
 }
 
 .viewButton {
-    background-color: #4a6fa5;
+    background-color: #636363;
     color: white;
     flex: 1;
+}
+
+.viewButton:hover {
+    background-color: #c8c8c8;
 }
 
 .manageButton {
     background-color: #ffffff;
     color: #333;
     flex: 1;
-}
-
-.viewButton:hover {
-    background-color: #3a5a8a;
 }
 
 .manageButton:hover {
