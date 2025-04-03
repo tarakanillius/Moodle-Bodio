@@ -1,41 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FaSearch, FaList, FaTh } from 'react-icons/fa';
 import styles from "../styles/courses.module.css";
 import Course from "../components/Course";
-import { fetchUserCourses } from "../utils/courseService";
+import { GlobalContext } from "../context/GlobalContext";
 
 export default function Courses() {
     const [viewMode, setViewMode] = useState('grid');
     const [searchQuery, setSearchQuery] = useState('');
-    const [courses, setCourses] = useState([]);
     const [filteredCourses, setFilteredCourses] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const { courses, coursesLoading, coursesError } = useContext(GlobalContext);
 
     useEffect(() => {
-        const loadCourses = async () => {
-            try {
-                setLoading(true);
-                const userId = localStorage.getItem('userId');
-
-                if (!userId) {
-                    setError("User not logged in");
-                    return;
-                }
-
-                const coursesData = await fetchUserCourses(userId);
-                setCourses(coursesData);
-                setFilteredCourses(coursesData);
-            } catch (err) {
-                console.error("Error fetching courses:", err);
-                setError("Failed to load courses. Please try again later.");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        loadCourses();
-    }, []);
+        if (courses) {
+            handleSearch();
+        }
+    }, [searchQuery, courses]);
 
     const toggleViewMode = () => {
         setViewMode(viewMode === 'grid' ? 'list' : 'grid');
@@ -55,10 +34,6 @@ export default function Courses() {
 
         setFilteredCourses(filtered);
     };
-
-    useEffect(() => {
-        handleSearch();
-    }, [searchQuery]);
 
     return (
         <div className={styles.coursesContainer}>
@@ -89,10 +64,10 @@ export default function Courses() {
                     </button>
                 </div>
             </div>
-            {loading ? (
+            {coursesLoading ? (
                 <div className={styles.loadingMessage}>Loading courses...</div>
-            ) : error ? (
-                <div className={styles.errorMessage}>{error}</div>
+            ) : coursesError ? (
+                <div className={styles.errorMessage}>{coursesError}</div>
             ) : filteredCourses.length === 0 ? (
                 <div className={styles.noCoursesMessage}>
                     {searchQuery ? "No courses match your search" : "No courses found"}

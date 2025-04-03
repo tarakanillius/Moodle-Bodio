@@ -4,7 +4,7 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     padding: 12px;
     transition: transform 0.2s, box-shadow 0.2s;
-    height: 150px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     overflow: visible;
@@ -91,7 +91,6 @@
     display: flex;
     gap: 5px;
     padding-top: 6px;
-    margin-top: auto;
 }
 
 .viewButton, .manageButton {

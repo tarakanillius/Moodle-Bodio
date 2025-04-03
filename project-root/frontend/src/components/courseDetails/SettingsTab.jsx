@@ -1,21 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaTrash, FaDownload } from 'react-icons/fa';
+import { GlobalContext } from "../../context/GlobalContext";
 import styles from "../../styles/courseDetail.module.css";
 
-export default function SettingsTab({course, userRole}){
+export default function SettingsTab({ course, userRole, onCourseUpdated }) {
+    const { updateCourse } = useContext(GlobalContext);
     const [courseData, setCourseData] = useState({
         name: course.name,
         description: course.description
     });
+    const [saving, setSaving] = useState(false);
+    const [saveMessage, setSaveMessage] = useState("");
+    const [saveError, setSaveError] = useState("");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setCourseData({ ...courseData, [name]: value });
     };
 
-    const handleSave = () => {
-        //TODO: Save course data logic
-        alert("Course settings saved!");
+    const handleSave = async () => {
+        if (userRole !== "teacher") return;
+
+        try {
+            setSaving(true);
+            setSaveMessage("");
+            setSaveError("");
+
+            const result = await updateCourse(course.id, courseData);
+
+            if (result.success) {
+                setSaveMessage("Course settings saved successfully!");
+
+                // Update the local course object with new data
+                const updatedCourse = { ...course, ...courseData };
+                if (onCourseUpdated) {
+                    onCourseUpdated(updatedCourse);
+                }
+            } else {
+                setSaveError(result.error || "Failed to save course settings");
+            }
+        } catch (error) {
+            console.error("Error saving course:", error);
+            setSaveError("An unexpected error occurred");
+        } finally {
+            setSaving(false);
+
+            // Clear success message after 3 seconds
+            if (!saveError) {
+                setTimeout(() => {
+                    setSaveMessage("");
+                }, 3000);
+            }
+        }
     };
 
     const handleExport = () => {
@@ -41,7 +77,7 @@ export default function SettingsTab({course, userRole}){
                         name="name"
                         value={courseData.name}
                         onChange={handleChange}
-                        disabled={userRole !== "teacher"}
+                        disabled={userRole !== "teacher" || saving}
                     />
                 </div>
 
@@ -53,28 +89,46 @@ export default function SettingsTab({course, userRole}){
                         value={courseData.description}
                         onChange={handleChange}
                         rows={4}
-                        disabled={userRole !== "teacher"}
+                        disabled={userRole !== "teacher" || saving}
                     />
                 </div>
 
+                {saveMessage && (
+                    <div className={styles.saveMessage}>
+                        {saveMessage}
+                    </div>
+                )}
 
+                {saveError && (
+                    <div className={styles.saveError}>
+                        {saveError}
+                    </div>
+                )}
             </div>
 
             <div className={styles.courseActions}>
-                <button className={styles.button} onClick={handleExport}>
+                <button className={styles.button} onClick={handleExport} disabled={saving}>
                     <FaDownload /> Export Course
                 </button>
                 {userRole === "teacher" && (
-                    <button className={styles.button} onClick={handleSave}>
-                        Salvare
+                    <button
+                        className={styles.button}
+                        onClick={handleSave}
+                        disabled={saving}
+                    >
+                        {saving ? "Saving..." : "Save"}
                     </button>
                 )}
                 {userRole === "teacher" && (
-                    <button className={styles.deleteButton} onClick={handleDelete}>
+                    <button
+                        className={styles.deleteButton}
+                        onClick={handleDelete}
+                        disabled={saving}
+                    >
                         <FaTrash /> Delete Course
                     </button>
                 )}
             </div>
         </div>
     );
-};
+}
