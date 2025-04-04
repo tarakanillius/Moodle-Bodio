@@ -5,7 +5,7 @@ import datetime
 import random
 
 # CHANGE HERE CREDENTIALS
-client = MongoClient("mongodb+srv://julie:Passworddb123@cluster1.28syrfz.mongodb.net/")
+client = MongoClient("mongodb://localhost:27017")
 db = client["Moodle-Bodio"]
 
 db.users.drop()

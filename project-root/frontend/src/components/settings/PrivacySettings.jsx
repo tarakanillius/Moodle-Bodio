@@ -15,7 +15,7 @@ const PrivacySettings = () => {
                         checked={privacySettings.profileVisible}
                         onChange={(e) => handlePrivacyChange("profileVisible", e.target.checked)}
                     />
-                    Allow profile to be visible to other users
+                    Consentire che il profilo sia visibile ad altri utenti
                 </label>
             </div>
             <div className={styles.settingItem}>
@@ -25,7 +25,7 @@ const PrivacySettings = () => {
                         checked={privacySettings.showOnlineStatus}
                         onChange={(e) => handlePrivacyChange("showOnlineStatus", e.target.checked)}
                     />
-                    Show online status
+                    Mostra stato online
                 </label>
             </div>
             <div className={styles.settingItem}>
@@ -35,18 +35,18 @@ const PrivacySettings = () => {
                         checked={privacySettings.allowDataCollection}
                         onChange={(e) => handlePrivacyChange("allowDataCollection", e.target.checked)}
                     />
-                    Allow data collection for service improvement
+                    Consentire la raccolta di dati per il miglioramento del servizio
                 </label>
             </div>
             <div className={styles.settingItem}>
-                <label>Data Sharing</label>
+                <label>Condivisione dati</label>
                 <select
                     value={privacySettings.dataSharing}
                     onChange={(e) => handlePrivacyChange("dataSharing", e.target.value)}
                 >
-                    <option>Minimal (Required Only)</option>
+                    <option>Minimi (solo necessari)</option>
                     <option>Standard</option>
-                    <option>Full Access</option>
+                    <option>Accesso completo</option>
                 </select>
             </div>
             <div className={styles.buttonContainer}>
@@ -54,7 +54,7 @@ const PrivacySettings = () => {
                     Salvare
                 </button>
                 <button className={styles.button}>
-                    Request Data Export
+                    Richiedi l'esportazione dei dati
                 </button>
             </div>
             {saveStatus && <p>{saveStatus}</p>}

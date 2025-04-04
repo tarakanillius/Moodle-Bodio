@@ -7,7 +7,7 @@ const NotificationSettings = () => {
 
     return (
         <div className={styles.settingsSection}>
-            <h2>Notification Settings</h2>
+            <h2>Impostazioni notifiche</h2>
             <div className={styles.settingItem}>
                 <label className={styles.checkboxLabel}>
                     <input
@@ -15,7 +15,7 @@ const NotificationSettings = () => {
                         checked={notifications.messages}
                         onChange={() => handleNotificationChange("messages")}
                     />
-                    New Messages
+                    Nuovi messaggi
                 </label>
             </div>
             <div className={styles.settingItem}>
@@ -25,7 +25,7 @@ const NotificationSettings = () => {
                         checked={notifications.courseUpdates}
                         onChange={() => handleNotificationChange("courseUpdates")}
                     />
-                    Course Updates
+                    Aggiornamenti corsi
                 </label>
             </div>
             <div className={styles.settingItem}>
@@ -35,7 +35,7 @@ const NotificationSettings = () => {
                         checked={notifications.assignments}
                         onChange={() => handleNotificationChange("assignments")}
                     />
-                    New Assignment Alerts
+                    Allerta nuove notifiche
                 </label>
             </div>
             <div className={styles.settingItem}>
@@ -45,16 +45,16 @@ const NotificationSettings = () => {
                         checked={notifications.announcements}
                         onChange={() => handleNotificationChange("announcements")}
                     />
-                    Announcements
+                    Annunci
                 </label>
             </div>
             <div className={styles.settingItem}>
-                <label>Notification Method</label>
+                <label>Metodo di notificazione</label>
                 <select>
                     <option>Email & In-App</option>
-                    <option>Email Only</option>
-                    <option>In-App Only</option>
-                    <option>None</option>
+                    <option>Email</option>
+                    <option>In-App</option>
+                    <option>Non voglio notifiche</option>
                 </select>
             </div>
             <div className={styles.buttonContainer}>

@@ -10,10 +10,10 @@ export default function Settings() {
     const [activeTab, setActiveTab] = useState("general");
 
     const tabs = [
-        { id: "general", label: "Generale" },
-        { id: "notifications", label: "Notifiche" },
-        { id: "security", label: "Sicurezza" },
-        { id: "privacy", label: "Privacy" }
+        { id: "Generale", label: "Generale" },
+        { id: "Notifiche", label: "Notifiche" },
+        { id: "Sicurezza", label: "Sicurezza" },
+        { id: "Privacy", label: "Privacy" }
     ];
 
     return (
@@ -24,10 +24,10 @@ export default function Settings() {
                 setActiveTab={setActiveTab}
             />
             <div className={styles.settingsContent}>
-                {activeTab === "general" && <GeneralSettings />}
-                {activeTab === "notifications" && <NotificationSettings />}
-                {activeTab === "security" && <SecuritySettings />}
-                {activeTab === "privacy" && <PrivacySettings />}
+                {activeTab === "Generale" && <GeneralSettings />}
+                {activeTab === "Notifiche" && <NotificationSettings />}
+                {activeTab === "Sicurezza" && <SecuritySettings />}
+                {activeTab === "Privacy" && <PrivacySettings />}
             </div>
         </div>
     );
