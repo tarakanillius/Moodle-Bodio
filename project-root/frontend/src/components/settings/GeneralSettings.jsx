@@ -10,18 +10,18 @@ const GeneralSettings = () => {
             <h2>General Settings</h2>
             <div className={styles.settingItem}>
                 <div className={styles.settingItem}>
-                    <label>Email Address</label>
+                    <label>Indirizzo email</label>
                     <input type="email" value="mario.rossi@example.com" disabled />
                 </div>
                 <div className={styles.settingItem}>
-                    <label>Account Info</label>
+                    <label>Informazioni account</label>
                     <input
                         type="text"
                         value="Mario Rossi registered 12.01.2024 by Admin123"
                         disabled
                     />
                 </div>
-                <label>Theme</label>
+                <label>Tema</label>
                 <select value={theme} onChange={(e) => setTheme(e.target.value)}>
                     <option>Light</option>
                     <option>Dark</option>
@@ -29,15 +29,15 @@ const GeneralSettings = () => {
                 </select>
             </div>
             <div className={styles.settingItem}>
-                <label>Language</label>
+                <label>Lingua</label>
                 <select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
                 >
-                    <option>English</option>
-                    <option>Italian</option>
-                    <option>French</option>
-                    <option>German</option>
+                    <option>Inglese</option>
+                    <option>Italiano</option>
+                    <option>Francese</option>
+                    <option>Tedesco</option>
                 </select>
             </div>
             <div className={styles.buttonContainer}>
