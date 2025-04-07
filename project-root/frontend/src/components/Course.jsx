@@ -60,8 +60,8 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                 </div>
                 <div className={styles.sectionsListView}>
                     {sections && sections.length > 0 ? sections.map((section, index) => (
-                        <span key={index} className={styles.sectionItemList}>{section}</span>
-                    )) : <span className={styles.sectionItemList}>No sections</span>}
+                        <span key={index} className={styles.sectionItem}>{section}</span>
+                    )) : <span className={styles.sectionItem}>No sections</span>}
                 </div>
                 <div className={styles.courseActionsList}>
                     <div className={styles.menuContainer} ref={menuRef}>

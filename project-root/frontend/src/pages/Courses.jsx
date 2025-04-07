@@ -1,19 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { FaSearch, FaList, FaTh } from 'react-icons/fa';
 import styles from "../styles/courses.module.css";
 import Course from "../components/Course";
-import { GlobalContext } from "../context/GlobalContext";
+import {GlobalContext} from "../context/GlobalContext";
 
 export default function Courses() {
     const [viewMode, setViewMode] = useState('grid');
     const [searchQuery, setSearchQuery] = useState('');
-    const [filteredCourses, setFilteredCourses] = useState([]);
-    const { courses, coursesLoading, coursesError } = useContext(GlobalContext);
+    const {courses,filteredCourses,setFilteredCourses,loading,error,fetchCourses} = useContext(GlobalContext);
 
     useEffect(() => {
-        if (courses) {
-            handleSearch();
-        }
+        fetchCourses();
+    }, []);
+
+    useEffect(() => {
+        handleSearch();
     }, [searchQuery, courses]);
 
     const toggleViewMode = () => {
@@ -54,18 +55,12 @@ export default function Courses() {
                     >
                         {viewMode === 'grid' ? <FaList /> : <FaTh />}
                     </button>
-                    <button
-                        className={styles.searchBtn}
-                        onClick={handleSearch}
-                    >
-                        Search
-                    </button>
                 </div>
             </div>
-            {coursesLoading ? (
+            {loading ? (
                 <div className={styles.loadingMessage}>Loading courses...</div>
-            ) : coursesError ? (
-                <div className={styles.errorMessage}>{coursesError}</div>
+            ) : error ? (
+                <div className={styles.errorMessage}>{error}</div>
             ) : filteredCourses.length === 0 ? (
                 <div className={styles.noCoursesMessage}>
                     {searchQuery ? "No courses match your search" : "No courses found"}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {useState, useContext, useEffect} from "react";
 import styles from "../styles/home.module.css";
 import Course from "../components/Course";
 import Calendar from 'react-calendar';
@@ -7,19 +7,20 @@ import 'react-calendar/dist/Calendar.css';
 
 export default function Home() {
     const [date, setDate] = useState(new Date());
-    const { courses, coursesLoading, coursesError } = useContext(GlobalContext);
+    const {courses,loading,error,fetchCourses} = useContext(GlobalContext);
+
+    useEffect(() => {
+        fetchCourses();
+    }, []);
 
     const onChange = newDate => {
         setDate(newDate);
     };
 
     const renderCoursesContent = () => {
-        if (coursesLoading) return <div className={styles.loading_message}>Loading courses...</div>;
-
-        if (coursesError) return <div className={styles.error_message}>{coursesError}</div>;
-
+        if (loading) return <div className={styles.loading_message}>Loading courses...</div>;
+        if (error) return <div className={styles.error_message}>{error}</div>;
         if (!courses || courses.length === 0) return <div className={styles.empty_message}>No courses found</div>;
-
         const recentCourses = courses.slice(0, 5);
 
         return recentCourses.map((course) => (

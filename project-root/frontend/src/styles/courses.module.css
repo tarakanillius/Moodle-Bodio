@@ -44,7 +44,7 @@
     gap: 10px;
 }
 
-.viewToggleBtn, .searchBtn {
+.viewToggleBtn {
     padding: 10px 15px;
     background-color: #666;
     color: white;
@@ -61,7 +61,7 @@
     background-color: #666;
 }
 
-.viewToggleBtn:hover, .searchBtn:hover {
+.viewToggleBtn:hover {
     background-color: #919191;
 }
 
