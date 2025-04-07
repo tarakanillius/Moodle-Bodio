@@ -16,9 +16,9 @@ const SecuritySettings = () => {
     } = useContext(GlobalContext);
 
     return (<div className={styles.settingsSection}>
-        <h2>Impostazioni di sicurezza</h2>
+        <h2 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Impostazioni di sicurezza</h2>
         <div className={styles.settingItem}>
-            <label>Nuova password</label>
+            <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Nuova password</label>
             <input
                 type="password"
                 placeholder="Inserisci la nuova password"
@@ -27,7 +27,7 @@ const SecuritySettings = () => {
             />
         </div>
         <div className={styles.settingItem}>
-            <label>Conferma la Password</label>
+            <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Conferma la Password</label>
             <input
                 type="password"
                 placeholder="Conferma la password"
@@ -36,7 +36,7 @@ const SecuritySettings = () => {
             />
         </div>
         <div className={styles.settingItem}>
-            <label>Doppio fattore di autenticazione</label>
+            <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Doppio fattore di autenticazione</label>
             <select
                 value={twoFactor}
                 onChange={(e) => setTwoFactor(e.target.value)}
@@ -48,7 +48,7 @@ const SecuritySettings = () => {
             </select>
         </div>
         <div className={styles.settingItem}>
-            <label>Storia Login</label>
+            <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Storico Login</label>
             <div className={styles.history}>
                 <ul>
                     <li>
@@ -67,7 +67,7 @@ const SecuritySettings = () => {
             </div>
         </div>
         <div className={styles.settingItem}>
-            <label>Sessioni attive</label>
+            <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Sessioni attive</label>
             <div className={styles.sessions}>
                 <ul>
                     <li className={styles.sessionItem}>

@@ -7,9 +7,9 @@ const NotificationSettings = () => {
 
     return (
         <div className={styles.settingsSection}>
-            <h2>Impostazioni notifiche</h2>
+            <h2 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Impostazioni notifiche</h2>
             <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel}>
+                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
                     <input
                         type="checkbox"
                         checked={notifications.messages}
@@ -19,7 +19,7 @@ const NotificationSettings = () => {
                 </label>
             </div>
             <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel}>
+                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
                     <input
                         type="checkbox"
                         checked={notifications.courseUpdates}
@@ -29,7 +29,7 @@ const NotificationSettings = () => {
                 </label>
             </div>
             <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel}>
+                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
                     <input
                         type="checkbox"
                         checked={notifications.assignments}
@@ -39,7 +39,7 @@ const NotificationSettings = () => {
                 </label>
             </div>
             <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel}>
+                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
                     <input
                         type="checkbox"
                         checked={notifications.announcements}
@@ -49,7 +49,7 @@ const NotificationSettings = () => {
                 </label>
             </div>
             <div className={styles.settingItem}>
-                <label>Metodo di notificazione</label>
+                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Metodo di notificazione</label>
                 <select>
                     <option>Email & In-App</option>
                     <option>Email</option>

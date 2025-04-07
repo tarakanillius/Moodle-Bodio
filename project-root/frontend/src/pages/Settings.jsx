@@ -17,7 +17,7 @@ export default function Settings() {
     ];
 
     return (
-        <div className={styles.settingsWrapper}>
+        <div className={styles.settingsWrapper} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
             <TabNav
                 tabs={tabs}
                 activeTab={activeTab}
