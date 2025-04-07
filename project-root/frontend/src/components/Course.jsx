@@ -95,7 +95,7 @@ export default function Course({viewMode = 'grid', name, description, sections, 
                 {sections ? (
                     <ul className={styles.sectionsList}>
                         {sections.map((section, index) => (
-                            <li key={index} className={styles.sectionItem} style={{ color: theme === "Dark" ? "#000000" : "#ffffff" }}>{section}</li>
+                            <li key={index} className={styles.sectionItem}>{section}</li>
                         ))}
                     </ul>
                 ) : (

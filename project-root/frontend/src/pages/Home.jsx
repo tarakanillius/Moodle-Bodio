@@ -7,7 +7,7 @@ import 'react-calendar/dist/Calendar.css';
 
 export default function Home() {
     const [date, setDate] = useState(new Date());
-    const {courses,loading,error,fetchCourses} = useContext(GlobalContext);
+    const {courses,loading,error,fetchCourses, theme} = useContext(GlobalContext);
 
     useEffect(() => {
         fetchCourses();

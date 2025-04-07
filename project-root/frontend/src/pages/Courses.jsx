@@ -7,7 +7,7 @@ import {GlobalContext} from "../context/GlobalContext";
 export default function Courses() {
     const [viewMode, setViewMode] = useState('grid');
     const [searchQuery, setSearchQuery] = useState('');
-    const {courses,filteredCourses,setFilteredCourses,loading,error,fetchCourses} = useContext(GlobalContext);
+    const {courses,filteredCourses,setFilteredCourses,loading,error,fetchCourses, theme} = useContext(GlobalContext);
 
     useEffect(() => {
         fetchCourses();
