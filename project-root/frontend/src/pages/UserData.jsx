@@ -99,27 +99,31 @@ export default function UserData() {
     if (loading) return <div className={styles.loadingMessage}>Loading user data...</div>;
 
     return (
-        <div className={styles.userDataContainer}>
+        <div className={styles.userDataContainer} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
             <div className={styles.titleContainer}>
-                <h2>Il Mio Profilo</h2>
-                <p>Modifica le tue informazioni personali.</p>
+                <h2 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Il Mio Profilo</h2>
+                <p style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Modifica le tue informazioni personali.</p>
             </div>
             {error && <div className={styles.errorMessage}>{error}</div>}
             {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
             <div className={`${styles.data} ${isEditing ? styles.editable : ""}`}>
-                <label>Nome:</label>
+                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Nome:</label>
                 <input type="text" name="name" value={userData.name} onChange={handleChange} disabled={!isEditing} />
-                <label>Cognome:</label>
+
+                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Cognome:</label>
                 <input type="text" name="surname" value={userData.surname} onChange={handleChange} disabled={!isEditing} />
-                <label>Genere:</label>
+
+                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Genere:</label>
                 <select name="gender" value={userData.gender} onChange={handleChange} disabled={!isEditing}>
                     <option value="male">Maschio</option>
                     <option value="female">Femmina</option>
                     <option value="other">Altro</option>
                 </select>
-                <label>Data di nascita:</label>
+
+                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Data di nascita:</label>
                 <input type="date" name="birthDate" value={userData.birthDate} onChange={handleChange} disabled={!isEditing} />
-                <label>Ruolo:</label>
+
+                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Ruolo:</label>
                 <input type="text" value={userData.role} disabled />
             </div>
             <div className={styles.buttonContainer}>

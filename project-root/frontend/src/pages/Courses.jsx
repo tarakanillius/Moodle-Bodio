@@ -34,8 +34,8 @@ export default function Courses() {
     };
 
     return (
-        <div className={styles.coursesContainer}>
-            <div className={styles.searchBarContainer}>
+        <div className={styles.coursesContainer} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
+            <div className={styles.searchBarContainer} style={{ backgroundColor: theme === "Dark" ? "#404040" : "#ffffff" }}>
                 <div className={styles.searchInputWrapper}>
                     <FaSearch className={styles.searchIcon} />
                     <input

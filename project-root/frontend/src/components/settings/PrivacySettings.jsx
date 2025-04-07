@@ -7,9 +7,9 @@ const PrivacySettings = () => {
 
     return (
         <div className={styles.settingsSection}>
-            <h2>Privacy Settings</h2>
+            <h2 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Privacy Settings</h2>
             <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel}>
+                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
                     <input
                         type="checkbox"
                         checked={privacySettings.profileVisible}
@@ -19,7 +19,7 @@ const PrivacySettings = () => {
                 </label>
             </div>
             <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel}>
+                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
                     <input
                         type="checkbox"
                         checked={privacySettings.showOnlineStatus}
@@ -29,7 +29,7 @@ const PrivacySettings = () => {
                 </label>
             </div>
             <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel}>
+                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
                     <input
                         type="checkbox"
                         checked={privacySettings.allowDataCollection}
@@ -39,7 +39,7 @@ const PrivacySettings = () => {
                 </label>
             </div>
             <div className={styles.settingItem}>
-                <label>Condivisione dati</label>
+                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Condivisione dati</label>
                 <select
                     value={privacySettings.dataSharing}
                     onChange={(e) => handlePrivacyChange("dataSharing", e.target.value)}

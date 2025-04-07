@@ -37,7 +37,7 @@ export default function Home() {
     };
 
     return (
-        <div className={styles.body}>
+        <div className={styles.body} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
             <div className={styles.header}>
                 <img
                     className={styles.logo_ameti}
@@ -46,14 +46,14 @@ export default function Home() {
                 />
             </div>
             <div className={styles.section_header}>
-                <h3>Corsi visitati di recente</h3>
+                <h3 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Corsi visitati di recente</h3>
             </div>
             <div className={styles.home_body}>
                 {renderCoursesContent()}
             </div>
             <div className={styles.calendar_container}>
                 <div className={styles.section_header}>
-                    <h3>Calendario</h3>
+                    <h3 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Calendario</h3>
                 </div>
                 <div className={styles.calendarContainer}>
                     <Calendar
