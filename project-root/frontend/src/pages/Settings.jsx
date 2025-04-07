@@ -7,7 +7,7 @@ import PrivacySettings from "../components/settings/PrivacySettings";
 import TabNav from "../components/TabNav";
 
 export default function Settings() {
-    const [activeTab, setActiveTab] = useState("general");
+    const [activeTab, setActiveTab] = useState("Generale");
 
     const tabs = [
         { id: "Generale", label: "Generale" },
