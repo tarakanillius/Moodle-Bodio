@@ -7,8 +7,8 @@ export default function Sidebar() {
     const { selectedComponent, setSelectedComponent, user } = useContext(GlobalContext);
 
     return (
-        <div className={styles.sidebar}>
-            <h1>m0.0dle</h1>
+        <div className={styles.sidebar} style={{ backgroundColor: theme === "Dark" ? "#404040" : "#ffffff" }}>
+            <h1 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>m0.0dle</h1>
             <div className={styles.sidebarButtons}>
                 <button
                     className={selectedComponent === "home" ? styles.active : ""}

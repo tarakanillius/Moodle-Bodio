@@ -1,16 +1,34 @@
 import {createContext, useEffect, useState} from "react";
-import axios from 'axios';
+import axios from "axios";
 
 export const GlobalContext = createContext(undefined, undefined);
 
 export default function GlobalProvider({ children }) {
     const [selectedComponent, setSelectedComponent] = useState("home");
     const [selectedCourseId, setSelectedCourseId] = useState(null);
+    const [theme, setTheme] = useState("Light");
+    const [language, setLanguage] = useState("English");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [twoFactor, setTwoFactor] = useState("Disabled");
+    const [saveStatus, setSaveStatus] = useState("");
     const [courses, setCourses] = useState([]);
-    const [coursesLoaded, setCoursesLoaded] = useState(false);
-    const [coursesLoading, setCoursesLoading] = useState(false);
-    const [coursesError, setCoursesError] = useState(null);
+    const [filteredCourses, setFilteredCourses] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    const [notifications, setNotifications] = useState({
+        messages: true,
+        courseUpdates: false,
+        assignments: true,
+        announcements: false
+    });
+    const [privacySettings, setPrivacySettings] = useState({
+        profileVisible: false,
+        showOnlineStatus: false,
+        allowDataCollection: false,
+        dataSharing: "Minimal (Required Only)"
+    });
     const [user, setUser] = useState({
         id: "",
         name: "",
@@ -20,37 +38,19 @@ export default function GlobalProvider({ children }) {
         gender: "",
     });
 
-    useEffect(() => {
-        if (localStorage.getItem("userId")) {
-            const userId = localStorage.getItem("userId");
-            const userName = localStorage.getItem("userName");
-            const userSurname = localStorage.getItem("userSurname");
-            const userEmail = localStorage.getItem("userEmail");
-            const userRole = localStorage.getItem("userRole");
-            const userGender = localStorage.getItem("userGender");
-            setUser({
-                id: userId,
-                name: userName || "",
-                surname: userSurname || "",
-                email: userEmail || "",
-                role: userRole || "",
-                gender: userGender || "male",
-            });
-        }
-    }, []);
-
-    useEffect(() => {
-        if (user.id && !coursesLoaded && !coursesLoading) {
-            loadUserCourses();
-        }
-    }, [user.id, coursesLoaded]);
-
-    const loadUserCourses = async () => {
-        if (!user.id) return;
+    const fetchCourses = async () => {
         try {
-            setCoursesLoading(true);
-            setCoursesError(null);
-            const response = await axios.get(`http://127.0.0.1:5000/student_courses/${user.id}`);
+            setLoading(true);
+            const userId = localStorage.getItem('userId');
+
+            if (!userId) {
+                setError("User not logged in");
+                setLoading(false);
+                return;
+            }
+
+            const response = await axios.get(`http://127.0.0.1:5000/student_courses/${userId}`);
+
             if (response.data.courses) {
                 const coursesWithDetails = await Promise.all(
                     response.data.courses.map(async (course) => {
@@ -63,21 +63,34 @@ export default function GlobalProvider({ children }) {
                         }
                     })
                 );
+
                 setCourses(coursesWithDetails);
-                setCoursesLoaded(true);
+                setFilteredCourses(coursesWithDetails);
             } else {
                 setCourses([]);
-                setCoursesLoaded(true);
+                setFilteredCourses([]);
             }
         } catch (err) {
-            console.error("Error loading courses:", err);
-            setCoursesError("Failed to load courses. Please try again later.");
-            setCourses([]);
+            console.error("Error fetching courses:", err);
+            setError("Failed to load courses. Please try again later.");
         } finally {
-            setCoursesLoading(false);
+            setLoading(false);
         }
     };
 
+    const updateUser = (userData) => {
+        setUser(userData);
+        localStorage.setItem("userId", userData.id);
+        localStorage.setItem("userName", userData.name);
+        localStorage.setItem("userSurname", userData.surname);
+        localStorage.setItem("userEmail", userData.email);
+        localStorage.setItem("userRole", userData.role);
+        localStorage.setItem("userGender", userData.gender);
+    };
+
+    const refreshCourses = () => {
+        setLoading(false);
+    };
 
     const updateCourse = async (courseId, updatedData) => {
         try {
@@ -99,20 +112,6 @@ export default function GlobalProvider({ children }) {
         }
     };
 
-    const getCourse = (courseId) => {
-        return courses.find(course => course.id === courseId) || null;
-    };
-
-    const updateUser = (userData) => {
-        setUser(userData);
-        localStorage.setItem("userId", userData.id);
-        localStorage.setItem("userName", userData.name);
-        localStorage.setItem("userSurname", userData.surname);
-        localStorage.setItem("userEmail", userData.email);
-        localStorage.setItem("userRole", userData.role);
-        localStorage.setItem("userGender", userData.gender);
-    };
-
     const clearUser = () => {
         setUser({
             id: "",
@@ -122,8 +121,6 @@ export default function GlobalProvider({ children }) {
             role: "",
             gender: "",
         });
-        setCourses([]);
-        setCoursesLoaded(false);
         localStorage.removeItem("userId");
         localStorage.removeItem("userName");
         localStorage.removeItem("userSurname");
@@ -132,29 +129,6 @@ export default function GlobalProvider({ children }) {
         localStorage.removeItem("userGender");
         localStorage.removeItem("isLoggedIn");
     };
-
-    const refreshCourses = () => {
-        setCoursesLoaded(false);
-    };
-
-    const [theme, setTheme] = useState("Light");
-    const [language, setLanguage] = useState("English");
-    const [notifications, setNotifications] = useState({
-        messages: true,
-        courseUpdates: false,
-        assignments: true,
-        announcements: false
-    });
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [twoFactor, setTwoFactor] = useState("Disabled");
-    const [saveStatus, setSaveStatus] = useState("");
-    const [privacySettings, setPrivacySettings] = useState({
-        profileVisible: false,
-        showOnlineStatus: false,
-        allowDataCollection: false,
-        dataSharing: "Minimal (Required Only)"
-    });
 
     const handleSave = () => {
         setSaveStatus("Saving...");
@@ -181,6 +155,29 @@ export default function GlobalProvider({ children }) {
             [setting]: typeof value === 'boolean' ? value : value
         });
     };
+
+    const getCourse = (courseId) => {
+        return courses.find(course => course.id === courseId) || null;
+    };
+
+    useEffect(() => {
+        if (localStorage.getItem("userId")) {
+            const userId = localStorage.getItem("userId");
+            const userName = localStorage.getItem("userName");
+            const userSurname = localStorage.getItem("userSurname");
+            const userEmail = localStorage.getItem("userEmail");
+            const userRole = localStorage.getItem("userRole");
+            const userGender = localStorage.getItem("userGender");
+            setUser({
+                id: userId,
+                name: userName || "",
+                surname: userSurname || "",
+                email: userEmail || "",
+                role: userRole || "",
+                gender: userGender || "male",
+            });
+        }
+    }, []);
 
     return (
         <GlobalContext.Provider value={{
@@ -211,11 +208,13 @@ export default function GlobalProvider({ children }) {
             privacySettings,
             handlePrivacyChange,
             courses,
-            coursesLoading,
-            coursesError,
-            loadUserCourses,
-            updateCourse,
+            fetchCourses,
+            filteredCourses,
+            setFilteredCourses,
+            loading,
+            error,
             getCourse,
+            updateCourse,
             refreshCourses
         }}>
             {children}

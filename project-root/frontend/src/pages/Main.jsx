@@ -33,9 +33,9 @@ export default function Main() {
     };
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
             <Sidebar />
-            <div className={styles.content}>
+            <div className={styles.content} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
                 {renderComponent()}
             </div>
         </div>

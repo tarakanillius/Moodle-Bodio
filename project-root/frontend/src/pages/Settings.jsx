@@ -7,7 +7,7 @@ import PrivacySettings from "../components/settings/PrivacySettings";
 import TabNav from "../components/TabNav";
 
 export default function Settings() {
-    const [activeTab, setActiveTab] = useState("general");
+    const [activeTab, setActiveTab] = useState("Generale");
 
     const tabs = [
         { id: "Generale", label: "Generale" },
@@ -17,7 +17,7 @@ export default function Settings() {
     ];
 
     return (
-        <div className={styles.settingsWrapper}>
+        <div className={styles.settingsWrapper} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
             <TabNav
                 tabs={tabs}
                 activeTab={activeTab}
