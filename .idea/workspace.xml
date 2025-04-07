@@ -4,9 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aee2d6a0-10cc-49e7-8be7-a78490adad49" name="Changes" comment="started add module for students info">
-      <change beforePath="$PROJECT_DIR$/project-root/backend/src/utils/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/src/utils/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/courseDetails/StudentsTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/courseDetails/StudentsTab.jsx" afterDir="false" />
+    <list default="true" id="aee2d6a0-10cc-49e7-8be7-a78490adad49" name="Changes" comment="fix in students info">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/checkbox/checkbox.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/checkbox/checkbox.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/checkbox/checkbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/checkbox/checkbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/combobox/combobox.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/combobox/combobox.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/combobox/combobox.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/combobox/combobox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/input/input.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/input/input.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/listbox/listbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/listbox/listbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/menu/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/menu/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/popover/popover.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/popover/popover.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/portal/portal.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/portal/portal.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/portal/portal.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/portal/portal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/radio-group/radio-group.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/radio-group/radio-group.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/select/select.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/select/select.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/textarea/textarea.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/components/textarea/textarea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/headlessui.dev.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/headlessui.dev.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/headlessui.prod.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/headlessui.prod.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/utils/owner.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/dist/utils/owner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@headlessui/react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@headlessui/react/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/settings/SecuritySettings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/settings/SecuritySettings.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/context/GlobalContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/context/GlobalContext.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +59,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/tarakanillius/Moodle-Bodio.git&quot;,
-    &quot;accountId&quot;: &quot;89a23b17-4b07-45ca-923d-ffa26c99e233&quot;
+    &quot;accountId&quot;: &quot;89c8bd54-aaea-4205-97dc-74b390b479dc&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -49,26 +70,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.app.executor": "Run",
-    "Python.populate_db.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "studentsOverview",
-    "last_opened_file_path": "C:/Users/user/WebstormProjects/Moodle-Bodio",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "C:/Users/user/AppData/Roaming/JetBrains/WebStorm2024.3/node/versions/22.14.0/node",
-    "nodejs_package_manager_path": "npm",
-    "npm.start.executor": "Run",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.populate_db.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;studentsOverview&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/WebstormProjects/Moodle-Bodio&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="npm.start">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Moodle-Bodio" />
@@ -105,8 +126,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.start" />
         <item itemvalue="Python.app" />
+        <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
   </component>
@@ -129,6 +150,7 @@
       <workItem from="1743665410896" duration="4874000" />
       <workItem from="1743672704595" duration="4478000" />
       <workItem from="1743681056756" duration="6615000" />
+      <workItem from="1744007730576" duration="14012000" />
     </task>
     <task id="LOCAL-00001" summary="fixed homepage">
       <option name="closed" value="true" />
@@ -196,6 +218,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed homepage" />
     <MESSAGE value="started add module for students info" />
-    <option name="LAST_COMMIT_MESSAGE" value="started add module for students info" />
+    <MESSAGE value="fix in students info" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix in students info" />
   </component>
 </project>
