@@ -139,7 +139,7 @@ courses_data = [
         "teacher": teacher1_id,
         "sections": section_ids["M320"],
         "students": random.sample(student_ids, 16),
-        "color": "rgba(0, 170, 255, 0.11)",
+        "color": "rgba(0, 170, 255, 0.5)",
     },
     {
         "_id": ObjectId(),
@@ -148,7 +148,7 @@ courses_data = [
         "teacher": teacher2_id,
         "sections": section_ids["M293"],
         "students": random.sample(student_ids, 8),
-        "color": "rgba(120, 255, 0, 0.11)"
+        "color": "rgba(120, 255, 0, 0.5)"
     },
     {
         "_id": ObjectId(),
@@ -157,7 +157,7 @@ courses_data = [
         "teacher": teacher2_id,
         "sections": section_ids["M426"],
         "students": random.sample(student_ids, 8),
-        "color": "rgba(255, 189, 0, 0.11)"
+        "color": "rgba(255, 189, 0, 0.5)"
     },
     {
         "_id": ObjectId(),
@@ -166,7 +166,7 @@ courses_data = [
         "teacher": teacher3_id,
         "sections": section_ids["M165"],
         "students": random.sample(student_ids, 8),
-        "color": "rgba(166, 0, 255, 0.11)"
+        "color": "rgba(166, 0, 255, 0.5)"
     },
     {
         "_id": ObjectId(),
@@ -175,7 +175,7 @@ courses_data = [
         "teacher": teacher1_id,
         "sections": section_ids["M322"],
         "students": random.sample(student_ids, 8),
-        "color": "rgba(255, 0, 0, 0.11)"
+        "color": "rgba(255, 0, 0, 0.5)"
     }
 ]
 

@@ -9,7 +9,7 @@ import SettingsTab from "../components/courseDetails/SettingsTab";
 import styles from "../styles/courseDetail.module.css";
 
 export default function CourseDetail({ courseId }) {
-    const { setSelectedComponent, user, getCourse, coursesLoading, coursesError, refreshCourses } = useContext(GlobalContext);
+    const { setSelectedComponent, user, getCourse, coursesLoading, coursesError, refreshCourses, theme } = useContext(GlobalContext);
     const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -67,13 +67,13 @@ export default function CourseDetail({ courseId }) {
     if (!course) return <div className={styles.errorMessage}>Course not found</div>;
 
     return (
-        <div className={styles.courseDetailContainer}>
+        <div className={styles.courseDetailContainer} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
             <div className={styles.courseHeader}>
-                <button className={styles.backButton} onClick={handleBackClick}>
+                <button className={styles.backButton} onClick={handleBackClick} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
                     <FaArrowLeft /> Back to Courses
                 </button>
-                <h1 className={styles.courseTitle}>{course.name}</h1>
-                <p className={styles.courseDescription}>{course.description}</p>
+                <h1 className={styles.courseTitle} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>{course.name}</h1>
+                <p className={styles.courseDescription} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>{course.description}</p>
             </div>
             <TabNav
                 tabs={courseTabs}

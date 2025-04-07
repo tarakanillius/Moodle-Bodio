@@ -3,7 +3,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 import styles from "../../styles/settings.module.css";
 
 const PrivacySettings = () => {
-    const {privacySettings, handlePrivacyChange, saveStatus, handleSave} = useContext(GlobalContext);
+    const {privacySettings, handlePrivacyChange, saveStatus, handleSave, theme} = useContext(GlobalContext);
 
     return (
         <div className={styles.settingsSection}>

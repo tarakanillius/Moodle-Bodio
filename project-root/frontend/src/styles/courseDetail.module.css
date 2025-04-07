@@ -293,10 +293,13 @@
     transition: background-color 0.2s;
 }
 
-.studentItem:hover {
-    background-color: #f7fafc;
+.studentItem.darkTheme:hover {
+    background-color: #555555;
 }
 
+.studentItem.lightTheme:hover {
+    background-color: #dddddd;
+}
 .studentAvatar {
     width: 40px;
     height: 40px;

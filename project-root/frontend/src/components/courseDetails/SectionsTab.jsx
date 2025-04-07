@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { FaFile, FaEdit, FaTrash, FaPlus, FaCheck, FaRegCircle } from 'react-icons/fa';
 import styles from "../../styles/courseDetail.module.css";
+import {GlobalContext} from "../../context/GlobalContext";
 
 export default function SectionsTab({course, activeSection, setActiveSection, userRole, completedSections, toggleSectionCompletion}){
     const currentSection = course.sections.find(section => section.id === activeSection);
+    const {theme} = useContext(GlobalContext);
 
     return (
-        <div className={styles.courseContent}>
+        <div className={styles.courseContent} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
             <div className={styles.sectionsSidebar}>
-                <h2 className={styles.sidebarTitle}>Sections</h2>
+                <h2 className={styles.sidebarTitle} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Sections</h2>
                 {userRole === "teacher" && (
                     <button className={styles.addSectionButton}>
                         <FaPlus /> Add Section
@@ -54,7 +56,7 @@ export default function SectionsTab({course, activeSection, setActiveSection, us
                 {currentSection ? (
                     <>
                         <div className={styles.sectionHeader}>
-                            <h2 className={styles.sectionTitle}>{currentSection.name}</h2>
+                            <h2 className={styles.sectionTitle} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>{currentSection.name}</h2>
                             {userRole === "teacher" && (
                                 <button className={styles.addFileButton}>
                                     <FaPlus /> Add File
@@ -62,7 +64,7 @@ export default function SectionsTab({course, activeSection, setActiveSection, us
                             )}
                         </div>
                         <div className={styles.sectionFiles}>
-                            <h3 className={styles.filesTitle}>Files</h3>
+                            <h3 className={styles.filesTitle} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Files</h3>
                             {currentSection.files && currentSection.files.length > 0 ? (
                                 <ul className={styles.filesList}>
                                     {currentSection.files.map((file, index) => (

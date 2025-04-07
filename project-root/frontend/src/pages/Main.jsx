@@ -9,7 +9,7 @@ import UserData from "./UserData";
 import CourseDetail from "./CourseDetails";
 
 export default function Main() {
-    const { selectedComponent, selectedCourseId } = useContext(GlobalContext);
+    const { selectedComponent, selectedCourseId, theme } = useContext(GlobalContext);
 
     const renderComponent = () => {
         switch (selectedComponent) {
