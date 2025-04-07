@@ -1,9 +1,5 @@
 .settingsWrapper {
-    height: 100%;
-    width: 100%;
     background: #ffffff;
-    overflow-y: auto;
-    max-height: 100vh;
     margin: 10px;
     gap: 10px;
 }

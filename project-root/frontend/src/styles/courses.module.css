@@ -1,9 +1,5 @@
 .coursesContainer {
-    height: 100%;
-    width: 100%;
     background: #ffffff;
-    overflow-y: auto;
-    max-height: 100vh;
     margin: 10px;
     gap: 10px;
 }
@@ -14,7 +10,7 @@
     align-items: center;
     margin-bottom: 20px;
     background-color: #f5f5f5;
-    padding: 10px 15px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

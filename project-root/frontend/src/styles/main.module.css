@@ -107,8 +107,8 @@
     background-color: #ffffff;
     color: black;
     padding: 20px;
-    margin-left: 250px;
-    width: calc(100% - 250px);
+    margin-left: 270px;
+    width: calc(100% - 270px);
     height: 100vh;
     overflow-y: auto;
     box-sizing: border-box;
