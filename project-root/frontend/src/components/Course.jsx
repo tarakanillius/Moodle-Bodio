@@ -5,7 +5,7 @@ import {GlobalContext} from "../context/GlobalContext";
 import axios from 'axios';
 
 export default function Course({viewMode = 'grid', name, description, sections, color, courseId }) {
-    const { setSelectedComponent, setSelectedCourseId, refreshCourses, theme } = useContext(GlobalContext);
+    const { setSelectedComponent, setSelectedCourseId, refreshCourses, theme, BACKEND_URL } = useContext(GlobalContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -41,7 +41,7 @@ export default function Course({viewMode = 'grid', name, description, sections, 
         setMenuOpen(false);
         if (window.confirm("Are you sure you want to delete this course?")) {
             try {
-                await axios.delete(`http://127.0.0.1:5000/delete_course/${courseId}`);
+                await axios.delete(`${BACKEND_URL}/delete_course/${courseId}`);
                 refreshCourses();
                 alert("Course deleted successfully");
             } catch (error) {

@@ -6,7 +6,7 @@ import styles from "../styles/login.module.css";
 
 export default function Login() {
     const navigate = useNavigate();
-    const { updateUser } = useContext(GlobalContext);
+    const { updateUser,BACKEND_URL } = useContext(GlobalContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -26,11 +26,15 @@ export default function Login() {
         try {
             setLoading(true);
             setError("");
-            const response = await axios.post("http://127.0.0.1:5000/login", {
+            const response = await axios.post(`${BACKEND_URL}/login`, {
                 email: email,
                 password: password
             });
-            const userDetailsResponse = await axios.get(`http://127.0.0.1:5000/user/${response.data.user_id}`);
+            const token = response.data.token;
+            if (!token) {
+                console.warn("No token received from server");
+            }
+            const userDetailsResponse = await axios.get(`${BACKEND_URL}/user/${response.data.user_id}`);
             const userData = userDetailsResponse.data.user;
             updateUser({
                 id: userData.id,
@@ -38,8 +42,8 @@ export default function Login() {
                 surname: userData.surname,
                 email: userData.email,
                 role: userData.role,
-                gender: userData.sex || "male",
-            });
+                gender: userData.sex,
+            }, token);
             localStorage.setItem("isLoggedIn", "true");
             navigate("/main");
         } catch (error) {
