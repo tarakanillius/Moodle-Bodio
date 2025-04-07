@@ -6,7 +6,7 @@ import styles from "../styles/userData.module.css";
 
 export default function UserData() {
     const navigate = useNavigate();
-    const { updateUser, clearUser } = useContext(GlobalContext);
+    const { updateUser, clearUser, theme} = useContext(GlobalContext);
     const [isEditing, setIsEditing] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");

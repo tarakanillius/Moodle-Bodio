@@ -12,7 +12,8 @@ const SecuritySettings = () => {
         setTwoFactor,
         saveStatus,
         handleSave,
-        terminateSession
+        terminateSession,
+        theme
     } = useContext(GlobalContext);
 
     return (<div className={styles.settingsSection}>

@@ -4,10 +4,10 @@ import styles from "../styles/main.module.css";
 import getAvatarImage from "../utils/getAvatar";
 
 export default function Sidebar() {
-    const { selectedComponent, setSelectedComponent, user } = useContext(GlobalContext);
+    const { selectedComponent, setSelectedComponent, user, theme } = useContext(GlobalContext);
 
     return (
-        <div className={styles.sidebar} style={{ backgroundColor: theme === "Dark" ? "#404040" : "#ffffff" }}>
+        <div className={styles.sidebar} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
             <h1 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>m0.0dle</h1>
             <div className={styles.sidebarButtons}>
                 <button

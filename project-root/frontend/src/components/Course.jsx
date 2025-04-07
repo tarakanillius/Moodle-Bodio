@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import styles from "../styles/course.module.css";
-import { FaEllipsisV, FaUsers, FaChalkboardTeacher, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEllipsisV, FaEdit, FaTrash } from 'react-icons/fa';
 import {GlobalContext} from "../context/GlobalContext";
 import axios from 'axios';
 
-export default function Course({viewMode = 'grid', name, description, teachers, students, sections, color, courseId }) {
-    const { setSelectedComponent, setSelectedCourseId, refreshCourses } = useContext(GlobalContext);
+export default function Course({viewMode = 'grid', name, description, sections, color, courseId }) {
+    const { setSelectedComponent, setSelectedCourseId, refreshCourses, theme } = useContext(GlobalContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -87,27 +87,15 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
     return (
         <div className={styles.courseCardGrid} style={{backgroundColor: color}}>
             <div className={styles.courseHeader}>
-                <h2 className={styles.courseName}>{name}</h2>
-                <div className={styles.courseStats}>
-                    <span className={styles.teacherCount}>
-                        <FaChalkboardTeacher className={styles.icon}/>
-                        {teachers && teachers.length > 0
-                            ? `${teachers.length} instructor${teachers.length > 1 ? 's' : ''}`
-                            : 'No instructor'}
-                    </span>
-                    <span className={styles.studentCount}>
-                        <FaUsers className={styles.icon}/>
-                        {students} student{students !== 1 ? 's' : ''}
-                    </span>
-                </div>
+                <h2 className={styles.courseName} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>{name}</h2>
             </div>
-            <p className={styles.courseDescription}>{description}</p>
+            <p className={styles.courseDescription} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>{description}</p>
             <div className={styles.courseSections}>
-                <h3 className={styles.sectionTitle}>Sections:</h3>
+                <h3 className={styles.sectionTitle} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Sections:</h3>
                 {sections ? (
                     <ul className={styles.sectionsList}>
                         {sections.map((section, index) => (
-                            <li key={index} className={styles.sectionItem}>{section}</li>
+                            <li key={index} className={styles.sectionItem} style={{ color: theme === "Dark" ? "#000000" : "#ffffff" }}>{section}</li>
                         ))}
                     </ul>
                 ) : (

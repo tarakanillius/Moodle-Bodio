@@ -7,7 +7,7 @@ import 'react-calendar/dist/Calendar.css';
 
 export default function Home() {
     const [date, setDate] = useState(new Date());
-    const { courses, coursesLoading, coursesError } = useContext(GlobalContext);
+    const { courses, coursesLoading, coursesError, theme } = useContext(GlobalContext);
 
     const onChange = newDate => {
         setDate(newDate);

@@ -8,7 +8,7 @@ export default function Courses() {
     const [viewMode, setViewMode] = useState('grid');
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredCourses, setFilteredCourses] = useState([]);
-    const { courses, coursesLoading, coursesError } = useContext(GlobalContext);
+    const { courses, coursesLoading, coursesError, theme } = useContext(GlobalContext);
 
     useEffect(() => {
         if (courses) {

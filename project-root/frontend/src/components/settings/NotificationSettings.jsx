@@ -3,7 +3,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 import styles from "../../styles/settings.module.css";
 
 const NotificationSettings = () => {
-    const {notifications, handleNotificationChange, saveStatus, handleSave} = useContext(GlobalContext);
+    const {notifications, handleNotificationChange, saveStatus, handleSave, theme} = useContext(GlobalContext);
 
     return (
         <div className={styles.settingsSection}>
