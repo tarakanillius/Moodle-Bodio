@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import styles from "../styles/course.module.css";
-import { FaEllipsisV, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEllipsisV, FaUsers, FaChalkboardTeacher, FaEdit, FaTrash } from 'react-icons/fa';
 import {GlobalContext} from "../context/GlobalContext";
 import axios from 'axios';
 
-export default function Course({viewMode = 'grid', name, description, sections, color, courseId }) {
-    const { setSelectedComponent, setSelectedCourseId, refreshCourses, theme } = useContext(GlobalContext);
+export default function Course({viewMode = 'grid', name, description, teachers, students, sections, color, courseId }) {
+    const { setSelectedComponent, setSelectedCourseId, refreshCourses, fetchCourses, theme, BACKEND_URL } = useContext(GlobalContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -41,7 +41,7 @@ export default function Course({viewMode = 'grid', name, description, sections, 
         setMenuOpen(false);
         if (window.confirm("Are you sure you want to delete this course?")) {
             try {
-                await axios.delete(`http://127.0.0.1:5000/delete_course/${courseId}`);
+                await axios.delete(`${BACKEND_URL}/delete_course/${courseId}`);
                 refreshCourses();
                 alert("Course deleted successfully");
             } catch (error) {
@@ -49,6 +49,7 @@ export default function Course({viewMode = 'grid', name, description, sections, 
                 alert("Failed to delete course: " + (error.response?.data?.error || "Unknown error"));
             }
         }
+        fetchCourses();
     };
 
     if (viewMode === 'list') {
@@ -56,6 +57,18 @@ export default function Course({viewMode = 'grid', name, description, sections, 
             <div className={styles.courseCardList} style={{backgroundColor: color}} onClick={handleViewCourse}>
                 <div className={styles.courseInfoList}>
                     <h2 className={styles.courseNameList}>{name}</h2>
+                    <div className={styles.courseStats}>
+                        <span className={styles.teacherCount}>
+                            <FaChalkboardTeacher className={styles.icon}/>
+                            {teachers && teachers.length > 0
+                                ? `${teachers.length} instructor${teachers.length > 1 ? 's' : ''}`
+                                : 'No instructor'}
+                        </span>
+                            <span className={styles.studentCount}>
+                            <FaUsers className={styles.icon}/>
+                                {students} student{students !== 1 ? 's' : ''}
+                        </span>
+                    </div>
                     <p className={styles.courseDescriptionList}>{description}</p>
                 </div>
                 <div className={styles.sectionsListView}>
@@ -66,7 +79,7 @@ export default function Course({viewMode = 'grid', name, description, sections, 
                 <div className={styles.courseActionsList}>
                     <div className={styles.menuContainer} ref={menuRef}>
                         <button className={styles.menuButton} onClick={handleManageCourse}>
-                            <FaEllipsisV />
+                            <FaEllipsisV/>
                         </button>
                         {menuOpen && (
                             <div className={styles.dropdownMenu}>
@@ -87,11 +100,25 @@ export default function Course({viewMode = 'grid', name, description, sections, 
     return (
         <div className={styles.courseCardGrid} style={{backgroundColor: color}}>
             <div className={styles.courseHeader}>
-                <h2 className={styles.courseName} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>{name}</h2>
+                <h2 className={styles.courseName} style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>{name}</h2>
             </div>
-            <p className={styles.courseDescription} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>{description}</p>
+            <div className={styles.courseStats}>
+                        <span className={styles.teacherCount}>
+                            <FaChalkboardTeacher className={styles.icon}/>
+                            {teachers && teachers.length > 0
+                                ? `${teachers.length} instructor${teachers.length > 1 ? 's' : ''}`
+                                : 'No instructor'}
+                        </span>
+                <span className={styles.studentCount}>
+                            <FaUsers className={styles.icon}/>
+                    {students} student{students !== 1 ? 's' : ''}
+                        </span>
+            </div>
+            <p className={styles.courseDescription}
+               style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>{description}</p>
             <div className={styles.courseSections}>
-                <h3 className={styles.sectionTitle} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Sections:</h3>
+                <h3 className={styles.sectionTitle}
+                    style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>Sections:</h3>
                 {sections ? (
                     <ul className={styles.sectionsList}>
                         {sections.map((section, index) => (

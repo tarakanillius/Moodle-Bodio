@@ -13,24 +13,27 @@ export default function Sidebar() {
                 <button
                     className={selectedComponent === "home" ? styles.active : ""}
                     onClick={() => setSelectedComponent("home")}
+                    style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff", color: theme === "Dark" ? "#ffffff" : "#000000" }}
                 >
                     Home
                 </button>
                 <button
                     className={selectedComponent === "modules" ? styles.active : ""}
                     onClick={() => setSelectedComponent("modules")}
+                    style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff", color: theme === "Dark" ? "#ffffff" : "#000000" }}
                 >
                     Moduli
                 </button>
                 <button
                     className={selectedComponent === "settings" ? styles.active : ""}
                     onClick={() => setSelectedComponent("settings")}
+                    style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff", color: theme === "Dark" ? "#ffffff" : "#000000" }}
                 >
                     Impostazioni
                 </button>
             </div>
             <div className={styles.sidebarAccount}>
-                <div className={styles.account} onClick={() => setSelectedComponent("userData")}>
+                <div className={styles.account} onClick={() => setSelectedComponent("userData")} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff", color: theme === "Dark" ? "#ffffff" : "#000000" }}>
                     <img
                         src={getAvatarImage(user.role, user.gender)}
                         alt="User"

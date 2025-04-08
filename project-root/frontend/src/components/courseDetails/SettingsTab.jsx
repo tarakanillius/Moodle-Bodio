@@ -5,7 +5,7 @@ import axios from 'axios';
 import styles from "../../styles/courseDetail.module.css";
 
 export default function SettingsTab({ course, userRole, onCourseUpdated }) {
-    const { updateCourse, refreshCourses, theme } = useContext(GlobalContext);
+    const { updateCourse, refreshCourses, theme, BACKEND_URL } = useContext(GlobalContext);
     const [saving, setSaving] = useState(false);
     const [saveMessage, setSaveMessage] = useState("");
     const [saveError, setSaveError] = useState("");
@@ -51,7 +51,7 @@ export default function SettingsTab({ course, userRole, onCourseUpdated }) {
         if (window.confirm("Are you sure you want to delete this course? This action cannot be undone.")) {
             try {
                 setSaving(true);
-                await axios.delete(`http://127.0.0.1:5000/delete_course/${course.id}`);
+                await axios.delete(`${BACKEND_URL}/delete_course/${course.id}`);
                 refreshCourses();
                 window.location.href = "/";
             } catch (error) {
@@ -71,19 +71,19 @@ export default function SettingsTab({ course, userRole, onCourseUpdated }) {
         try {
             setEnrollmentStatus("Enrolling student...");
             setEnrollmentError("");
-            const studentResponse = await axios.get(`http://127.0.0.1:5000/user_by_email/${studentEmail}`);
+            const studentResponse = await axios.get(`${BACKEND_URL}/user_by_email/${studentEmail}`);
             if (!studentResponse.data.user) {
                 setEnrollmentError("Student not found with this email");
                 setEnrollmentStatus("");
                 return;
             }
-            await axios.post(`http://127.0.0.1:5000/enroll_student`, {
+            await axios.post(`${BACKEND_URL}/enroll_student`, {
                 student_id: studentResponse.data.user.id,
                 course_id: course.id
             });
             setEnrollmentStatus("Student enrolled successfully!");
             setStudentEmail("");
-            const updatedCourseResponse = await axios.get(`http://127.0.0.1:5000/course/${course.id}`);
+            const updatedCourseResponse = await axios.get(`${BACKEND_URL}/course/${course.id}`);
             if (onCourseUpdated && updatedCourseResponse.data.course) {onCourseUpdated(updatedCourseResponse.data.course);}
             setTimeout(() => {setEnrollmentStatus("");}, 3000);
         } catch (error) {
