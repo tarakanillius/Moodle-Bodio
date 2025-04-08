@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaTimes } from 'react-icons/fa';
 import styles from '../styles/modal.module.css';
 
 export default function Modal({ isOpen, onClose, title, children, theme = "Light" }) {
@@ -17,14 +16,6 @@ export default function Modal({ isOpen, onClose, title, children, theme = "Light
             >
                 <div className={styles.modalHeader}>
                     <h2 className={styles.modalTitle}>{title}</h2>
-                    <button
-                        className={styles.closeButton}
-                        onClick={onClose}
-                        aria-label="Close modal"
-                        style={{ color: theme === "Dark" ? "#ddd" : "#888" }}
-                    >
-                        <FaTimes />
-                    </button>
                 </div>
                 <div className={styles.modalBody}>
                     {children}

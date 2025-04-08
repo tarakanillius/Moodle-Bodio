@@ -48,7 +48,6 @@ async function formatUser(user) {
 async function addUser({ name, surname, email, role, sex, birth, password }) {
     const db = await connectToDatabase();
 
-    // Check if user already exists
     const existingUser = await db.collection('users').findOne({ email });
     if (existingUser) {
         throw { message: 'Email already registered', status: 400 };
@@ -108,11 +107,9 @@ async function deleteUser(id) {
 async function enrollStudent(studentId, courseId) {
     const db = await connectToDatabase();
 
-    // Convert string IDs to ObjectId
     const studentObjId = new ObjectId(studentId);
     const courseObjId = new ObjectId(courseId);
 
-    // Check if student and course exist
     const student = await db.collection('users').findOne({
         _id: studentObjId,
         role: 'student'
@@ -129,13 +126,11 @@ async function enrollStudent(studentId, courseId) {
         };
     }
 
-    // Check if student is already enrolled
     const isEnrolled = course.students.some(id => id.toString() === studentId);
     if (isEnrolled) {
         return { message: 'Student already enrolled in this course' };
     }
 
-    // Update course with new student
     await db.collection('courses').updateOne(
         { _id: courseObjId },
         { $push: { students: studentObjId } }
@@ -169,11 +164,6 @@ async function unenrollStudent(student_id, course_id) {
 
     if (!course) {
         throw { message: 'Course not found', status: 404 };
-    }
-
-    const isEnrolled = student.courses.some(id => id.toString() === course_id);
-    if (!isEnrolled) {
-        throw { message: 'Student is not enrolled in this course', status: 400 };
     }
 
     await db.collection('users').updateOne(

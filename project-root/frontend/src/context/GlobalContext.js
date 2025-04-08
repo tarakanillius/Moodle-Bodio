@@ -17,7 +17,7 @@ export default function GlobalProvider({ children }) {
     const [filteredCourses, setFilteredCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const BACKEND_URL = "http://127.0.0.1:5001";
+    const BACKEND_URL = "http://127.0.0.1:5010";
     const [token, setToken] = useState(localStorage.getItem("token") || "");
     const [notifications, setNotifications] = useState({
         messages: true,
@@ -101,12 +101,13 @@ export default function GlobalProvider({ children }) {
 
     const handleUnenrollStudent = async (studentId, courseId) => {
         try {
-            await axiosInstance.post(`${BACKEND_URL}/unenroll_student`, {
+            const response = await axiosInstance.post(`${BACKEND_URL}/unenroll_student`, {
                 student_id: studentId,
                 course_id: courseId
             });
 
-            // Update the courses state to reflect the change
+            console.log("Unenroll response:", response.data);
+
             setCourses(prevCourses =>
                 prevCourses.map(course => {
                     if (course.id === courseId) {
@@ -122,6 +123,7 @@ export default function GlobalProvider({ children }) {
             return { success: true };
         } catch (error) {
             console.error("Error unenrolling student:", error);
+            console.error("Error details:", error.response?.data);
             return {
                 success: false,
                 error: error.response?.data?.error || "Failed to unenroll student"

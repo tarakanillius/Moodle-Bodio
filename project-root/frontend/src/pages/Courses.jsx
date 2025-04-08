@@ -85,17 +85,44 @@ export default function Courses() {
         }
     };
 
+// Keep the existing imports and functionality
+// Only updating the JSX structure for better layout
+
+// Keep the existing imports and functionality
+// Only updating the JSX structure to fix the right edge overflow
+
     return (
-        <div className={styles.coursesContainer} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
-            <div className={styles.searchBarContainer} style={{ backgroundColor: theme === "Dark" ? "#404040" : "#ffffff" }}>
-                <div className={styles.searchInputWrapper}>
-                    <FaSearch className={styles.searchIcon} />
+        <div className={styles.coursesContainer} style={{
+            backgroundColor: theme === "Dark" ? "#1a1a1a" : "#ffffff",
+            overflowX: "hidden" // Prevent horizontal overflow
+        }}>
+            <h2 style={{
+                color: theme === "Dark" ? "#ffffff" : "#333333",
+                marginBottom: "20px",
+                fontSize: "28px",
+                width: "100%",
+                boxSizing: "border-box"
+            }}>
+                My Courses
+            </h2>
+
+            <div className={styles.searchBarContainer} style={{
+                backgroundColor: theme === "Dark" ? "#2d2d2d" : "#f5f5f5",
+                width: "100%",
+                boxSizing: "border-box"
+            }}>
+                <div className={styles.searchInputWrapper} style={{
+                    backgroundColor: theme === "Dark" ? "#3d3d3d" : "#ffffff",
+                    flex: "1 1 auto"
+                }}>
+                    <FaSearch className={styles.searchIcon} style={{ color: theme === "Dark" ? "#aaaaaa" : "#666666" }} />
                     <input
                         type="text"
                         placeholder="Search courses..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className={styles.searchInput}
+                        style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}
                     />
                 </div>
                 <div className={styles.actionButtons}>
@@ -112,22 +139,31 @@ export default function Courses() {
                             className={styles.viewToggleBtn}
                             onClick={() => setIsAddModalOpen(true)}
                             title="Add new course"
+                            style={{ backgroundColor: "#4CAF50" }}
                         >
                             <FaPlus />
                         </button>
                     )}
                 </div>
             </div>
+
             {loading ? (
-                <div className={styles.loadingMessage}>Loading courses...</div>
+                <div className={styles.loadingMessage} style={{ color: theme === "Dark" ? "#bbbbbb" : "#666666" }}>
+                    Loading courses...
+                </div>
             ) : error ? (
-                <div className={styles.errorMessage}>{error}</div>
+                <div className={styles.errorMessage}>
+                    {error}
+                </div>
             ) : filteredCourses.length === 0 ? (
-                <div className={styles.noCoursesMessage}>
+                <div className={styles.noCoursesMessage} style={{ color: theme === "Dark" ? "#bbbbbb" : "#718096" }}>
                     {searchQuery ? "No courses match your search" : "No courses found"}
                 </div>
             ) : (
-                <div className={`${styles.coursesList} ${styles[viewMode]}`}>
+                <div className={`${styles.coursesList} ${styles[viewMode]}`} style={{
+                    width: "100%",
+                    boxSizing: "border-box"
+                }}>
                     {filteredCourses.map(course => (
                         <Course
                             key={course.id}
@@ -143,7 +179,6 @@ export default function Courses() {
                     ))}
                 </div>
             )}
-
             {/* Add Course Modal */}
             <Modal
                 isOpen={isAddModalOpen}

@@ -15,7 +15,6 @@ const storage = multer.diskStorage({
         cb(null, UPLOAD_FOLDER);
     },
     filename: (req, file, cb) => {
-        // Create unique filename
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         const ext = path.extname(file.originalname);
         cb(null, file.fieldname + '-' + uniqueSuffix + ext);
@@ -24,7 +23,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage,
-    limits: { fileSize: 16 * 1024 * 1024 }, // 16MB limit
+    limits: { fileSize: 16 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
         if (isAllowedFile(file.originalname)) {
             cb(null, true);
@@ -46,10 +45,8 @@ router.post('/upload_file', checkAuthorization, upload.single('file'), async (re
             return res.status(400).json({ error: 'Section ID is required' });
         }
 
-        // Generate file URL
         const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
 
-        // Add file to section in database
         await addFileToSection(section_id, req.file.originalname, fileUrl);
 
         res.json({

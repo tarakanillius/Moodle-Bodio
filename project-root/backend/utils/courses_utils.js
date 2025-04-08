@@ -18,14 +18,12 @@ async function formatCourse(course, details = false) {
     };
 
     if (details) {
-        // Get teacher details
         const teacher = await db.collection('users').findOne({ _id: course.teacher });
         result.teacher = teacher ? {
             id: teacher._id.toString(),
             name: `${teacher.name} ${teacher.surname}`
         } : null;
 
-        // Get sections details
         result.sections = [];
         for (const sectionId of course.sections) {
             const section = await db.collection('sections').findOne({ _id: sectionId });
@@ -38,7 +36,6 @@ async function formatCourse(course, details = false) {
             }
         }
 
-        // Get students details
         result.students = [];
         for (const studentId of course.students) {
             const student = await db.collection('users').findOne({ _id: studentId });
@@ -81,7 +78,6 @@ async function addCourse({ name, description, teacherId, color }) {
 
     const teacherObjId = new ObjectId(teacherId);
 
-    // Verify teacher exists
     const teacher = await db.collection('users').findOne({
         _id: teacherObjId,
         role: 'teacher'
@@ -102,7 +98,6 @@ async function addCourse({ name, description, teacherId, color }) {
 
     const result = await db.collection('courses').insertOne(newCourse);
 
-    // Update teacher with new course
     await db.collection('users').updateOne(
         { _id: teacherObjId },
         { $push: { courses: result.insertedId } }
@@ -139,14 +134,12 @@ async function deleteCourse(id) {
     const db = await connectToDatabase();
     const courseId = new ObjectId(id);
 
-    // Get course details before deletion
     const course = await db.collection('courses').findOne({ _id: courseId });
 
     if (!course) {
         throw { message: 'Course not found', status: 404 };
     }
 
-    // Remove course from students' courses array
     for (const studentId of course.students) {
         await db.collection('users').updateOne(
             { _id: studentId },
@@ -154,18 +147,15 @@ async function deleteCourse(id) {
         );
     }
 
-    // Remove course from teacher's courses array
     await db.collection('users').updateOne(
         { _id: course.teacher },
         { $pull: { courses: courseId } }
     );
 
-    // Delete all sections associated with the course
     for (const sectionId of course.sections) {
         await db.collection('sections').deleteOne({ _id: sectionId });
     }
 
-    // Delete the course
     await db.collection('courses').deleteOne({ _id: courseId });
 
     return { message: 'Course deleted successfully' };

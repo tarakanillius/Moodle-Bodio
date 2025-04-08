@@ -3,7 +3,6 @@ import getAvatarImage from "../../utils/getAvatar";
 import styles from "../../styles/courseDetail.module.css";
 import modalStyles from "../../styles/modal.module.css";
 import {GlobalContext} from "../../context/GlobalContext";
-import { FaUserMinus } from 'react-icons/fa';
 
 export default function StudentsTab({ course, onCourseUpdated }){
     const {theme, handleUnenrollStudent, user} = useContext(GlobalContext);
@@ -22,6 +21,7 @@ export default function StudentsTab({ course, onCourseUpdated }){
 
         try {
             const result = await handleUnenrollStudent(studentId, course.id);
+            console.log("Unenroll result:", result);
 
             if (result.success) {
                 setActionStatus("Student unenrolled successfully!");
@@ -77,16 +77,6 @@ export default function StudentsTab({ course, onCourseUpdated }){
                                 <span className={styles.studentName} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>{student.name}</span>
                                 <span className={styles.studentEmail}>{student.email}</span>
                             </div>
-                            {isTeacher && (
-                                <button
-                                    className={styles.unenrollButton}
-                                    onClick={() => handleUnenroll(student.id)}
-                                    disabled={unenrollingStudent === student.id}
-                                    title="Unenroll student"
-                                >
-                                    <FaUserMinus />
-                                </button>
-                            )}
                         </li>
                     ))}
                 </ul>
