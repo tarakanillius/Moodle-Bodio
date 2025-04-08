@@ -118,6 +118,9 @@
     height: 100vh;
     overflow-y: auto;
     box-sizing: border-box;
+    width: 100%;
+    max-width: 100%; /* Assicurati che non vada oltre la larghezza del contenitore */
+    overflow-x: hidden; /* Nasconde qualsiasi overflow orizzontale */
 }
 
 /* -------------------------
@@ -157,7 +160,7 @@
     }
 
     .sidebarAccount {
-        width: 50px;
+        width: 20%;
         padding-top: 0;
         margin-top: 0;
         border-top: none;
@@ -201,5 +204,6 @@
         width: 100%;
         height: auto;
         padding-bottom: 70px; /* spazio per sidebar mobile fissa */
+        overflow-x: hidden; /* Nascondiamo l'overflow orizzontale */
     }
 }
