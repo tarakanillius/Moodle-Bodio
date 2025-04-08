@@ -119,13 +119,10 @@
     overflow-y: auto;
     box-sizing: border-box;
     width: 100%;
-    max-width: 100%; /* Assicurati che non vada oltre la larghezza del contenitore */
-    overflow-x: hidden; /* Nasconde qualsiasi overflow orizzontale */
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
-/* -------------------------
-   ✅ MOBILE: sidebar bottom bar
----------------------------- */
 @media (max-width: 768px) {
     .wrapper {
         flex-direction: column;
@@ -203,7 +200,7 @@
         margin-left: 0;
         width: 100%;
         height: auto;
-        padding-bottom: 70px; /* spazio per sidebar mobile fissa */
-        overflow-x: hidden; /* Nascondiamo l'overflow orizzontale */
+        padding-bottom: 70px;
+        overflow-x: hidden;
     }
 }
