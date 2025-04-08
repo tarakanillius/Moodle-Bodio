@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aee2d6a0-10cc-49e7-8be7-a78490adad49" name="Changes" comment="fix in students info">
+    <list default="true" id="aee2d6a0-10cc-49e7-8be7-a78490adad49" name="Changes" comment="added modal">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/courseDetails/StudentsTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/courseDetails/StudentsTab.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/course.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/course.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/courseDetail.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/courseDetail.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +133,7 @@
       <workItem from="1743672704595" duration="4478000" />
       <workItem from="1743681056756" duration="6615000" />
       <workItem from="1744007730576" duration="18270000" />
-      <workItem from="1744094445284" duration="4200000" />
+      <workItem from="1744094445284" duration="5910000" />
     </task>
     <task id="LOCAL-00001" summary="fixed homepage">
       <option name="closed" value="true" />
@@ -166,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744031484029</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added modal">
+      <option name="closed" value="true" />
+      <created>1744098753857</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744098753857</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +218,7 @@
     <MESSAGE value="fixed homepage" />
     <MESSAGE value="started add module for students info" />
     <MESSAGE value="fix in students info" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix in students info" />
+    <MESSAGE value="added modal" />
+    <option name="LAST_COMMIT_MESSAGE" value="added modal" />
   </component>
 </project>

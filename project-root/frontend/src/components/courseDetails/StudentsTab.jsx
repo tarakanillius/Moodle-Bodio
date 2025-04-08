@@ -44,11 +44,11 @@ const StudentsTab = ({ course }) => {
                 ))}
             </ul>
 
-            <Modal show={show} onHide={handleClose} className="modalContent">
-                <Modal.Header closeButton className="modalHeader">
+            <Modal show={show} onHide={handleClose} className={styles.modalContent}>
+                <Modal.Header className={styles.modalHeader}>
                     <Modal.Title>{selectedStudent?.name}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="modalBody">
+                <Modal.Body className={styles.modalBody}>
                     <img
                         src={getAvatarImage("student", selectedStudent?.gender || "male")}
                         alt={selectedStudent?.name}
@@ -57,7 +57,7 @@ const StudentsTab = ({ course }) => {
                     <p><strong>Email:</strong> {selectedStudent?.email}</p>
                     <p><strong>Gender:</strong> {selectedStudent?.gender}</p>
                 </Modal.Body>
-                <Modal.Footer className="modalFooter">
+                <Modal.Footer className={styles.modalFooter}>
                     <Button variant="secondary" onClick={handleClose}>Close</Button>
                     <Button variant="primary" onClick={handleClose}>Save Changes</Button>
                 </Modal.Footer>
