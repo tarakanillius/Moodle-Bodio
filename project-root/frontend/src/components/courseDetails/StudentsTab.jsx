@@ -2,34 +2,32 @@ import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import getAvatarImage from "../../utils/getAvatar";
 import styles from "../../styles/courseDetail.module.css";
-
-const StudentsTab = ({ course }) => {
-    const [selectedStudent, setSelectedStudent] = useState(null);
-    const [show, setShow] = useState(false);
 import modalStyles from "../../styles/modal.module.css";
 import {GlobalContext} from "../../context/GlobalContext";
 import { FaUserMinus } from 'react-icons/fa';
 
-export default function StudentsTab({ course, onCourseUpdated }){
+export default function StudentsTab({ course, onCourseUpdated }) {
     const {theme, handleUnenrollStudent, user} = useContext(GlobalContext);
     const [unenrollingStudent, setUnenrollingStudent] = useState(null);
     const [actionStatus, setActionStatus] = useState("");
     const [actionError, setActionError] = useState("");
+    const [selectedStudent, setSelectedStudent] = useState(null);
+    const [show, setShow] = useState(false);
 
     const isTeacher = user && user.role === 'teacher';
 
-    const handleUnenroll = async (studentId) => {
-        if (!isTeacher) return;
-
-    const handleClose = () => {
+    const handleClose = async () => {
         setShow(false);
         setSelectedStudent(null);
     };
 
-    const handleShow = (student) => {
+    const handleShow = async (student) => {
         setSelectedStudent(student);
         setShow(true);
     };
+
+    const handleUnenroll = async (studentId) => {
+        if (!isTeacher) return;
 
     if (!course.students || course.students.length === 0) {
         return <p>No students enrolled in this course</p>;
@@ -103,8 +101,7 @@ export default function StudentsTab({ course, onCourseUpdated }){
                     <p><strong>Gender:</strong> {selectedStudent?.gender}</p>
                 </Modal.Body>
                 <Modal.Footer className={styles.modalFooter}>
-                    <Button variant="secondary" onClick={handleClose}>Close</Button>
-                    <Button variant="primary" onClick={handleClose}>Save Changes</Button>
+                    <Button onClick={handleClose}>Close</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -154,4 +151,4 @@ export default function StudentsTab({ course, onCourseUpdated }){
         </div>
     );
 };
-}
+
