@@ -5,7 +5,7 @@ import {GlobalContext} from "../context/GlobalContext";
 import axios from 'axios';
 
 export default function Course({viewMode = 'grid', name, description, teachers, students, sections, color, courseId }) {
-    const { setSelectedComponent, setSelectedCourseId, refreshCourses, theme, BACKEND_URL } = useContext(GlobalContext);
+    const { setSelectedComponent, setSelectedCourseId, refreshCourses, fetchCourses, theme, BACKEND_URL } = useContext(GlobalContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -49,6 +49,7 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                 alert("Failed to delete course: " + (error.response?.data?.error || "Unknown error"));
             }
         }
+        fetchCourses();
     };
 
     if (viewMode === 'list') {

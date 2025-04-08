@@ -13,7 +13,7 @@ export default function TabNav({ tabs, activeTab, setActiveTab, className }){
                     className={activeTab === tab.id ? styles.active : ""}
                     onClick={() => setActiveTab(tab.id)}
                     disabled={tab.disabled}
-                    style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}
+                    style={{ color: theme === "Dark" ? "#ffffff" : "#000000"}}
                 >
                     {tab.label}
                 </button>

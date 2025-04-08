@@ -10,7 +10,6 @@ import { checkAuthorization } from '../utils/auth.js';
 
 const router = express.Router();
 
-// Configure multer for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, UPLOAD_FOLDER);
@@ -35,7 +34,6 @@ const upload = multer({
     }
 });
 
-// Upload file to section
 router.post('/upload_file', checkAuthorization, upload.single('file'), async (req, res, next) => {
     try {
         if (!req.file) {
@@ -66,7 +64,6 @@ router.post('/upload_file', checkAuthorization, upload.single('file'), async (re
     }
 });
 
-// Error handler for multer
 router.use((err, req, res, next) => {
     if (err instanceof multer.MulterError) {
         if (err.code === 'LIMIT_FILE_SIZE') {

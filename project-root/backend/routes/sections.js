@@ -8,7 +8,6 @@ import { checkAuthorization } from '../utils/auth.js';
 
 const router = express.Router();
 
-// Get all sections
 router.get('/sections', async (req, res, next) => {
     try {
         const allSections = await getSections();
@@ -25,7 +24,6 @@ router.get('/sections', async (req, res, next) => {
     }
 });
 
-// Get section by ID
 router.get('/section/:id', async (req, res, next) => {
     try {
         const section = await getSectionById(req.params.id);
@@ -46,7 +44,6 @@ router.get('/section/:id', async (req, res, next) => {
     }
 });
 
-// Add new section
 router.post('/add_section', checkAuthorization, async (req, res, next) => {
     try {
         const { name, course_id } = req.body;

@@ -12,7 +12,6 @@ import { createJSONToken, isValidPassword, checkAuthorization } from '../utils/a
 
 const router = express.Router();
 
-// Get all students
 router.get('/students', async (req, res, next) => {
     try {
         const students = await getStudents();
@@ -25,7 +24,6 @@ router.get('/students', async (req, res, next) => {
     }
 });
 
-// Get all teachers
 router.get('/teachers', async (req, res, next) => {
     try {
         const teachers = await getTeachers();
@@ -38,7 +36,6 @@ router.get('/teachers', async (req, res, next) => {
     }
 });
 
-// Get user by ID
 router.get('/user/:id', async (req, res, next) => {
     try {
         const user = await getUserById(req.params.id);
@@ -52,7 +49,6 @@ router.get('/user/:id', async (req, res, next) => {
     }
 });
 
-// Get user by email
 router.get('/user_by_email/:email', async (req, res, next) => {
     try {
         const user = await getUserByEmail(req.params.email);
@@ -66,7 +62,6 @@ router.get('/user_by_email/:email', async (req, res, next) => {
     }
 });
 
-// Login
 router.post('/login', async (req, res, next) => {
     try {
         const { email, password } = req.body;
@@ -77,13 +72,11 @@ router.post('/login', async (req, res, next) => {
 
         const user = await getUserByEmail(email);
 
-        // Check password
         const isValid = await isValidPassword(password, user.password_hash);
         if (!isValid) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // Create token
         const token = createJSONToken({
             userId: user._id.toString(),
             email: user.email,
@@ -105,7 +98,6 @@ router.post('/login', async (req, res, next) => {
     }
 });
 
-// Update user
 router.put('/update_user/:id', checkAuthorization, async (req, res, next) => {
     try {
         const result = await updateUser(req.params.id, req.body);
@@ -115,7 +107,6 @@ router.put('/update_user/:id', checkAuthorization, async (req, res, next) => {
     }
 });
 
-// Enroll student in course
 router.post('/enroll_student', checkAuthorization, async (req, res, next) => {
     try {
         const { student_id, course_id } = req.body;

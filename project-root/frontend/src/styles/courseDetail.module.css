@@ -434,3 +434,105 @@
 .errorMessage {
     color: #e53e3e;
 }
+
+.formGroup {
+    margin-bottom: 16px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.formGroup input,
+.formGroup textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.formGroup small {
+    display: block;
+    margin-top: 4px;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.primaryButton {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.primaryButton:hover {
+    background-color: #3a7bc8;
+}
+
+.primaryButton:disabled {
+    background-color: #a0c3e8;
+    cursor: not-allowed;
+}
+
+.secondaryButton {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.secondaryButton:hover {
+    background-color: #e5e5e5;
+}
+
+.errorMessage {
+    background-color: #ffebee;
+    color: #d32f2f;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.progressContainer {
+    width: 100%;
+    height: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    margin: 16px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.progressBar {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.progressText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #333;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+
