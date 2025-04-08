@@ -434,3 +434,27 @@
 .errorMessage {
     color: #e53e3e;
 }
+
+.modalContent {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 200px;
+    margin: 20px;
+    display: flex
+}
+
+.modalBody {
+    text-align: right;
+}
+
+.modalHeader {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.modalFooter {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
