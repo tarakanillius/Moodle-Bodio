@@ -6,7 +6,7 @@ import styles from "../styles/userData.module.css";
 
 export default function UserData() {
     const navigate = useNavigate();
-    const { updateUser, clearUser, theme} = useContext(GlobalContext);
+    const { updateUser, clearUser, theme, BACKEND_URL} = useContext(GlobalContext);
     const [isEditing, setIsEditing] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -29,7 +29,7 @@ export default function UserData() {
             }
             try {
                 setLoading(true);
-                const response = await axios.get(`http://127.0.0.1:5000/user/${userId}`);
+                const response = await axios.get(`${BACKEND_URL}/user/${userId}`);
                 let formattedBirthDate = "";
                 if (response.data.user.birth) formattedBirthDate = response.data.user.birth.split('T')[0];
                 setUserData({
@@ -62,7 +62,7 @@ export default function UserData() {
                 setError("User not authenticated");
                 return;
             }
-            await axios.put(`http://127.0.0.1:5000/update_user/${userId}`, {
+            await axios.put(`${BACKEND_URL}/update_user/${userId}`, {
                 name: userData.name,
                 surname: userData.surname,
                 sex: userData.gender,

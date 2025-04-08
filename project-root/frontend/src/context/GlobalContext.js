@@ -1,4 +1,5 @@
 import {createContext, useEffect, useState} from "react";
+import axiosInstance from "../utils/axiosConfig";
 import axios from "axios";
 
 export const GlobalContext = createContext(undefined, undefined);
@@ -16,7 +17,8 @@ export default function GlobalProvider({ children }) {
     const [filteredCourses, setFilteredCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const BACKEND_URL = "http://127.0.0.1:5001";
+    const [token, setToken] = useState(localStorage.getItem("token") || "");
     const [notifications, setNotifications] = useState({
         messages: true,
         courseUpdates: false,
@@ -49,13 +51,13 @@ export default function GlobalProvider({ children }) {
                 return;
             }
 
-            const response = await axios.get(`http://127.0.0.1:5000/student_courses/${userId}`);
+            const response = await axiosInstance.get(`${BACKEND_URL}/student_courses/${userId}`);
 
             if (response.data.courses) {
                 const coursesWithDetails = await Promise.all(
                     response.data.courses.map(async (course) => {
                         try {
-                            const detailsResponse = await axios.get(`http://127.0.0.1:5000/course/${course.id}`);
+                            const detailsResponse = await axios.get(`${BACKEND_URL}/course/${course.id}`);
                             return detailsResponse.data.course;
                         } catch (err) {
                             console.error(`Error fetching details for course ${course.id}:`, err);
@@ -78,7 +80,7 @@ export default function GlobalProvider({ children }) {
         }
     };
 
-    const updateUser = (userData) => {
+    const updateUser = (userData, authToken) => {
         setUser(userData);
         localStorage.setItem("userId", userData.id);
         localStorage.setItem("userName", userData.name);
@@ -86,6 +88,11 @@ export default function GlobalProvider({ children }) {
         localStorage.setItem("userEmail", userData.email);
         localStorage.setItem("userRole", userData.role);
         localStorage.setItem("userGender", userData.gender);
+
+        if (authToken) {
+            localStorage.setItem("token", authToken);
+            setToken(authToken);
+        }
     };
 
     const refreshCourses = () => {
@@ -94,7 +101,7 @@ export default function GlobalProvider({ children }) {
 
     const updateCourse = async (courseId, updatedData) => {
         try {
-            await axios.put(`http://127.0.0.1:5000/update_course/${courseId}`, updatedData);
+            await axiosInstance.put(`${BACKEND_URL}/update_course/${courseId}`, updatedData);
             setCourses(prevCourses =>
                 prevCourses.map(course =>
                     course.id === courseId
@@ -121,6 +128,8 @@ export default function GlobalProvider({ children }) {
             role: "",
             gender: "",
         });
+        setToken("");
+        localStorage.removeItem("token");
         localStorage.removeItem("userId");
         localStorage.removeItem("userName");
         localStorage.removeItem("userSurname");
@@ -179,8 +188,17 @@ export default function GlobalProvider({ children }) {
         }
     }, []);
 
+    useEffect(() => {
+        if (token) {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        } else {
+            delete axios.defaults.headers.common['Authorization'];
+        }
+    }, [token]);
+
     return (
         <GlobalContext.Provider value={{
+            BACKEND_URL,
             selectedComponent,
             setSelectedComponent,
             selectedCourseId,

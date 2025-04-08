@@ -9,7 +9,7 @@ import SettingsTab from "../components/courseDetails/SettingsTab";
 import styles from "../styles/courseDetail.module.css";
 
 export default function CourseDetail({ courseId }) {
-    const { setSelectedComponent, user, getCourse, coursesLoading, coursesError, refreshCourses, theme } = useContext(GlobalContext);
+    const { setSelectedComponent, user, getCourse, coursesLoading, coursesError, refreshCourses, theme, BACKEND_URL } = useContext(GlobalContext);
     const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -36,7 +36,7 @@ export default function CourseDetail({ courseId }) {
                     setCourse(cachedCourse);
                     if (cachedCourse.sections && cachedCourse.sections.length > 0) setActiveSection(cachedCourse.sections[0].id);
                 } else {
-                    const response = await axios.get(`http://127.0.0.1:5000/course/${courseId}`);
+                    const response = await axios.get(`${BACKEND_URL}/course/${courseId}`);
                     setCourse(response.data.course);
 
                     if (response.data.course.sections && response.data.course.sections.length > 0) setActiveSection(response.data.course.sections[0].id);
