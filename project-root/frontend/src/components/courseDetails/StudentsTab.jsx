@@ -1,14 +1,69 @@
-import React, {useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import getAvatarImage from "../../utils/getAvatar";
 import styles from "../../styles/courseDetail.module.css";
+import modalStyles from "../../styles/modal.module.css";
 import {GlobalContext} from "../../context/GlobalContext";
+import { FaUserMinus } from 'react-icons/fa';
 
-export default function StudentsTab({ course }){
-    const {theme} = useContext(GlobalContext);
+export default function StudentsTab({ course, onCourseUpdated }){
+    const {theme, handleUnenrollStudent, user} = useContext(GlobalContext);
+    const [unenrollingStudent, setUnenrollingStudent] = useState(null);
+    const [actionStatus, setActionStatus] = useState("");
+    const [actionError, setActionError] = useState("");
+
+    const isTeacher = user && user.role === 'teacher';
+
+    const handleUnenroll = async (studentId) => {
+        if (!isTeacher) return;
+
+        setUnenrollingStudent(studentId);
+        setActionStatus("Unenrolling student...");
+        setActionError("");
+
+        try {
+            const result = await handleUnenrollStudent(studentId, course.id);
+
+            if (result.success) {
+                setActionStatus("Student unenrolled successfully!");
+
+                if (onCourseUpdated) {
+                    const updatedCourse = {
+                        ...course,
+                        students: course.students.filter(student => student.id !== studentId)
+                    };
+                    onCourseUpdated(updatedCourse);
+                }
+
+                setTimeout(() => {
+                    setActionStatus("");
+                }, 3000);
+            } else {
+                setActionError(result.error || "Failed to unenroll student");
+            }
+        } catch (error) {
+            console.error("Error in unenroll handler:", error);
+            setActionError("An unexpected error occurred");
+        } finally {
+            setUnenrollingStudent(null);
+        }
+    };
 
     return (
         <div className={styles.studentsContainer}>
             <h2 className={styles.studentsTitle} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Enrolled Students</h2>
+
+            {actionStatus && (
+                <div className={modalStyles.successMessage}>
+                    {actionStatus}
+                </div>
+            )}
+
+            {actionError && (
+                <div className={modalStyles.errorMessage}>
+                    {actionError}
+                </div>
+            )}
+
             {course.students && course.students.length > 0 ? (
                 <ul className={styles.studentsList}>
                     {course.students.map(student => (
@@ -22,6 +77,16 @@ export default function StudentsTab({ course }){
                                 <span className={styles.studentName} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>{student.name}</span>
                                 <span className={styles.studentEmail}>{student.email}</span>
                             </div>
+                            {isTeacher && (
+                                <button
+                                    className={styles.unenrollButton}
+                                    onClick={() => handleUnenroll(student.id)}
+                                    disabled={unenrollingStudent === student.id}
+                                    title="Unenroll student"
+                                >
+                                    <FaUserMinus />
+                                </button>
+                            )}
                         </li>
                     ))}
                 </ul>
