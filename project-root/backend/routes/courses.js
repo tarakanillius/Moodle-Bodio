@@ -12,7 +12,6 @@ import { checkAuthorization } from '../utils/auth.js';
 
 const router = express.Router();
 
-// Get all courses
 router.get('/courses', async (req, res, next) => {
     try {
         const allCourses = await getCourses();
@@ -29,7 +28,6 @@ router.get('/courses', async (req, res, next) => {
     }
 });
 
-// Get course by ID
 router.get('/course/:id', async (req, res, next) => {
     try {
         const course = await getCourseById(req.params.id);
@@ -45,7 +43,6 @@ router.get('/course/:id', async (req, res, next) => {
     }
 });
 
-// Get courses for a student
 router.get('/student_courses/:id', async (req, res, next) => {
     try {
         const courses = await getStudentCourses(req.params.id);
@@ -65,7 +62,6 @@ router.get('/student_courses/:id', async (req, res, next) => {
     }
 });
 
-// Add new course
 router.post('/add_course', checkAuthorization, async (req, res, next) => {
     try {
         const courseData = req.body;
@@ -89,7 +85,6 @@ router.post('/add_course', checkAuthorization, async (req, res, next) => {
     }
 });
 
-// Update course
 router.put('/update_course/:id', checkAuthorization, async (req, res, next) => {
     try {
         const result = await updateCourse(req.params.id, req.body);
@@ -99,7 +94,6 @@ router.put('/update_course/:id', checkAuthorization, async (req, res, next) => {
     }
 });
 
-// Delete course
 router.delete('/delete_course/:id', checkAuthorization, async (req, res, next) => {
     try {
         const result = await deleteCourse(req.params.id);
