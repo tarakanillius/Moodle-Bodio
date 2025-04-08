@@ -141,13 +141,52 @@ async function enrollStudent(studentId, courseId) {
         { $push: { students: studentObjId } }
     );
 
-    // Update student with new course
     await db.collection('users').updateOne(
         { _id: studentObjId },
         { $push: { courses: courseObjId } }
     );
 
     return { message: 'Student enrolled successfully' };
+}
+
+async function unenrollStudent(student_id, course_id) {
+    const db = await connectToDatabase();
+    const studentObjId = new ObjectId(student_id);
+    const courseObjId = new ObjectId(course_id);
+
+    const student = await db.collection('users').findOne({
+        _id: studentObjId,
+        role: 'student'
+    });
+
+    if (!student) {
+        throw { message: 'Student not found', status: 404 };
+    }
+
+    const course = await db.collection('courses').findOne({
+        _id: courseObjId
+    });
+
+    if (!course) {
+        throw { message: 'Course not found', status: 404 };
+    }
+
+    const isEnrolled = student.courses.some(id => id.toString() === course_id);
+    if (!isEnrolled) {
+        throw { message: 'Student is not enrolled in this course', status: 400 };
+    }
+
+    await db.collection('users').updateOne(
+        { _id: studentObjId },
+        { $pull: { courses: courseObjId } }
+    );
+
+    await db.collection('courses').updateOne(
+        { _id: courseObjId },
+        { $pull: { students: studentObjId } }
+    );
+
+    return { message: 'Student unenrolled successfully' };
 }
 
 export {
@@ -159,5 +198,6 @@ export {
     addUser,
     updateUser,
     deleteUser,
-    enrollStudent
+    enrollStudent,
+    unenrollStudent
 };

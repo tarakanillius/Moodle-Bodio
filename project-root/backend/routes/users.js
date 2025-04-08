@@ -125,4 +125,22 @@ router.post('/enroll_student', checkAuthorization, async (req, res, next) => {
     }
 });
 
+router.post('/unenroll_student', checkAuthorization, async (req, res, next) => {
+    try {
+        const { student_id, course_id } = req.body;
+
+        if (!student_id || !course_id) {
+            return res.status(400).json({ error: 'Student ID and Course ID are required' });
+        }
+
+        const result = await unenrollStudent(student_id, course_id);
+        res.json(result);
+    } catch (err) {
+        if (err.status) {
+            return res.status(err.status).json({ error: err.message });
+        }
+        next(err);
+    }
+});
+
 export { router };

@@ -99,6 +99,36 @@ export default function GlobalProvider({ children }) {
         setLoading(false);
     };
 
+    const handleUnenrollStudent = async (studentId, courseId) => {
+        try {
+            await axiosInstance.post(`${BACKEND_URL}/unenroll_student`, {
+                student_id: studentId,
+                course_id: courseId
+            });
+
+            // Update the courses state to reflect the change
+            setCourses(prevCourses =>
+                prevCourses.map(course => {
+                    if (course.id === courseId) {
+                        return {
+                            ...course,
+                            students: course.students.filter(student => student.id !== studentId)
+                        };
+                    }
+                    return course;
+                })
+            );
+
+            return { success: true };
+        } catch (error) {
+            console.error("Error unenrolling student:", error);
+            return {
+                success: false,
+                error: error.response?.data?.error || "Failed to unenroll student"
+            };
+        }
+    };
+
     const updateCourse = async (courseId, updatedData) => {
         try {
             await axiosInstance.put(`${BACKEND_URL}/update_course/${courseId}`, updatedData);
@@ -233,7 +263,8 @@ export default function GlobalProvider({ children }) {
             error,
             getCourse,
             updateCourse,
-            refreshCourses
+            refreshCourses,
+            handleUnenrollStudent
         }}>
             {children}
         </GlobalContext.Provider>
