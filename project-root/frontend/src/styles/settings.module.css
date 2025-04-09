@@ -1,13 +1,24 @@
 .settingsWrapper {
+    height: calc(100vh - 40px);
+    width: 100%;
     background: #ffffff;
-    margin: 10px;
-    gap: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 30px;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
 }
 
 .settingsContent {
     animation: fadeIn 0.3s ease-in-out;
-    max-width: 800px;
-    margin: 0 auto;
+    width: 100%;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .settingsSection {
@@ -15,6 +26,11 @@
     flex-direction: column;
     width: 100%;
     margin-bottom: 40px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
 }
 
 .settingsSection h2 {
@@ -32,6 +48,11 @@
     gap: 8px;
     margin-bottom: 20px;
     width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .settingItem label {
@@ -52,6 +73,7 @@
     background-color: #f9fafb;
     width: 100%;
     max-width: 100%;
+    box-sizing: border-box;
 }
 
 .settingItem input[type="checkbox"] {
@@ -87,6 +109,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    padding-top: 20px;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .button {
@@ -99,26 +124,29 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
-    margin-top: 20px;
     align-self: flex-start;
 }
 
 .button:hover {
     background-color: #4b5563;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .button:active {
-    transform: translateY(1px);
+    transform: translateY(0);
 }
 
 .history,
 .sessions {
-    background: #f9fafb;
+    background: #ffffff;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     border: 1px solid #e5e7eb;
     width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 .history ul,
@@ -126,6 +154,7 @@
     list-style-type: none;
     padding-left: 0;
     margin: 0;
+    width: 100%;
 }
 
 .history ul li,
@@ -138,6 +167,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .history ul li:last-child,
@@ -187,24 +218,21 @@
     color: white;
 }
 
-@media (max-width: 768px) {
-    .settingsWrapper {
-        padding: 20px 15px;
-    }
+.settingGroup {
+    margin-bottom: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
 
-    .settingItem input[type="text"],
-    .settingItem input[type="email"],
-    .settingItem input[type="password"],
-    .settingItem select {
-        padding: 10px;
-    }
-
-    .button {
-        padding: 10px 20px;
-        font-size: 14px;
-        width: 100%;
-        max-width: none;
-    }
+.settingGroup h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #374151;
+    border-bottom: 1px solid #f3f4f6;
+    padding-bottom: 8px;
 }
 
 @keyframes fadeIn {

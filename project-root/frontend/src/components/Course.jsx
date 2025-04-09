@@ -56,20 +56,20 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
         return (
             <div className={styles.courseCardList} style={{backgroundColor: color}} onClick={handleViewCourse}>
                 <div className={styles.courseInfoList}>
-                    <h2 className={styles.courseNameList}>{name}</h2>
+                    <h2 className={styles.courseNameList} style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>{name}</h2>
                     <div className={styles.courseStats}>
-                        <span className={styles.teacherCount}>
+                        <div className={styles.teacherCount}>
                             <FaChalkboardTeacher className={styles.icon}/>
                             {teachers && teachers.length > 0
                                 ? `${teachers.length} instructor${teachers.length > 1 ? 's' : ''}`
                                 : 'No instructor'}
-                        </span>
-                            <span className={styles.studentCount}>
+                        </div>
+                            <div className={styles.studentCount}>
                             <FaUsers className={styles.icon}/>
                                 {students} student{students !== 1 ? 's' : ''}
-                        </span>
+                        </div>
                     </div>
-                    <p className={styles.courseDescriptionList}>{description}</p>
+                    <p className={styles.courseDescriptionList} style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>{description}</p>
                 </div>
                 <div className={styles.sectionsListView}>
                     {sections && sections.length > 0 ? sections.map((section, index) => (
@@ -78,7 +78,7 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                 </div>
                 <div className={styles.courseActionsList}>
                     <div className={styles.menuContainer} ref={menuRef}>
-                        <button className={styles.menuButton} onClick={handleManageCourse}>
+                        <button className={styles.menuButton} style={{color: theme === "Dark" ? "#ffffff" : "#000000"}} onClick={handleManageCourse}>
                             <FaEllipsisV/>
                         </button>
                         {menuOpen && (

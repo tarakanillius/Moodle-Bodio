@@ -14,7 +14,6 @@ async function getSectionById(id) {
 async function addSection({ name, courseId }) {
     const db = await connectToDatabase();
 
-    // Verify course exists
     const course = await db.collection('courses').findOne({
         _id: new ObjectId(courseId)
     });
@@ -30,7 +29,6 @@ async function addSection({ name, courseId }) {
 
     const result = await db.collection('sections').insertOne(newSection);
 
-    // Update course with new section
     await db.collection('courses').updateOne(
         { _id: new ObjectId(courseId) },
         { $push: { sections: result.insertedId } }
@@ -42,7 +40,6 @@ async function addSection({ name, courseId }) {
 async function addFileToSection(sectionId, fileName, fileUrl) {
     const db = await connectToDatabase();
 
-    // Verify section exists
     const section = await db.collection('sections').findOne({
         _id: new ObjectId(sectionId)
     });
@@ -51,7 +48,6 @@ async function addFileToSection(sectionId, fileName, fileUrl) {
         throw { message: 'Section not found', status: 404 };
     }
 
-    // Add file to section
     await db.collection('sections').updateOne(
         { _id: new ObjectId(sectionId) },
         { $push: { data: { name: fileName, url: fileUrl } } }

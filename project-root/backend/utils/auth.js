@@ -7,7 +7,7 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 
 function createJSONToken(payload) {
-    return jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: '2h' });
 }
 
 function validateJSONToken(token) {
@@ -36,8 +36,7 @@ function checkAuthorization(req, res, next) {
     const authToken = authFragments[1];
 
     try {
-        const tokenPayload = validateJSONToken(authToken);
-        req.user = tokenPayload;
+        req.user = validateJSONToken(authToken);
         next();
     } catch (error) {
         return res.status(401).json({ error: 'Invalid token' });

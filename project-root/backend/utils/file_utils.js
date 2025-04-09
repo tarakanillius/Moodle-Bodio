@@ -7,7 +7,6 @@ const __dirname = path.dirname(__filename);
 
 const UPLOAD_FOLDER = path.join(__dirname, '..', 'files', 'uploads');
 
-// Ensure upload directory exists
 if (!fs.existsSync(UPLOAD_FOLDER)) {
     fs.mkdirSync(UPLOAD_FOLDER, { recursive: true });
 }

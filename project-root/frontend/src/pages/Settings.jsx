@@ -19,19 +19,37 @@ export default function Settings() {
     ];
 
     return (
-        <div className={styles.settingsWrapper} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
+        <div className={styles.settingsWrapper}>
+            <h2 style={{
+                color: theme === "Dark" ? "#ffffff" : "#333333",
+                marginBottom: "20px",
+                fontSize: "28px",
+                borderBottom: `1px solid ${theme === "Dark" ? "#333333" : "#eaeaea"}`,
+                paddingBottom: "15px"
+            }}>
+                Impostazioni
+            </h2>
+
             <TabNav
                 tabs={tabs}
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
             />
+
             <div className={styles.settingsContent}>
-                {activeTab === "Generale" && <GeneralSettings />}
-                {activeTab === "Notifiche" && <NotificationSettings />}
-                {activeTab === "Sicurezza" && <SecuritySettings />}
-                {activeTab === "Privacy" && <PrivacySettings />}
+                <div style={{
+                    backgroundColor: theme === "Dark" ? "#000000" : "#ffffff",
+                    borderRadius: "12px",
+                    padding: "20px",
+                    marginTop: "20px",
+                    marginBottom: "20px"
+                }}>
+                    {activeTab === "Generale" && <GeneralSettings />}
+                    {activeTab === "Notifiche" && <NotificationSettings />}
+                    {activeTab === "Sicurezza" && <SecuritySettings />}
+                    {activeTab === "Privacy" && <PrivacySettings />}
+                </div>
             </div>
         </div>
     );
 };
-

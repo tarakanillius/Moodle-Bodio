@@ -29,24 +29,22 @@ async function populateDatabase() {
 
         const db = client.db(dbName);
 
-        // Drop existing collections
         await db.collection('users').drop().catch(() => console.log('No users collection to drop'));
         await db.collection('courses').drop().catch(() => console.log('No courses collection to drop'));
         await db.collection('sections').drop().catch(() => console.log('No sections collection to drop'));
+        await db.collection('quiz').drop().catch(() => console.log('No quiz collection to drop'));
 
-        // Create teacher IDs
         const teacher1_id = new ObjectId();
         const teacher2_id = new ObjectId();
         const teacher3_id = new ObjectId();
 
-        // Create teacher data
         const teachers_data = [
             {
                 _id: teacher1_id,
                 name: "Davide",
                 surname: "Krähenbühl",
                 sex: "male",
-                birth: new Date(1985, 4, 15), // Note: Month is 0-indexed in JavaScript
+                birth: new Date(1985, 4, 15),
                 email: "davide.krahenbuhl@example.com",
                 password_hash: await bcrypt.hash("password123", 12),
                 role: "teacher",
@@ -212,7 +210,6 @@ async function populateDatabase() {
             }
         ];
 
-        // Update teacher courses
         for (const course of courses_data) {
             for (const teacher of teachers_data) {
                 if (teacher._id.equals(course.teacher)) {
@@ -221,7 +218,6 @@ async function populateDatabase() {
             }
         }
 
-        // Update student courses
         for (const course of courses_data) {
             for (const student_id of course.students) {
                 for (const student of students_data) {
@@ -232,7 +228,6 @@ async function populateDatabase() {
             }
         }
 
-        // Insert data into collections
         await db.collection('users').insertMany([...teachers_data, ...students_data]);
         await db.collection('sections').insertMany(sections_data);
         await db.collection('courses').insertMany(courses_data);
@@ -245,11 +240,9 @@ async function populateDatabase() {
     }
 }
 
-// Helper function to get random subset of array
 function getRandomSubset(array, size) {
     const shuffled = [...array].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, size);
 }
 
-// Run the population script
 populateDatabase().catch(console.error);

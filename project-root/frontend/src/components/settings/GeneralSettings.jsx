@@ -3,7 +3,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 import styles from "../../styles/settings.module.css";
 
 const GeneralSettings = () => {
-    const {theme, setTheme, language, setLanguage, saveStatus, handleSave} = useContext(GlobalContext);
+    const {theme, setTheme, language, setLanguage} = useContext(GlobalContext);
 
     return (
         <div className={styles.settingsSection}>
@@ -40,12 +40,6 @@ const GeneralSettings = () => {
                     <option>Tedesco</option>
                 </select>
             </div>
-            <div className={styles.buttonContainer}>
-                <button className={styles.button} onClick={handleSave}>
-                    Salvare
-                </button>
-            </div>
-            {saveStatus && <p>{saveStatus}</p>}
         </div>
     );
 };

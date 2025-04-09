@@ -6,9 +6,11 @@ import {
     getUserByEmail,
     formatUser,
     updateUser,
-    enrollStudent
+    enrollStudent,
+    unenrollStudent,
 } from '../utils/user_utils.js';
 import { createJSONToken, isValidPassword, checkAuthorization } from '../utils/auth.js';
+console.log("Loading users routes...");
 
 const router = express.Router();
 

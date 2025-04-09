@@ -131,7 +131,6 @@
     margin-left: 8px;
 }
 
-/* Button styles */
 .buttonGroup {
     display: flex;
     justify-content: flex-end;
@@ -171,7 +170,6 @@
     background-color: #e5e5e5;
 }
 
-/* Error message */
 .errorMessage {
     background-color: #ffebee;
     color: #d32f2f;
@@ -180,7 +178,6 @@
     margin-bottom: 16px;
 }
 
-/* Progress bar for file uploads */
 .progressContainer {
     width: 100%;
     height: 20px;
@@ -208,7 +205,6 @@
     font-weight: 500;
 }
 
-/* Animation */
 @keyframes modalFadeIn {
     from {
         opacity: 0;

@@ -86,16 +86,27 @@ export default function Courses() {
     };
 
     return (
-        <div className={styles.coursesContainer} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
-            <div className={styles.searchBarContainer} style={{ backgroundColor: theme === "Dark" ? "#404040" : "#ffffff" }}>
-                <div className={styles.searchInputWrapper}>
-                    <FaSearch className={styles.searchIcon} />
+        <div className={styles.coursesContainer} style={{backgroundColor: theme === "Dark" ? "#1a1a1a" : "#ffffff"}}>
+            <h2 style={{
+                color: theme === "Dark" ? "#ffffff" : "#333333",
+                marginBottom: "20px",
+                fontSize: "28px",
+                width: "100%",
+                boxSizing: "border-box"
+            }}>
+                My Courses
+            </h2>
+
+            <div className={styles.searchBarContainer} style={{backgroundColor: theme === "Dark" ? "#2d2d2d" : "#f5f5f5"}}>
+                <div className={styles.searchInputWrapper} style={{backgroundColor: theme === "Dark" ? "#3d3d3d" : "#ffffff"}}>
+                    <FaSearch className={styles.searchIcon} style={{ color: theme === "Dark" ? "#aaaaaa" : "#666666" }} />
                     <input
                         type="text"
                         placeholder="Search courses..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className={styles.searchInput}
+                        style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}
                     />
                 </div>
                 <div className={styles.actionButtons}>
@@ -112,18 +123,24 @@ export default function Courses() {
                             className={styles.viewToggleBtn}
                             onClick={() => setIsAddModalOpen(true)}
                             title="Add new course"
+                            style={{ backgroundColor: "#636363" }}
                         >
                             <FaPlus />
                         </button>
                     )}
                 </div>
             </div>
+
             {loading ? (
-                <div className={styles.loadingMessage}>Loading courses...</div>
+                <div className={styles.loadingMessage} style={{ color: theme === "Dark" ? "#bbbbbb" : "#666666" }}>
+                    Loading courses...
+                </div>
             ) : error ? (
-                <div className={styles.errorMessage}>{error}</div>
+                <div className={styles.errorMessage}>
+                    {error}
+                </div>
             ) : filteredCourses.length === 0 ? (
-                <div className={styles.noCoursesMessage}>
+                <div className={styles.noCoursesMessage} style={{ color: theme === "Dark" ? "#bbbbbb" : "#718096" }}>
                     {searchQuery ? "No courses match your search" : "No courses found"}
                 </div>
             ) : (
@@ -143,8 +160,6 @@ export default function Courses() {
                     ))}
                 </div>
             )}
-
-            {/* Add Course Modal */}
             <Modal
                 isOpen={isAddModalOpen}
                 onClose={() => setIsAddModalOpen(false)}
@@ -179,7 +194,7 @@ export default function Courses() {
                         <input
                             type="color"
                             id="courseColor"
-                            value={newCourse.color.startsWith('rgba') ? '#00aaff' : newCourse.color}
+                            value={newCourse.color}
                             onChange={handleColorChange}
                         />
                     </div>

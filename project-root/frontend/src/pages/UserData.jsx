@@ -99,33 +99,109 @@ export default function UserData() {
     if (loading) return <div className={styles.loadingMessage}>Loading user data...</div>;
 
     return (
-        <div className={styles.userDataContainer} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
+        <div className={styles.userDataContainer} style={{ backgroundColor: theme === "Dark" ? "#1a1a1a" : "#ffffff" }}>
             <div className={styles.titleContainer}>
-                <h2 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Il Mio Profilo</h2>
-                <p style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Modifica le tue informazioni personali.</p>
+                <h2 style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Il Mio Profilo</h2>
+                <p style={{ color: theme === "Dark" ? "#bbbbbb" : "#666666" }}>
+                    Modifica le tue informazioni personali.
+                </p>
             </div>
+
             {error && <div className={styles.errorMessage}>{error}</div>}
             {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
-            <div className={`${styles.data} ${isEditing ? styles.editable : ""}`}>
-                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Nome:</label>
-                <input type="text" name="name" value={userData.name} onChange={handleChange} disabled={!isEditing} />
 
-                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Cognome:</label>
-                <input type="text" name="surname" value={userData.surname} onChange={handleChange} disabled={!isEditing} />
+            <div className={`${styles.data} ${isEditing ? styles.editable : ""}`}
+                 style={{ backgroundColor: theme === "Dark" ? "#2d2d2d" : isEditing ? "#f0f7ff" : "#f9f9f9" }}>
+                <div className={styles.fieldGroup}>
+                    <label style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Nome:</label>
+                    <input
+                        type="text"
+                        name="name"
+                        value={userData.name}
+                        onChange={handleChange}
+                        disabled={!isEditing}
+                        style={{
+                            backgroundColor: theme === "Dark"
+                                ? (isEditing ? "#3d3d3d" : "#2d2d2d")
+                                : (isEditing ? "#ffffff" : "#f2f2f2"),
+                            color: theme === "Dark" ? "#ffffff" : "#333333",
+                            borderColor: theme === "Dark" ? "#555555" : "#dddddd"
+                        }}
+                    />
+                </div>
 
-                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Genere:</label>
-                <select name="gender" value={userData.gender} onChange={handleChange} disabled={!isEditing}>
-                    <option value="male">Maschio</option>
-                    <option value="female">Femmina</option>
-                    <option value="other">Altro</option>
-                </select>
+                <div className={styles.fieldGroup}>
+                    <label style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Cognome:</label>
+                    <input
+                        type="text"
+                        name="surname"
+                        value={userData.surname}
+                        onChange={handleChange}
+                        disabled={!isEditing}
+                        style={{
+                            backgroundColor: theme === "Dark"
+                                ? (isEditing ? "#3d3d3d" : "#2d2d2d")
+                                : (isEditing ? "#ffffff" : "#f2f2f2"),
+                            color: theme === "Dark" ? "#ffffff" : "#333333",
+                            borderColor: theme === "Dark" ? "#555555" : "#dddddd"
+                        }}
+                    />
+                </div>
 
-                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Data di nascita:</label>
-                <input type="date" name="birthDate" value={userData.birthDate} onChange={handleChange} disabled={!isEditing} />
+                <div className={styles.fieldGroup}>
+                    <label style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Genere:</label>
+                    <select
+                        name="gender"
+                        value={userData.gender}
+                        onChange={handleChange}
+                        disabled={!isEditing}
+                        style={{
+                            backgroundColor: theme === "Dark"
+                                ? (isEditing ? "#3d3d3d" : "#2d2d2d")
+                                : (isEditing ? "#ffffff" : "#f2f2f2"),
+                            color: theme === "Dark" ? "#ffffff" : "#333333",
+                            borderColor: theme === "Dark" ? "#555555" : "#dddddd"
+                        }}
+                    >
+                        <option value="male">Maschio</option>
+                        <option value="female">Femmina</option>
+                        <option value="other">Altro</option>
+                    </select>
+                </div>
 
-                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Ruolo:</label>
-                <input type="text" value={userData.role} disabled />
+                <div className={styles.fieldGroup}>
+                    <label style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Data di nascita:</label>
+                    <input
+                        type="date"
+                        name="birthDate"
+                        value={userData.birthDate}
+                        onChange={handleChange}
+                        disabled={!isEditing}
+                        style={{
+                            backgroundColor: theme === "Dark"
+                                ? (isEditing ? "#3d3d3d" : "#2d2d2d")
+                                : (isEditing ? "#ffffff" : "#f2f2f2"),
+                            color: theme === "Dark" ? "#ffffff" : "#333333",
+                            borderColor: theme === "Dark" ? "#555555" : "#dddddd"
+                        }}
+                    />
+                </div>
+
+                <div className={styles.fieldGroup}>
+                    <label style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Ruolo:</label>
+                    <input
+                        type="text"
+                        value={userData.role}
+                        disabled
+                        style={{
+                            backgroundColor: theme === "Dark" ? "#2d2d2d" : "#f2f2f2",
+                            color: theme === "Dark" ? "#bbbbbb" : "#777777",
+                            borderColor: theme === "Dark" ? "#555555" : "#dddddd"
+                        }}
+                    />
+                </div>
             </div>
+
             <div className={styles.buttonContainer}>
                 <button
                     className={styles.editButton}
@@ -134,6 +210,7 @@ export default function UserData() {
                 >
                     {isEditing ? "Salva" : "Modifica"}
                 </button>
+
                 <button
                     className={styles.logoutButton}
                     onClick={handleLogout}
