@@ -1,19 +1,44 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 import getAvatarImage from "../../utils/getAvatar";
 import styles from "../../styles/courseDetail.module.css";
 import modalStyles from "../../styles/modal.module.css";
 import {GlobalContext} from "../../context/GlobalContext";
+import { FaUserMinus } from 'react-icons/fa';
 
-export default function StudentsTab({ course, onCourseUpdated }){
+export default function StudentsTab({ course, onCourseUpdated }) {
     const {theme, handleUnenrollStudent, user} = useContext(GlobalContext);
     const [unenrollingStudent, setUnenrollingStudent] = useState(null);
     const [actionStatus, setActionStatus] = useState("");
     const [actionError, setActionError] = useState("");
+    const [selectedStudent, setSelectedStudent] = useState(null);
+    const [unenrStudent, setUnenrStudent] = useState(false);
+    const [show, setShow] = useState(false);
 
     const isTeacher = user && user.role === 'teacher';
 
+    const handleClose = async () => {
+        setShow(false);
+        setSelectedStudent(null);
+    };
+
+    const handleSave = async () => {
+        if(unenrStudent) handleUnenroll(selectedStudent.id);
+        setShow(false);
+    };
+
+    const handleShow = async (student) => {
+        setSelectedStudent(student);
+        setShow(true);
+    };
+
     const handleUnenroll = async (studentId) => {
         if (!isTeacher) return;
+
+        if (!course.students || course.students.length === 0) {
+            setActionError("No students enrolled in this course");
+            return;
+        }
 
         setUnenrollingStudent(studentId);
         setActionStatus("Unenrolling student...");
@@ -21,7 +46,6 @@ export default function StudentsTab({ course, onCourseUpdated }){
 
         try {
             const result = await handleUnenrollStudent(studentId, course.id);
-            console.log("Unenroll result:", result);
 
             if (result.success) {
                 setActionStatus("Student unenrolled successfully!");
@@ -50,7 +74,47 @@ export default function StudentsTab({ course, onCourseUpdated }){
 
     return (
         <div className={styles.studentsContainer}>
-            <h2 className={styles.studentsTitle} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Enrolled Students</h2>
+            <h2 className={styles.studentsTitle}>Enrolled Students</h2>
+            <ul className={styles.studentsList}>
+                {course.students.map((student) => (
+                    <li
+                        key={student.id}
+                        className={styles.studentItem}
+                        onClick={() => handleShow(student)}
+                    >
+                        <img
+                            src={getAvatarImage("student", student.gender || "male")}
+                            alt={student.name}
+                            className={styles.studentAvatar}
+                        />
+                        <div className={styles.studentInfo}>
+                            <span className={styles.studentName}>{student.name}</span>
+                            <span className={styles.studentEmail}>{student.email}</span>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+
+            <Modal show={show} onHide={handleClose} className={styles.modalContent}>
+                <Modal.Header className={styles.modalHeader}>
+                    <Modal.Title><h2><strong>Student Card</strong></h2></Modal.Title>
+                </Modal.Header>
+                <Modal.Body className={styles.modalBody}>
+                    <img
+                        src={getAvatarImage("student", selectedStudent?.gender || "male")}
+                        alt={selectedStudent?.name}
+                        className={styles.studentAvatar}
+                    />
+                    <p><strong>Nome:</strong> {selectedStudent?.name.split(' ')[0]}</p>
+                    <p><strong>Cognome:</strong> {selectedStudent?.name.split(' ')[1]}</p>
+                    <p><strong>Email:</strong> {selectedStudent?.email}</p>
+                    <Button onClick={() => setUnenrStudent(true)}>Uenr</Button>
+                </Modal.Body>
+                <Modal.Footer className={styles.modalFooter}>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleSave}>Save</Button>
+                </Modal.Footer>
+            </Modal>
 
             {actionStatus && (
                 <div className={modalStyles.successMessage}>
@@ -63,26 +127,7 @@ export default function StudentsTab({ course, onCourseUpdated }){
                     {actionError}
                 </div>
             )}
-
-            {course.students && course.students.length > 0 ? (
-                <ul className={styles.studentsList}>
-                    {course.students.map(student => (
-                        <li key={student.id} className={`${styles.studentItem} ${theme === "Dark" ? styles.darkTheme : styles.lightTheme}`}>
-                            <img
-                                src={getAvatarImage("student", student.gender || "male")}
-                                alt={student.name}
-                                className={styles.studentAvatar}
-                            />
-                            <div className={styles.studentInfo}>
-                                <span className={styles.studentName} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>{student.name}</span>
-                                <span className={styles.studentEmail}>{student.email}</span>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p className={styles.noStudents}>No students enrolled in this course</p>
-            )}
         </div>
     );
 };
+

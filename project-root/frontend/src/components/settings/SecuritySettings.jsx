@@ -90,7 +90,7 @@ const SecuritySettings = () => {
                 </span>
               </span>
                         <button onClick={() => terminateSession("iPhone 12")}>
-                            Terminate
+                            Disattiva
                         </button>
                     </li>
                     <li className={styles.sessionItem}>

@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     overflow: visible;
+    width: 100%;
     position: relative;
 }
 
@@ -225,7 +226,6 @@
 .dropdownMenu button.deleteButton:hover {
     background-color: #fff5f5;
 }
-
 
 .menuButton {
     background: none;

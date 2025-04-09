@@ -2,7 +2,7 @@ import {createContext, useEffect, useState} from "react";
 import axiosInstance from "../utils/axiosConfig";
 import axios from "axios";
 
-export const GlobalContext = createContext(undefined, undefined);
+export const GlobalContext = createContext(undefined);
 
 export default function GlobalProvider({ children }) {
     const [selectedComponent, setSelectedComponent] = useState("home");
