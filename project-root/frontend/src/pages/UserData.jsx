@@ -207,10 +207,6 @@ export default function UserData() {
                     className={styles.editButton}
                     onClick={toggleEditMode}
                     disabled={loading}
-                    style={{
-                        backgroundColor: isEditing ? "#4CAF50" : "#4a90e2",
-                        opacity: loading ? 0.7 : 1
-                    }}
                 >
                     {isEditing ? "Salva" : "Modifica"}
                 </button>

@@ -85,17 +85,8 @@ export default function Courses() {
         }
     };
 
-// Keep the existing imports and functionality
-// Only updating the JSX structure for better layout
-
-// Keep the existing imports and functionality
-// Only updating the JSX structure to fix the right edge overflow
-
     return (
-        <div className={styles.coursesContainer} style={{
-            backgroundColor: theme === "Dark" ? "#1a1a1a" : "#ffffff",
-            overflowX: "hidden" // Prevent horizontal overflow
-        }}>
+        <div className={styles.coursesContainer} style={{backgroundColor: theme === "Dark" ? "#1a1a1a" : "#ffffff"}}>
             <h2 style={{
                 color: theme === "Dark" ? "#ffffff" : "#333333",
                 marginBottom: "20px",
@@ -106,15 +97,8 @@ export default function Courses() {
                 My Courses
             </h2>
 
-            <div className={styles.searchBarContainer} style={{
-                backgroundColor: theme === "Dark" ? "#2d2d2d" : "#f5f5f5",
-                width: "100%",
-                boxSizing: "border-box"
-            }}>
-                <div className={styles.searchInputWrapper} style={{
-                    backgroundColor: theme === "Dark" ? "#3d3d3d" : "#ffffff",
-                    flex: "1 1 auto"
-                }}>
+            <div className={styles.searchBarContainer} style={{backgroundColor: theme === "Dark" ? "#2d2d2d" : "#f5f5f5"}}>
+                <div className={styles.searchInputWrapper} style={{backgroundColor: theme === "Dark" ? "#3d3d3d" : "#ffffff"}}>
                     <FaSearch className={styles.searchIcon} style={{ color: theme === "Dark" ? "#aaaaaa" : "#666666" }} />
                     <input
                         type="text"
@@ -139,7 +123,7 @@ export default function Courses() {
                             className={styles.viewToggleBtn}
                             onClick={() => setIsAddModalOpen(true)}
                             title="Add new course"
-                            style={{ backgroundColor: "#4CAF50" }}
+                            style={{ backgroundColor: "#636363" }}
                         >
                             <FaPlus />
                         </button>
@@ -160,10 +144,7 @@ export default function Courses() {
                     {searchQuery ? "No courses match your search" : "No courses found"}
                 </div>
             ) : (
-                <div className={`${styles.coursesList} ${styles[viewMode]}`} style={{
-                    width: "100%",
-                    boxSizing: "border-box"
-                }}>
+                <div className={`${styles.coursesList} ${styles[viewMode]}`}>
                     {filteredCourses.map(course => (
                         <Course
                             key={course.id}
@@ -179,7 +160,6 @@ export default function Courses() {
                     ))}
                 </div>
             )}
-            {/* Add Course Modal */}
             <Modal
                 isOpen={isAddModalOpen}
                 onClose={() => setIsAddModalOpen(false)}
@@ -214,7 +194,7 @@ export default function Courses() {
                         <input
                             type="color"
                             id="courseColor"
-                            value={newCourse.color.startsWith('rgba') ? '#00aaff' : newCourse.color}
+                            value={newCourse.color}
                             onChange={handleColorChange}
                         />
                     </div>

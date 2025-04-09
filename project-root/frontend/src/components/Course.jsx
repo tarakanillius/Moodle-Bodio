@@ -58,16 +58,16 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                 <div className={styles.courseInfoList}>
                     <h2 className={styles.courseNameList} style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>{name}</h2>
                     <div className={styles.courseStats}>
-                        <span className={styles.teacherCount}>
+                        <div className={styles.teacherCount}>
                             <FaChalkboardTeacher className={styles.icon}/>
                             {teachers && teachers.length > 0
                                 ? `${teachers.length} instructor${teachers.length > 1 ? 's' : ''}`
                                 : 'No instructor'}
-                        </span>
-                            <span className={styles.studentCount}>
+                        </div>
+                            <div className={styles.studentCount}>
                             <FaUsers className={styles.icon}/>
                                 {students} student{students !== 1 ? 's' : ''}
-                        </span>
+                        </div>
                     </div>
                     <p className={styles.courseDescriptionList} style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>{description}</p>
                 </div>

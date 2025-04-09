@@ -22,7 +22,7 @@ export default function Home() {
         if (loading) return <div className={styles.loading_message}>Loading courses...</div>;
         if (error) return <div className={styles.error_message}>{error}</div>;
         if (!courses || courses.length === 0) return <div className={styles.empty_message}>No courses found</div>;
-        const recentCourses = courses.slice(0, 5);
+        const recentCourses = courses.slice(0, 3);
 
         return (
             <div className={`${courseStyles['grid']}`}>

@@ -1,7 +1,7 @@
 .userDataContainer {
     height: calc(100vh - 40px);
     width: 100%;
-    background: #ffffff;
+    background-color: red;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 30px;
@@ -39,7 +39,7 @@
     transition: opacity 0.3s, transform 0.3s;
     transform: scale(0.98);
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: red;
     border-radius: 10px;
     overflow: hidden;
     width: 100%;
@@ -50,7 +50,7 @@
 .data.editable {
     opacity: 1;
     transform: scale(1);
-    background-color: #f0f7ff;
+    background-color: red;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -73,7 +73,7 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 16px;
-    background-color: #ffffff;
+    background-color: red;
     transition: all 0.3s ease;
     box-sizing: border-box;
 }
@@ -85,14 +85,19 @@
 }
 
 .data input:disabled, .data select:disabled {
-    background-color: #f2f2f2;
+    background-color: red;
     cursor: not-allowed;
     border-color: #e0e0e0;
     color: #777;
 }
+.buttonContainer {
+    display: flex;
+    gap: 15px;
+}
+
 
 .editButton {
-    background-color: #4a90e2;
+    background-color: #636363;
     margin-top: 25px;
     color: white;
     padding: 12px 20px;
@@ -106,7 +111,7 @@
 }
 
 .editButton:hover {
-    background-color: #3a7bc8;
+    opacity: 0.9;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -115,31 +120,24 @@
     transform: translateY(0);
 }
 
-.passwordContainer {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 100%;
-}
-
-.passwordContainer input {
-    flex: 1;
-    padding-right: 45px;
-}
-
-.showPasswordBtn {
-    position: absolute;
-    right: 10px;
-    background: none;
+.logoutButton {
+    background-color: #e53e3e;
+    color: white;
+    padding: 12px 20px;
     border: none;
-    color: #666;
+    border-radius: 8px;
     cursor: pointer;
-    padding: 5px;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 25px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.showPasswordBtn:hover {
-    color: #333;
+.logoutButton:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .errorMessage {
@@ -176,31 +174,6 @@
     width: 100%;
     box-sizing: border-box;
     margin-top: 25px;
-}
-
-.buttonContainer {
-    display: flex;
-    gap: 15px;
-}
-
-.logoutButton {
-    background-color: #e53e3e;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 25px;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.logoutButton:hover {
-    background-color: #c53030;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .fieldIcon {
