@@ -7,7 +7,6 @@ import {GlobalContext} from "../../context/GlobalContext";
 
 export default function StudentsTab({ course, onCourseUpdated }) {
     const {textColor, handleUnenrollStudent, user} = useContext(GlobalContext);
-    const [unenrollingStudent, setUnenrollingStudent] = useState(null);
     const [actionStatus, setActionStatus] = useState("");
     const [actionError, setActionError] = useState("");
     const [selectedStudent, setSelectedStudent] = useState(null);
@@ -39,7 +38,6 @@ export default function StudentsTab({ course, onCourseUpdated }) {
             return;
         }
 
-        setUnenrollingStudent(studentId);
         setActionStatus("Unenrolling student...");
         setActionError("");
 
@@ -66,8 +64,6 @@ export default function StudentsTab({ course, onCourseUpdated }) {
         } catch (error) {
             console.error("Error in unenroll handler:", error);
             setActionError("An unexpected error occurred");
-        } finally {
-            setUnenrollingStudent(null);
         }
     };
 
