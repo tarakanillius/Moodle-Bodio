@@ -148,7 +148,7 @@
 }
 
 .primaryButton {
-    background-color: #4a90e2;
+    background-color: #575757;
     color: white;
 }
 
@@ -157,7 +157,7 @@
 }
 
 .primaryButton:disabled {
-    background-color: #a0c3e8;
+    background-color: #474747;
     cursor: not-allowed;
 }
 

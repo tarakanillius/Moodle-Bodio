@@ -9,7 +9,7 @@ import {GlobalContext} from "../context/GlobalContext";
 
 export default function Settings() {
     const [activeTab, setActiveTab] = useState("Generale");
-    const { theme } = useContext(GlobalContext);
+    const { backgroundColor, backgroundColor2, textColor } = useContext(GlobalContext);
 
     const tabs = [
         { id: "Generale", label: "Generale" },
@@ -19,12 +19,12 @@ export default function Settings() {
     ];
 
     return (
-        <div className={styles.settingsWrapper}>
+        <div className={styles.settingsWrapper} style={{ backgroundColor: backgroundColor }}>
             <h2 style={{
-                color: theme === "Dark" ? "#ffffff" : "#333333",
+                color: textColor,
                 marginBottom: "20px",
                 fontSize: "28px",
-                borderBottom: `1px solid ${theme === "Dark" ? "#333333" : "#eaeaea"}`,
+                borderBottom: `1px solid ${backgroundColor2}`,
                 paddingBottom: "15px"
             }}>
                 Impostazioni
@@ -38,7 +38,7 @@ export default function Settings() {
 
             <div className={styles.settingsContent}>
                 <div style={{
-                    backgroundColor: theme === "Dark" ? "#000000" : "#ffffff",
+                    backgroundColor: backgroundColor,
                     borderRadius: "12px",
                     padding: "20px",
                     marginTop: "20px",

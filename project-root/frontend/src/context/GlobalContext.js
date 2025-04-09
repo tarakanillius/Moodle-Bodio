@@ -8,6 +8,9 @@ export default function GlobalProvider({ children }) {
     const [selectedComponent, setSelectedComponent] = useState("home");
     const [selectedCourseId, setSelectedCourseId] = useState(null);
     const [theme, setTheme] = useState("Light");
+    const backgroundColor = theme === "Dark" ? "#1a1a1a" : "#ffffff";
+    const backgroundColor2 = theme === "Dark" ? "#393939" : "#f4f4f4";
+    const textColor = theme === "Dark" ? "#ffffff" : "#000000";
     const [language, setLanguage] = useState("English");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -218,6 +221,7 @@ export default function GlobalProvider({ children }) {
                 gender: userGender || "male",
             });
         }
+        setTheme(localStorage.getItem("theme"));
     }, []);
 
     useEffect(() => {
@@ -266,7 +270,10 @@ export default function GlobalProvider({ children }) {
             getCourse,
             updateCourse,
             refreshCourses,
-            handleUnenrollStudent
+            handleUnenrollStudent,
+            backgroundColor,
+            backgroundColor2,
+            textColor
         }}>
             {children}
         </GlobalContext.Provider>

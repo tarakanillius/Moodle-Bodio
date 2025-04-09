@@ -1,14 +1,15 @@
-import React, {useState, useContext, useEffect, useRef} from 'react';
+import React, {useState, useContext} from 'react';
 import { FaFile, FaEdit, FaTrash, FaPlus, FaCheck, FaRegCircle, FaFileAlt, FaBrain } from 'react-icons/fa';
 import styles from "../../styles/courseDetail.module.css";
 import modalStyles from "../../styles/modal.module.css";
 import {GlobalContext} from "../../context/GlobalContext";
 import Modal from "../Modal";
+import Dropdown from "../Dropdown";
 import axiosInstance from "../../utils/axiosConfig";
 
 export default function SectionsTab({course, activeSection, setActiveSection, userRole, completedSections, toggleSectionCompletion}){
     const currentSection = course.sections.find(section => section.id === activeSection);
-    const {theme, BACKEND_URL} = useContext(GlobalContext);
+    const {backgroundColor, backgroundColor2, textColor, BACKEND_URL} = useContext(GlobalContext);
     const [isAddSectionModalOpen, setIsAddSectionModalOpen] = useState(false);
     const [newSectionName, setNewSectionName] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,20 +18,6 @@ export default function SectionsTab({course, activeSection, setActiveSection, us
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadProgress, setUploadProgress] = useState(0);
     const [dropDownActive, setDropDownActive] = useState(false);
-    const dropdownRef = useRef(null);
-
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setDropDownActive(false);
-            }
-        }
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [dropdownRef]);
 
     const handleAddSection = async (e) => {
         e.preventDefault();
@@ -96,10 +83,25 @@ export default function SectionsTab({course, activeSection, setActiveSection, us
         }
     };
 
+    const addContentItems = [
+        {
+            icon: <FaBrain />,
+            label: "Add Quiz",
+            onClick: () => {
+
+            }
+        },
+        {
+            icon: <FaFileAlt />,
+            label: "Upload File",
+            onClick: () => setIsAddFileModalOpen(true)
+        }
+    ];
+
     return (
-        <div className={styles.courseContent} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
+        <div className={styles.courseContent} style={{ backgroundColor: backgroundColor }}>
             <div className={styles.sectionsSidebar}>
-                <h2 className={styles.sidebarTitle} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Sections</h2>
+                <h2 className={styles.sidebarTitle} style={{ color: textColor }}>Sections</h2>
                 {userRole === "teacher" && (
                     <button
                         className={styles.addSectionButton}
@@ -115,6 +117,7 @@ export default function SectionsTab({course, activeSection, setActiveSection, us
                                 key={section.id}
                                 className={`${styles.sectionItem} ${section.id === activeSection ? styles.activeSection : ''}`}
                                 onClick={() => setActiveSection(section.id)}
+                                style={{color: textColor, backgroundColor: backgroundColor2}}
                             >
                                 {userRole === "student" && (
                                     <span
@@ -149,80 +152,43 @@ export default function SectionsTab({course, activeSection, setActiveSection, us
                     <>
                         <div className={styles.sectionHeader} style={{
                             position: 'relative',
-                            color: theme === "Dark" ? "#ffffff" : "#000000"
+                            color: textColor
                         }}>
                             <h2 className={styles.sectionTitle}
-                                style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>
+                                style={{color: textColor}}>
                                 {currentSection.name}
                             </h2>
                             {userRole === "teacher" && (
-                                <div className={styles.dropdownContainer} ref={dropdownRef}>
-                                    <button
-                                        className={styles.addFileButton}
-                                        onClick={() => setDropDownActive(!dropDownActive)}
-                                    >
-                                        <FaPlus/> Add Content
-                                    </button>
-                                    {dropDownActive && (
-                                        <div className={styles.dropdownMenu} style={{
-                                            position: 'absolute',
-                                            right: '0',
-                                            top: '100%',
-                                            zIndex: '1000',
-                                            backgroundColor: theme === "Dark" ? "#2d2d2d" : "#ffffff",
-                                            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-                                            borderRadius: '4px',
-                                            border: `1px solid ${theme === "Dark" ? "#444444" : "#e2e8f0"}`,
-                                            minWidth: '160px'
-                                        }}>
-                                            <button
-                                                className={styles.dropdownItem}
-                                                onClick={() => {
-                                                    setDropDownActive(false);
-                                                }}
-                                            >
-                                                <FaBrain/> Add Quiz
-                                            </button>
-                                            <button
-                                                className={styles.dropdownItem}
-                                                onClick={() => {
-                                                    setIsAddFileModalOpen(true);
-                                                    setDropDownActive(false);
-                                                }}
-                                            >
-                                                <FaFileAlt/> Upload File
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-
+                                <Dropdown
+                                    trigger={
+                                        <button className={styles.addFileButton}>
+                                            <FaPlus/> Add Content
+                                        </button>
+                                    }
+                                    isOpen={dropDownActive}
+                                    setIsOpen={setDropDownActive}
+                                    items={addContentItems}
+                                    backgroundColor={backgroundColor2}
+                                    borderColor={backgroundColor}
+                                />
                             )}
                         </div>
-                        <div className={styles.sectionFiles}>
-                            <h3 className={styles.filesTitle}
-                                style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>Files</h3>
+                        <div className={styles.sectionData}>
+                            <h3 className={styles.dataTitle}
+                                style={{color: textColor}}>Content</h3>
                             {currentSection.files && currentSection.files.length > 0 ? (
                                 <ul className={styles.filesList}>
-                                {currentSection.files.map((file, index) => (
+                                    {currentSection.files.map((file, index) => (
                                         <li key={index} className={styles.fileItem}>
-                                            <FaFile className={styles.fileIcon}/>
-                                            <a
-                                                href={file.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={styles.fileLink}
-                                            >
+                                            <FaFile className={styles.fileIcon} style={{color: textColor}}/>
+                                            <a href={file.url} target="_blank" rel="noopener noreferrer" className={styles.fileLink} style={{color: textColor}}>
                                                 {file.name}
                                             </a>
-                                            {userRole === "teacher" && (
-                                                <FaTrash className={styles.deleteFileIcon}/>
-                                            )}
+                                            {userRole === "teacher" && (<FaTrash className={styles.deleteFileIcon}/>)}
                                         </li>
                                     ))}
                                 </ul>
-                            ) : (
-                                <p className={styles.noFiles}>No files in this section</p>
-                            )}
+                            ) : (<p className={styles.noFiles}>No files in this section</p>)}
                         </div>
                     </>
                 ) : (
@@ -236,7 +202,6 @@ export default function SectionsTab({course, activeSection, setActiveSection, us
                 isOpen={isAddSectionModalOpen}
                 onClose={() => setIsAddSectionModalOpen(false)}
                 title="Add New Section"
-                theme={theme}
             >
                 <form onSubmit={handleAddSection}>
                     <div className={modalStyles.formGroup}>
@@ -280,7 +245,6 @@ export default function SectionsTab({course, activeSection, setActiveSection, us
                 isOpen={isAddFileModalOpen}
                 onClose={() => setIsAddFileModalOpen(false)}
                 title="Upload File"
-                theme={theme}
             >
                 <form onSubmit={handleFileUpload}>
                     <div className={modalStyles.formGroup}>

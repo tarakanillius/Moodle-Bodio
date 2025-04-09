@@ -8,7 +8,7 @@ import 'react-calendar/dist/Calendar.css';
 
 export default function Home() {
     const [date, setDate] = useState(new Date());
-    const {courses, loading, error, fetchCourses, theme} = useContext(GlobalContext);
+    const {courses, loading, error, fetchCourses, backgroundColor, backgroundColor2, textColor} = useContext(GlobalContext);
 
     useEffect(() => {
         fetchCourses();
@@ -44,33 +44,28 @@ export default function Home() {
     };
 
     return (
-        <div className={styles.body} style={{ backgroundColor: theme === "Dark" ? "#1a1a1a" : "#ffffff" }}>
+        <div className={styles.body} style={{ backgroundColor: backgroundColor }}>
             <div className={styles.header}>
-                <img
-                    className={styles.logo_ameti}
-                    src="/assets/logo_ameti.jpeg"
-                    alt="AMETI Logo"
-                />
                 <div className={styles.welcome_text}>
-                    <h1 style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>
+                    <h1 style={{ color: textColor }}>
                         Welcome to m0.0dle Learning Platform
                     </h1>
-                    <p style={{ color: theme === "Dark" ? "#bbbbbb" : "#666666" }}>
+                    <p style={{ color: textColor }}>
                         Your personalized learning dashboard
                     </p>
                 </div>
             </div>
 
-            <div className={styles.recent_courses_container} style={{ backgroundColor: theme === "Dark" ? "#2d2d2d" : "#f9f9f9" }}>
+            <div className={styles.recent_courses_container} style={{ backgroundColor: backgroundColor2 }}>
                 <div className={styles.section_header}>
-                    <h3 style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Recently Visited Courses</h3>
+                    <h3 style={{ color: textColor }}>Recently Visited Courses</h3>
                 </div>
                 {renderCoursesContent()}
             </div>
 
-            <div className={styles.calendar_container} style={{ backgroundColor: theme === "Dark" ? "#2d2d2d" : "#f9f9f9" }}>
+            <div className={styles.calendar_container} style={{ backgroundColor: backgroundColor2 }}>
                 <div className={styles.section_header}>
-                    <h3 style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Calendar</h3>
+                    <h3 style={{ color: textColor }}>Calendar</h3>
                 </div>
                 <div className={styles.calendarContainer}>
                     <Calendar

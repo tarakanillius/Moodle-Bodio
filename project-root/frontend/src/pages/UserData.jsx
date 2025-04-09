@@ -6,7 +6,7 @@ import styles from "../styles/userData.module.css";
 
 export default function UserData() {
     const navigate = useNavigate();
-    const { updateUser, clearUser, theme, BACKEND_URL} = useContext(GlobalContext);
+    const { updateUser, clearUser, backgroundColor, backgroundColor2, textColor, BACKEND_URL} = useContext(GlobalContext);
     const [isEditing, setIsEditing] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -99,10 +99,10 @@ export default function UserData() {
     if (loading) return <div className={styles.loadingMessage}>Loading user data...</div>;
 
     return (
-        <div className={styles.userDataContainer} style={{ backgroundColor: theme === "Dark" ? "#1a1a1a" : "#ffffff" }}>
+        <div className={styles.userDataContainer} style={{ backgroundColor: backgroundColor }}>
             <div className={styles.titleContainer}>
-                <h2 style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Il Mio Profilo</h2>
-                <p style={{ color: theme === "Dark" ? "#bbbbbb" : "#666666" }}>
+                <h2 style={{ color: textColor }}>Il Mio Profilo</h2>
+                <p style={{ color: textColor }}>
                     Modifica le tue informazioni personali.
                 </p>
             </div>
@@ -111,9 +111,9 @@ export default function UserData() {
             {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
 
             <div className={`${styles.data} ${isEditing ? styles.editable : ""}`}
-                 style={{ backgroundColor: theme === "Dark" ? "#2d2d2d" : isEditing ? "#f0f7ff" : "#f9f9f9" }}>
+                 style={{ backgroundColor: backgroundColor2 }}>
                 <div className={styles.fieldGroup}>
-                    <label style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Nome:</label>
+                    <label style={{ color: textColor }}>Nome:</label>
                     <input
                         type="text"
                         name="name"
@@ -121,17 +121,15 @@ export default function UserData() {
                         onChange={handleChange}
                         disabled={!isEditing}
                         style={{
-                            backgroundColor: theme === "Dark"
-                                ? (isEditing ? "#3d3d3d" : "#2d2d2d")
-                                : (isEditing ? "#ffffff" : "#f2f2f2"),
-                            color: theme === "Dark" ? "#ffffff" : "#333333",
-                            borderColor: theme === "Dark" ? "#555555" : "#dddddd"
+                            backgroundColor: backgroundColor2,
+                            color: textColor,
+                            borderColor: backgroundColor
                         }}
                     />
                 </div>
 
                 <div className={styles.fieldGroup}>
-                    <label style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Cognome:</label>
+                    <label style={{ color: textColor }}>Cognome:</label>
                     <input
                         type="text"
                         name="surname"
@@ -139,28 +137,24 @@ export default function UserData() {
                         onChange={handleChange}
                         disabled={!isEditing}
                         style={{
-                            backgroundColor: theme === "Dark"
-                                ? (isEditing ? "#3d3d3d" : "#2d2d2d")
-                                : (isEditing ? "#ffffff" : "#f2f2f2"),
-                            color: theme === "Dark" ? "#ffffff" : "#333333",
-                            borderColor: theme === "Dark" ? "#555555" : "#dddddd"
+                            backgroundColor: backgroundColor2,
+                            color: textColor,
+                            borderColor: backgroundColor
                         }}
                     />
                 </div>
 
                 <div className={styles.fieldGroup}>
-                    <label style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Genere:</label>
+                    <label style={{ color: textColor }}>Genere:</label>
                     <select
                         name="gender"
                         value={userData.gender}
                         onChange={handleChange}
                         disabled={!isEditing}
                         style={{
-                            backgroundColor: theme === "Dark"
-                                ? (isEditing ? "#3d3d3d" : "#2d2d2d")
-                                : (isEditing ? "#ffffff" : "#f2f2f2"),
-                            color: theme === "Dark" ? "#ffffff" : "#333333",
-                            borderColor: theme === "Dark" ? "#555555" : "#dddddd"
+                            backgroundColor: backgroundColor2,
+                            color: textColor,
+                            borderColor: backgroundColor
                         }}
                     >
                         <option value="male">Maschio</option>
@@ -170,7 +164,7 @@ export default function UserData() {
                 </div>
 
                 <div className={styles.fieldGroup}>
-                    <label style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Data di nascita:</label>
+                    <label style={{ color: textColor }}>Data di nascita:</label>
                     <input
                         type="date"
                         name="birthDate"
@@ -178,25 +172,23 @@ export default function UserData() {
                         onChange={handleChange}
                         disabled={!isEditing}
                         style={{
-                            backgroundColor: theme === "Dark"
-                                ? (isEditing ? "#3d3d3d" : "#2d2d2d")
-                                : (isEditing ? "#ffffff" : "#f2f2f2"),
-                            color: theme === "Dark" ? "#ffffff" : "#333333",
-                            borderColor: theme === "Dark" ? "#555555" : "#dddddd"
+                            backgroundColor: backgroundColor2,
+                            color: textColor,
+                            borderColor: backgroundColor
                         }}
                     />
                 </div>
 
                 <div className={styles.fieldGroup}>
-                    <label style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}>Ruolo:</label>
+                    <label style={{ color: textColor }}>Ruolo:</label>
                     <input
                         type="text"
                         value={userData.role}
                         disabled
                         style={{
-                            backgroundColor: theme === "Dark" ? "#2d2d2d" : "#f2f2f2",
-                            color: theme === "Dark" ? "#bbbbbb" : "#777777",
-                            borderColor: theme === "Dark" ? "#555555" : "#dddddd"
+                            backgroundColor: backgroundColor2,
+                            color: textColor,
+                            borderColor: backgroundColor
                         }}
                     />
                 </div>

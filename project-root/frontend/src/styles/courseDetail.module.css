@@ -1,11 +1,17 @@
 .courseDetailContainer {
-    height: 100%;
+    height: calc(100vh - 40px);
     width: 100%;
     background: #ffffff;
     overflow-y: auto;
-    max-height: 100vh;
-    margin: 10px;
-    gap: 10px;
+    overflow-x: hidden;
+    padding: 30px;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
 }
 
 .courseHeader {
@@ -199,7 +205,7 @@
     background-color: #b6b6b6;
 }
 
-.filesTitle {
+.dataTitle {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
@@ -561,102 +567,4 @@
     padding: 10px;
     border-radius: 4px;
     margin-bottom: 16px;
-}
-
-.modalContent {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    min-width: 30%;
-    margin: 30px auto;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.modalBody {
-    max-height: 60%;
-    text-align: left;
-    color: #333333;
-    font-size: 16px;
-    margin: 10px;
-}
-
-.modalBody button {
-    padding: 4px 8px;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.modalBody button:hover {
-    background-color: #0056b3;
-}
-
-
-.modalHeader {
-    border-bottom: 2px solid #f0f0f0;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333333;
-    max-height: 15%;
-}
-
-.modalFooter {
-    border-top: 2px solid #f0f0f0;
-    padding-top: 15px;
-    display: flex;
-    justify-content: flex-end;
-    max-height: 25%;
-}
-
-.modalFooter button {
-    padding: 8px 15px;
-    border-radius: 5px;
-    margin: 5px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.modalFooter button:hover {
-    background-color: #0056b3;
-}
-
-
-.dropdownMenu button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    text-align: left;
-    padding: 10px 15px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 14px;
-    color: #4a5568;
-    transition: background-color 0.2s;
-}
-
-.dropdownMenu button:hover {
-    background-color: #f7fafc;
-}
-
-.dropdownMenu button.deleteButton {
-    color: #e53e3e;
-}
-
-.dropdownMenu button.deleteButton:hover {
-    background-color: #fff5f5;
 }

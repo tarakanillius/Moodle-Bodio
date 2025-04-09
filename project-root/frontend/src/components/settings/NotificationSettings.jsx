@@ -3,13 +3,13 @@ import { GlobalContext } from "../../context/GlobalContext";
 import styles from "../../styles/settings.module.css";
 
 const NotificationSettings = () => {
-    const {notifications, handleNotificationChange, saveStatus, handleSave, theme} = useContext(GlobalContext);
+    const {notifications, handleNotificationChange, saveStatus, handleSave, backgroundColor, backgroundColor2, textColor,} = useContext(GlobalContext);
 
     return (
-        <div className={styles.settingsSection}>
-            <h2 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Impostazioni notifiche</h2>
-            <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
+        <div className={styles.settingsSection} style={{ backgroundColor: backgroundColor }}>
+            <h2 style={{ color: textColor }}>Impostazioni notifiche</h2>
+            <div className={styles.settingItem} style={{ backgroundColor: backgroundColor2 }}>
+                <label className={styles.checkboxLabel} style={{ color: textColor }}>
                     <input
                         type="checkbox"
                         checked={notifications.messages}
@@ -18,8 +18,8 @@ const NotificationSettings = () => {
                     Nuovi messaggi
                 </label>
             </div>
-            <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
+            <div className={styles.settingItem} style={{ backgroundColor: backgroundColor2 }}>
+                <label className={styles.checkboxLabel} style={{ color: textColor }}>
                     <input
                         type="checkbox"
                         checked={notifications.courseUpdates}
@@ -28,8 +28,8 @@ const NotificationSettings = () => {
                     Aggiornamenti corsi
                 </label>
             </div>
-            <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
+            <div className={styles.settingItem} style={{ backgroundColor: backgroundColor2 }}>
+                <label className={styles.checkboxLabel} style={{ color: textColor }}>
                     <input
                         type="checkbox"
                         checked={notifications.assignments}
@@ -38,8 +38,8 @@ const NotificationSettings = () => {
                     Allerta nuove notifiche
                 </label>
             </div>
-            <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
+            <div className={styles.settingItem} style={{ backgroundColor: backgroundColor2 }}>
+                <label className={styles.checkboxLabel} style={{ color: textColor }}>
                     <input
                         type="checkbox"
                         checked={notifications.announcements}
@@ -48,8 +48,8 @@ const NotificationSettings = () => {
                     Annunci
                 </label>
             </div>
-            <div className={styles.settingItem}>
-                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Metodo di notificazione</label>
+            <div className={styles.settingItem} style={{ backgroundColor: backgroundColor2 }}>
+                <label style={{ color: textColor }}>Metodo di notificazione</label>
                 <select>
                     <option>Email & In-App</option>
                     <option>Email</option>

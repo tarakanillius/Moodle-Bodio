@@ -3,13 +3,13 @@ import { GlobalContext } from "../../context/GlobalContext";
 import styles from "../../styles/settings.module.css";
 
 const PrivacySettings = () => {
-    const {privacySettings, handlePrivacyChange, saveStatus, handleSave, theme} = useContext(GlobalContext);
+    const {privacySettings, handlePrivacyChange, saveStatus, handleSave, backgroundColor, backgroundColor2, textColor} = useContext(GlobalContext);
 
     return (
-        <div className={styles.settingsSection}>
-            <h2 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Privacy Settings</h2>
-            <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
+        <div className={styles.settingsSection} style={{ backgroundColor: backgroundColor }}>
+            <h2 style={{ color: textColor }}>Privacy Settings</h2>
+            <div className={styles.settingItem} style={{ backgroundColor: backgroundColor2 }}>
+                <label className={styles.checkboxLabel} style={{ color: textColor }}>
                     <input
                         type="checkbox"
                         checked={privacySettings.profileVisible}
@@ -18,8 +18,8 @@ const PrivacySettings = () => {
                     Consentire che il profilo sia visibile ad altri utenti
                 </label>
             </div>
-            <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
+            <div className={styles.settingItem} style={{ backgroundColor: backgroundColor2 }}>
+                <label className={styles.checkboxLabel} style={{ color: textColor }}>
                     <input
                         type="checkbox"
                         checked={privacySettings.showOnlineStatus}
@@ -28,8 +28,8 @@ const PrivacySettings = () => {
                     Mostra stato online
                 </label>
             </div>
-            <div className={styles.settingItem}>
-                <label className={styles.checkboxLabel} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>
+            <div className={styles.settingItem} style={{ backgroundColor: backgroundColor2 }}>
+                <label className={styles.checkboxLabel} style={{ color: textColor }}>
                     <input
                         type="checkbox"
                         checked={privacySettings.allowDataCollection}
@@ -38,8 +38,8 @@ const PrivacySettings = () => {
                     Consentire la raccolta di dati per il miglioramento del servizio
                 </label>
             </div>
-            <div className={styles.settingItem}>
-                <label style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Condivisione dati</label>
+            <div className={styles.settingItem} style={{ backgroundColor: backgroundColor2 }}>
+                <label style={{ color: textColor }}>Condivisione dati</label>
                 <select
                     value={privacySettings.dataSharing}
                     onChange={(e) => handlePrivacyChange("dataSharing", e.target.value)}

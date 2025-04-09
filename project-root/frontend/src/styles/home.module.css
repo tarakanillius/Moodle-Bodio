@@ -14,12 +14,6 @@
     flex-direction: column;
 }
 
-.logo_ameti {
-    height: 80px;
-    width: auto;
-    margin-right: 20px;
-}
-
 .header {
     width: 100%;
     display: flex;

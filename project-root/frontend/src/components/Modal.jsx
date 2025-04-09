@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from '../styles/modal.module.css';
+import {GlobalContext} from "../context/GlobalContext";
 
-export default function Modal({ isOpen, onClose, title, children, theme = "Light" }) {
+export default function Modal({ isOpen, onClose, title, children }) {
+    const {backgroundColor, textColor} = useContext(GlobalContext);
     if (!isOpen) return null;
+
 
     return (
         <div className={styles.modalOverlay} onClick={onClose}>
@@ -10,8 +13,8 @@ export default function Modal({ isOpen, onClose, title, children, theme = "Light
                 className={styles.modalContent}
                 onClick={e => e.stopPropagation()}
                 style={{
-                    backgroundColor: theme === "Dark" ? "#333" : "#fff",
-                    color: theme === "Dark" ? "#fff" : "#333"
+                    backgroundColor: backgroundColor,
+                    color: textColor
                 }}
             >
                 <div className={styles.modalHeader}>

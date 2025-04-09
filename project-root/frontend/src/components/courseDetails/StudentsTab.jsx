@@ -4,10 +4,9 @@ import getAvatarImage from "../../utils/getAvatar";
 import styles from "../../styles/courseDetail.module.css";
 import modalStyles from "../../styles/modal.module.css";
 import {GlobalContext} from "../../context/GlobalContext";
-import { FaUserMinus } from 'react-icons/fa';
 
 export default function StudentsTab({ course, onCourseUpdated }) {
-    const {theme, handleUnenrollStudent, user} = useContext(GlobalContext);
+    const {textColor, handleUnenrollStudent, user} = useContext(GlobalContext);
     const [unenrollingStudent, setUnenrollingStudent] = useState(null);
     const [actionStatus, setActionStatus] = useState("");
     const [actionError, setActionError] = useState("");
@@ -74,13 +73,14 @@ export default function StudentsTab({ course, onCourseUpdated }) {
 
     return (
         <div className={styles.studentsContainer}>
-            <h2 className={styles.studentsTitle}>Enrolled Students</h2>
+            <h2 className={styles.studentsTitle} style={{ color: textColor }}>Enrolled Students</h2>
             <ul className={styles.studentsList}>
                 {course.students.map((student) => (
                     <li
                         key={student.id}
                         className={styles.studentItem}
                         onClick={() => handleShow(student)}
+                        style={{ color: textColor }}
                     >
                         <img
                             src={getAvatarImage("student", student.gender || "male")}

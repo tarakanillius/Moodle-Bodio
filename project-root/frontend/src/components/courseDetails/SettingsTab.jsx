@@ -5,7 +5,7 @@ import axios from 'axios';
 import styles from "../../styles/courseDetail.module.css";
 
 export default function SettingsTab({ course, userRole, onCourseUpdated }) {
-    const { updateCourse, refreshCourses, theme, BACKEND_URL } = useContext(GlobalContext);
+    const { updateCourse, refreshCourses, backgroundColor, textColor, BACKEND_URL } = useContext(GlobalContext);
     const [saving, setSaving] = useState(false);
     const [saveMessage, setSaveMessage] = useState("");
     const [saveError, setSaveError] = useState("");
@@ -94,11 +94,11 @@ export default function SettingsTab({ course, userRole, onCourseUpdated }) {
     };
 
     return (
-        <div className={styles.settingsContainer} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
-            <h2 className={styles.settingsTitle} style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Course Settings</h2>
+        <div className={styles.settingsContainer} style={{ backgroundColor: backgroundColor }}>
+            <h2 className={styles.settingsTitle} style={{ color: textColor }}>Course Settings</h2>
             <div className={styles.settingsForm}>
                 <div className={styles.formGroup}>
-                    <label htmlFor="courseName" style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Course Name</label>
+                    <label htmlFor="courseName" style={{ color: textColor }}>Course Name</label>
                     <input
                         type="text"
                         id="courseName"
@@ -109,7 +109,7 @@ export default function SettingsTab({ course, userRole, onCourseUpdated }) {
                     />
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="courseDescription" style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Description</label>
+                    <label htmlFor="courseDescription" style={{ color: textColor }}>Description</label>
                     <textarea
                         id="courseDescription"
                         name="description"
@@ -130,10 +130,10 @@ export default function SettingsTab({ course, userRole, onCourseUpdated }) {
                     </div>
                 )}
                     <div className={styles.enrollForm}>
-                        <h3 style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Enroll Student</h3>
+                        <h3 style={{ color: textColor }}>Enroll Student</h3>
                         <form onSubmit={handleEnrollStudent}>
                             <div className={styles.formGroup}>
-                                <label htmlFor="studentEmail" style={{ color: theme === "Dark" ? "#ffffff" : "#000000" }}>Student Email</label>
+                                <label htmlFor="studentEmail" style={{ color:textColor }}>Student Email</label>
                                 <input
                                     type="email"
                                     id="studentEmail"

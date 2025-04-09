@@ -10,7 +10,7 @@ import axiosInstance from "../utils/axiosConfig";
 export default function Courses() {
     const [viewMode, setViewMode] = useState('grid');
     const [searchQuery, setSearchQuery] = useState('');
-    const {courses, filteredCourses, setFilteredCourses, loading, error, fetchCourses, theme, user, BACKEND_URL} = useContext(GlobalContext);
+    const {courses, filteredCourses, setFilteredCourses, loading, error, fetchCourses, backgroundColor, backgroundColor2, textColor, user, BACKEND_URL} = useContext(GlobalContext);
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const canAddCourse = user && user.role === 'teacher';
     const [newCourse, setNewCourse] = useState({
@@ -86,9 +86,9 @@ export default function Courses() {
     };
 
     return (
-        <div className={styles.coursesContainer} style={{backgroundColor: theme === "Dark" ? "#1a1a1a" : "#ffffff"}}>
+        <div className={styles.coursesContainer} style={{backgroundColor: backgroundColor}}>
             <h2 style={{
-                color: theme === "Dark" ? "#ffffff" : "#333333",
+                color: textColor,
                 marginBottom: "20px",
                 fontSize: "28px",
                 width: "100%",
@@ -97,16 +97,16 @@ export default function Courses() {
                 My Courses
             </h2>
 
-            <div className={styles.searchBarContainer} style={{backgroundColor: theme === "Dark" ? "#2d2d2d" : "#f5f5f5"}}>
-                <div className={styles.searchInputWrapper} style={{backgroundColor: theme === "Dark" ? "#3d3d3d" : "#ffffff"}}>
-                    <FaSearch className={styles.searchIcon} style={{ color: theme === "Dark" ? "#aaaaaa" : "#666666" }} />
+            <div className={styles.searchBarContainer} style={{backgroundColor: backgroundColor2}}>
+                <div className={styles.searchInputWrapper} style={{backgroundColor: backgroundColor}}>
+                    <FaSearch className={styles.searchIcon} style={{ color: textColor}} />
                     <input
                         type="text"
                         placeholder="Search courses..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className={styles.searchInput}
-                        style={{ color: theme === "Dark" ? "#ffffff" : "#333333" }}
+                        style={{ color: textColor}}
                     />
                 </div>
                 <div className={styles.actionButtons}>
@@ -132,7 +132,7 @@ export default function Courses() {
             </div>
 
             {loading ? (
-                <div className={styles.loadingMessage} style={{ color: theme === "Dark" ? "#bbbbbb" : "#666666" }}>
+                <div className={styles.loadingMessage} style={{ color: textColor}}>
                     Loading courses...
                 </div>
             ) : error ? (
@@ -140,7 +140,7 @@ export default function Courses() {
                     {error}
                 </div>
             ) : filteredCourses.length === 0 ? (
-                <div className={styles.noCoursesMessage} style={{ color: theme === "Dark" ? "#bbbbbb" : "#718096" }}>
+                <div className={styles.noCoursesMessage} style={{ color: textColor }}>
                     {searchQuery ? "No courses match your search" : "No courses found"}
                 </div>
             ) : (
@@ -164,7 +164,6 @@ export default function Courses() {
                 isOpen={isAddModalOpen}
                 onClose={() => setIsAddModalOpen(false)}
                 title="Add New Course"
-                theme={theme}
             >
                 <form onSubmit={handleAddCourse}>
                     <div className={modalStyles.formGroup}>

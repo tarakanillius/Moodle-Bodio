@@ -1,36 +1,21 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from "../styles/course.module.css";
 import { FaEllipsisV, FaUsers, FaChalkboardTeacher, FaEdit, FaTrash } from 'react-icons/fa';
 import {GlobalContext} from "../context/GlobalContext";
 import axios from 'axios';
+import Dropdown from './Dropdown';
 
 export default function Course({viewMode = 'grid', name, description, teachers, students, sections, color, courseId }) {
-    const { setSelectedComponent, setSelectedCourseId, refreshCourses, fetchCourses, theme, BACKEND_URL } = useContext(GlobalContext);
+    const { setSelectedComponent, setSelectedCourseId, refreshCourses, fetchCourses, backgroundColor2, textColor, BACKEND_URL } = useContext(GlobalContext);
     const [menuOpen, setMenuOpen] = useState(false);
-    const menuRef = useRef(null);
-
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (menuRef.current && !menuRef.current.contains(event.target)) setMenuOpen(false);
-        }
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, [menuRef]);
 
     const handleViewCourse = () => {
         setSelectedCourseId(courseId);
         setSelectedComponent("course");
     };
 
-    const handleManageCourse = (e) => {
-        e.stopPropagation();
-        setMenuOpen(!menuOpen);
-    };
-
     const handleEditCourse = (e) => {
         e.stopPropagation();
-        setMenuOpen(false);
         setSelectedCourseId(courseId);
         setSelectedComponent("course");
         localStorage.setItem("openCourseTab", "settings");
@@ -38,7 +23,6 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
 
     const handleDeleteCourse = async (e) => {
         e.stopPropagation();
-        setMenuOpen(false);
         if (window.confirm("Are you sure you want to delete this course?")) {
             try {
                 await axios.delete(`${BACKEND_URL}/delete_course/${courseId}`);
@@ -52,11 +36,25 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
         fetchCourses();
     };
 
+    const courseManagementItems = [
+        {
+            icon: <FaEdit />,
+            label: "Edit Course",
+            onClick: handleEditCourse
+        },
+        {
+            icon: <FaTrash />,
+            label: "Delete Course",
+            onClick: handleDeleteCourse,
+            className: styles.deleteButton
+        }
+    ];
+
     if (viewMode === 'list') {
         return (
             <div className={styles.courseCardList} style={{backgroundColor: color}} onClick={handleViewCourse}>
                 <div className={styles.courseInfoList}>
-                    <h2 className={styles.courseNameList} style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>{name}</h2>
+                    <h2 className={styles.courseNameList} style={{color: textColor}}>{name}</h2>
                     <div className={styles.courseStats}>
                         <div className={styles.teacherCount}>
                             <FaChalkboardTeacher className={styles.icon}/>
@@ -64,12 +62,12 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                                 ? `${teachers.length} instructor${teachers.length > 1 ? 's' : ''}`
                                 : 'No instructor'}
                         </div>
-                            <div className={styles.studentCount}>
+                        <div className={styles.studentCount}>
                             <FaUsers className={styles.icon}/>
-                                {students} student{students !== 1 ? 's' : ''}
+                            {students} student{students !== 1 ? 's' : ''}
                         </div>
                     </div>
-                    <p className={styles.courseDescriptionList} style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>{description}</p>
+                    <p className={styles.courseDescriptionList} style={{color: textColor}}>{description}</p>
                 </div>
                 <div className={styles.sectionsListView}>
                     {sections && sections.length > 0 ? sections.map((section, index) => (
@@ -77,21 +75,19 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                     )) : <span className={styles.sectionItem}>No sections</span>}
                 </div>
                 <div className={styles.courseActionsList}>
-                    <div className={styles.menuContainer} ref={menuRef}>
-                        <button className={styles.menuButton} style={{color: theme === "Dark" ? "#ffffff" : "#000000"}} onClick={handleManageCourse}>
-                            <FaEllipsisV/>
-                        </button>
-                        {menuOpen && (
-                            <div className={styles.dropdownMenu}>
-                                <button onClick={handleEditCourse}>
-                                    <FaEdit/> Edit Course
-                                </button>
-                                <button onClick={handleDeleteCourse} className={styles.deleteButton}>
-                                    <FaTrash/> Delete Course
-                                </button>
-                            </div>
-                        )}
-                    </div>
+                    <Dropdown
+                        trigger={
+                            <button
+                                className={styles.menuButton}
+                                style={{color: textColor}}
+                            >
+                                <FaEllipsisV/>
+                            </button>
+                        }
+                        isOpen={menuOpen}
+                        setIsOpen={setMenuOpen}
+                        items={courseManagementItems}
+                    />
                 </div>
             </div>
         );
@@ -100,25 +96,25 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
     return (
         <div className={styles.courseCardGrid} style={{backgroundColor: color}}>
             <div className={styles.courseHeader}>
-                <h2 className={styles.courseName} style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>{name}</h2>
+                <h2 className={styles.courseName} style={{color: textColor}}>{name}</h2>
             </div>
             <div className={styles.courseStats}>
-                        <span className={styles.teacherCount}>
-                            <FaChalkboardTeacher className={styles.icon}/>
-                            {teachers && teachers.length > 0
-                                ? `${teachers.length} instructor${teachers.length > 1 ? 's' : ''}`
-                                : 'No instructor'}
-                        </span>
-                <span className={styles.studentCount}>
-                            <FaUsers className={styles.icon}/>
+                <span className={styles.teacherCount} style={{color: textColor}}>
+                    <FaChalkboardTeacher className={styles.icon}/>
+                    {teachers && teachers.length > 0
+                        ? `${teachers.length} instructor${teachers.length > 1 ? 's' : ''}`
+                        : 'No instructor'}
+                </span>
+                <span className={styles.studentCount} style={{color: textColor}}>
+                    <FaUsers className={styles.icon}/>
                     {students} student{students !== 1 ? 's' : ''}
-                        </span>
+                </span>
             </div>
             <p className={styles.courseDescription}
-               style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>{description}</p>
+               style={{color: textColor}}>{description}</p>
             <div className={styles.courseSections}>
                 <h3 className={styles.sectionTitle}
-                    style={{color: theme === "Dark" ? "#ffffff" : "#000000"}}>Sections:</h3>
+                    style={{color: textColor}}>Sections:</h3>
                 {sections ? (
                     <ul className={styles.sectionsList}>
                         {sections.map((section, index) => (
@@ -130,22 +126,17 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                 )}
             </div>
             <div className={styles.courseFooter}>
-                <button className={styles.viewButton} onClick={handleViewCourse}>Visualizza</button>
-                <div className={styles.menuContainer} ref={menuRef}>
-                    <button className={styles.manageButton} onClick={handleManageCourse}>
-                        Gestisci
-                    </button>
-                    {menuOpen && (
-                        <div className={styles.dropdownMenu}>
-                            <button onClick={handleEditCourse}>
-                                <FaEdit/> Edit Course
-                            </button>
-                            <button onClick={handleDeleteCourse} className={styles.deleteButton}>
-                                <FaTrash/> Delete Course
-                            </button>
-                        </div>
-                    )}
-                </div>
+                <button className={styles.viewButton} onClick={handleViewCourse} style={{backgroundColor: backgroundColor2, color: textColor}}>Visualizza</button>
+                <Dropdown
+                    trigger={
+                        <button className={styles.manageButton}>
+                            Gestisci
+                        </button>
+                    }
+                    isOpen={menuOpen}
+                    setIsOpen={setMenuOpen}
+                    items={courseManagementItems}
+                />
             </div>
         </div>
     );

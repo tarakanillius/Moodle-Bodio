@@ -3,7 +3,7 @@ import styles from "../styles/tabNav.module.css";
 import {GlobalContext} from "../context/GlobalContext";
 
 export default function TabNav({ tabs, activeTab, setActiveTab, className }){
-    const {theme} = useContext(GlobalContext);
+    const {textColor} = useContext(GlobalContext);
 
     return (
         <nav className={`${styles.tabNav} ${className || ''}`}>
@@ -13,7 +13,7 @@ export default function TabNav({ tabs, activeTab, setActiveTab, className }){
                     className={activeTab === tab.id ? styles.active : ""}
                     onClick={() => setActiveTab(tab.id)}
                     disabled={tab.disabled}
-                    style={{ color: theme === "Dark" ? "#ffffff" : "#000000"}}
+                    style={{ color: textColor}}
                 >
                     {tab.label}
                 </button>
