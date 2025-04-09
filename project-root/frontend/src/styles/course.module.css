@@ -12,11 +12,6 @@
     position: relative;
 }
 
-.courseCardGrid:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-}
-
 .courseHeader {
     margin-bottom: 6px;
 }
@@ -91,6 +86,7 @@
     display: flex;
     gap: 5px;
     padding-top: 6px;
+    position: relative;
 }
 
 .viewButton, .manageButton {
@@ -101,6 +97,9 @@
     font-weight: 500;
     transition: background-color 0.2s;
     font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .viewButton {
@@ -135,12 +134,7 @@
     align-items: center;
     gap: 15px;
     cursor: pointer;
-}
-
-.courseCardList:hover {
-    background-color: #f8f9fa;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
 }
 
 .courseInfoList {
@@ -182,4 +176,35 @@
     grid-area: actions;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+
+.menuButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #718096;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    width: 32px;
+    height: 32px;
+}
+
+.menuButton:hover {
+    background-color: #edf2f7;
+    color: #4a5568;
+}
+
+.deleteButton {
+    color: #e53e3e !important;
+}
+
+.deleteButton:hover {
+    background-color: #fff5f5 !important;
 }

@@ -5,6 +5,14 @@ import {GlobalContext} from "../context/GlobalContext";
 import axios from 'axios';
 import Dropdown from './Dropdown';
 
+function hexToRgba(hex, opacity = 0.4) {
+    hex = hex.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+}
+
 export default function Course({viewMode = 'grid', name, description, teachers, students, sections, color, courseId }) {
     const { setSelectedComponent, setSelectedCourseId, refreshCourses, fetchCourses, backgroundColor2, textColor, BACKEND_URL } = useContext(GlobalContext);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -52,17 +60,17 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
 
     if (viewMode === 'list') {
         return (
-            <div className={styles.courseCardList} style={{backgroundColor: color}} onClick={handleViewCourse}>
+            <div className={styles.courseCardList} style={{backgroundColor: hexToRgba(color)}} onClick={handleViewCourse}>
                 <div className={styles.courseInfoList}>
                     <h2 className={styles.courseNameList} style={{color: textColor}}>{name}</h2>
                     <div className={styles.courseStats}>
-                        <div className={styles.teacherCount}>
+                        <div className={styles.teacherCount} style={{color: textColor}}>
                             <FaChalkboardTeacher className={styles.icon}/>
                             {teachers && teachers.length > 0
                                 ? `${teachers.length} instructor${teachers.length > 1 ? 's' : ''}`
                                 : 'No instructor'}
                         </div>
-                        <div className={styles.studentCount}>
+                        <div className={styles.studentCount} style={{color: textColor}}>
                             <FaUsers className={styles.icon}/>
                             {students} student{students !== 1 ? 's' : ''}
                         </div>
@@ -74,19 +82,20 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                         <span key={index} className={styles.sectionItem}>{section}</span>
                     )) : <span className={styles.sectionItem}>No sections</span>}
                 </div>
-                <div className={styles.courseActionsList}>
+                <div
+                    className={styles.courseActionsList}
+                    onClick={(e) => e.stopPropagation()}
+                >
                     <Dropdown
                         trigger={
-                            <button
-                                className={styles.menuButton}
-                                style={{color: textColor}}
-                            >
+                            <button className={styles.menuButton} style={{color: textColor}}>
                                 <FaEllipsisV/>
                             </button>
                         }
                         isOpen={menuOpen}
                         setIsOpen={setMenuOpen}
                         items={courseManagementItems}
+                        borderColor={backgroundColor2}
                     />
                 </div>
             </div>
@@ -94,7 +103,7 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
     }
 
     return (
-        <div className={styles.courseCardGrid} style={{backgroundColor: color}}>
+        <div className={styles.courseCardGrid} style={{backgroundColor: hexToRgba(color)}}>
             <div className={styles.courseHeader}>
                 <h2 className={styles.courseName} style={{color: textColor}}>{name}</h2>
             </div>
@@ -126,7 +135,13 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                 )}
             </div>
             <div className={styles.courseFooter}>
-                <button className={styles.viewButton} onClick={handleViewCourse} style={{backgroundColor: backgroundColor2, color: textColor}}>Visualizza</button>
+                <button
+                    className={styles.viewButton}
+                    onClick={handleViewCourse}
+                    style={{backgroundColor: backgroundColor2, color: textColor}}
+                >
+                    Visualizza
+                </button>
                 <Dropdown
                     trigger={
                         <button className={styles.manageButton}>
@@ -136,6 +151,7 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                     isOpen={menuOpen}
                     setIsOpen={setMenuOpen}
                     items={courseManagementItems}
+                    borderColor={backgroundColor2}
                 />
             </div>
         </div>

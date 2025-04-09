@@ -1,21 +1,24 @@
 .dropdownContainer {
     position: relative;
     display: inline-block;
-    border-radius: 4px;
+    z-index: 1000 !important; /* Very high z-index */
 }
 
 .triggerContainer {
+    border-radius: 4px;
     cursor: pointer;
+    width: fit-content;
 }
 
 .dropdownMenu {
     position: absolute;
     top: 100%;
-    z-index: 1000;
+    z-index: 1001 !important; /* Even higher z-index */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     min-width: 160px;
     margin-top: 5px;
+    background-color: black;
 }
 
 .dropdownItem {
@@ -43,9 +46,9 @@
 }
 
 .dropdownItem.deleteButton {
-    color: #e53e3e;
+    color: #e53e3e !important;
 }
 
 .dropdownItem.deleteButton:hover {
-    background-color: #fff5f5;
+    background-color: #fff5f5 !important;
 }

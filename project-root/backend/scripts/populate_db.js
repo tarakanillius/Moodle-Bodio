@@ -170,7 +170,7 @@ async function populateDatabase() {
                 teacher: teacher1_id,
                 sections: section_ids["M320"],
                 students: getRandomSubset(student_ids, 16),
-                color: "rgba(0, 170, 255, 0.5)",
+                color: "#00aaff",
             },
             {
                 _id: new ObjectId(),
@@ -179,7 +179,7 @@ async function populateDatabase() {
                 teacher: teacher2_id,
                 sections: section_ids["M293"],
                 students: getRandomSubset(student_ids, 8),
-                color: "rgba(120, 255, 0, 0.5)"
+                color: "#78ff00"
             },
             {
                 _id: new ObjectId(),
@@ -188,7 +188,7 @@ async function populateDatabase() {
                 teacher: teacher2_id,
                 sections: section_ids["M426"],
                 students: getRandomSubset(student_ids, 8),
-                color: "rgba(255, 189, 0, 0.5)"
+                color: "#ffbd00"
             },
             {
                 _id: new ObjectId(),
@@ -197,7 +197,7 @@ async function populateDatabase() {
                 teacher: teacher3_id,
                 sections: section_ids["M165"],
                 students: getRandomSubset(student_ids, 8),
-                color: "rgba(166, 0, 255, 0.5)"
+                color: "#a600ff"
             },
             {
                 _id: new ObjectId(),
@@ -206,7 +206,7 @@ async function populateDatabase() {
                 teacher: teacher1_id,
                 sections: section_ids["M322"],
                 students: getRandomSubset(student_ids, 8),
-                color: "rgba(255, 0, 0, 0.5)"
+                color: "#ff0000"
             }
         ];
 
@@ -232,7 +232,7 @@ async function populateDatabase() {
         await db.collection('sections').insertMany(sections_data);
         await db.collection('courses').insertMany(courses_data);
 
-        console.log('Database populated successfully with the new schema.');
+        console.log('Database populated successfully.');
     } catch (error) {
         console.error('Error populating database:', error);
     } finally {

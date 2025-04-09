@@ -140,7 +140,7 @@ export default function Courses() {
                     {error}
                 </div>
             ) : filteredCourses.length === 0 ? (
-                <div className={styles.noCoursesMessage} style={{ color: textColor }}>
+                <div className={styles.noCoursesMessage} style={{ color: textColor, backgroundColor: backgroundColor2}}>
                     {searchQuery ? "No courses match your search" : "No courses found"}
                 </div>
             ) : (
