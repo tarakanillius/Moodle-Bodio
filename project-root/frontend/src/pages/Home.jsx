@@ -25,7 +25,7 @@ export default function Home() {
         const recentCourses = courses.slice(0, 3);
 
         return (
-            <div className={`${courseStyles['grid']}`}>
+            <div className={courseStyles.grid}>
                 {recentCourses.map((course) => (
                     <Course
                         key={course.id}

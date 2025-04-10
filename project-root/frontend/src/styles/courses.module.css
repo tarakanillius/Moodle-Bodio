@@ -91,14 +91,17 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .list {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
 .loadingMessage, .errorMessage, .noCoursesMessage {

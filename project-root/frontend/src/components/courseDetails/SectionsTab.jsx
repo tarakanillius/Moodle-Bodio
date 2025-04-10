@@ -188,7 +188,7 @@ export default function SectionsTab({course, activeSection, setActiveSection, us
                                         </li>
                                     ))}
                                 </ul>
-                            ) : (<p className={styles.noFiles}>No files in this section</p>)}
+                            ) : (<p className={styles.noFiles}>No content in this section</p>)}
                         </div>
                     </>
                 ) : (
