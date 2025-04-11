@@ -410,9 +410,11 @@
 
 /* ======= QUIZ EDITOR STYLES ======= */
 .quizEditorContainer, .quizTakerContainer {
-    width: 100%;
-    margin: 0 auto;
-    max-width: 800px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .header {
@@ -841,14 +843,6 @@
         flex-direction: column;
         gap: 16px;
     }
-}
-
-.quizTakerContainer,
-.quizEditorContainer {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 .quizTakerHeader,

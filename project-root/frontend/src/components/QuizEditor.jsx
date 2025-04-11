@@ -110,7 +110,7 @@ export default function QuizEditor({ quizId, onClose }) {
 
     return (
         <div className={styles.quizEditorContainer} style={{ backgroundColor, color: textColor }}>
-            <div className={styles.quizEditorHeader} style={{ borderBottomColor: textColor === '#ffffff' ? '#444' : '#e2e8f0' }}>
+            <div className={styles.quizEditorHeader} style={{ borderBottomColor: textColor === '#ffffff' ? '#444' : '#e2e8f0', backgroundColor }}>
                 <button
                     className={styles.backButton}
                     onClick={onClose}
