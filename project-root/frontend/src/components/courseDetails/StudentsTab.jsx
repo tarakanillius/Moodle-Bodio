@@ -116,9 +116,9 @@ export default function StudentsTab({ course, onCourseUpdated }) {
                 <p className={styles.noStudents}>No students enrolled in this course</p>
             )}
 
-            <Modal show={show} onHide={handleClose} className={styles.modalContent}>
+            <Modal show={show} onHide={handleClose} className={styles.modalContent} style={{ backgroundColor: backgroundColor2 }}>
                 <Modal.Header className={styles.modalHeader}>
-                    <Modal.Title><h2><strong>Student Card</strong></h2></Modal.Title>
+                    <Modal.Title><h2 style={{ color: textColor }}><strong>Student Card</strong></h2></Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={styles.modalBody}>
                     <img
@@ -126,30 +126,30 @@ export default function StudentsTab({ course, onCourseUpdated }) {
                         alt={selectedStudent?.name}
                         className={styles.studentAvatar}
                     />
-                    <p><strong>Nome:</strong> {selectedStudent?.name.split(' ')[0]}</p>
-                    <p><strong>Cognome:</strong> {selectedStudent?.name.split(' ')[1]}</p>
-                    <p><strong>Email:</strong> {selectedStudent?.email}</p>
-                    <table className={styles.gradesTable}>
-                        <thead>
-                        <tr>
-                            <th>Test</th>
-                            <th>Grade</th>
+                    <p style={{ color: textColor }}><strong>Nome:</strong> {selectedStudent?.name.split(' ')[0]}</p>
+                    <p style={{ color: textColor }}><strong>Cognome:</strong> {selectedStudent?.name.split(' ')[1]}</p>
+                    <p style={{ color: textColor }}><strong>Email:</strong> {selectedStudent?.email}</p>
+                    <table className={styles.gradesTable} style={{ backgroundColor: backgroundColor2}}>
+                        <thead style={{ backgroundColor: backgroundColor2}}>
+                        <tr style={{ color: textColor }}>
+                            <th style={{ backgroundColor: backgroundColor2}}>Test</th>
+                            <th style={{ backgroundColor: backgroundColor2}}>Grade</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody style={{ color: textColor }}>
+                            <tr style={{ backgroundColor: backgroundColor2 }}>
                                 <td>Test 1</td>
                                 <td>5</td>
                             </tr>
-                            <tr>
+                            <tr style={{ backgroundColor: backgroundColor2 }}>
                                 <td>Test 2</td>
                                 <td>6</td>
                             </tr>
-                            <tr>
+                            <tr style={{ backgroundColor: backgroundColor2 }}>
                                 <td>Test 3</td>
                                 <td>5.5</td>
                             </tr>
-                            <tr>
+                            <tr style={{ backgroundColor: backgroundColor2 }}>
                                 <td>Test 4</td>
                                 <td>2</td>
                             </tr>

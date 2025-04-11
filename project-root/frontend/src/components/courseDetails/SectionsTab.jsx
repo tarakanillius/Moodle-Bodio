@@ -46,7 +46,7 @@ export default function SectionsTab({
     const [selectedQuizId, setSelectedQuizId] = useState(null);
     const [quizToEdit, setQuizToEdit] = useState(null);
     const [quizDetails, setQuizDetails] = useState({});
-    const [setLoadingQuizzes] = useState(false);
+    const [loadingQuizzes, setLoadingQuizzes] = useState(false);
 
     const dropdownRef = useRef(null);
 
