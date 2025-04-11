@@ -173,7 +173,7 @@ export default function SettingsTab({ course, userRole, onCourseUpdated }) {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label htmlFor="courseDescription" style={{ color: textColor }}>Course Description</label>
+                    <label htmlFor="courseDescription" style={{ color: textColor }}>Course description</label>
                     <textarea
                         id="courseDescription"
                         name="description"

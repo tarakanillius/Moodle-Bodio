@@ -841,4 +841,3 @@ export default function SectionsTab({
         </div>
     );
 }
-
