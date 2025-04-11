@@ -108,9 +108,18 @@ export default function CourseDetails({ courseId }) {
 
     const tabs = [
         { id: "sections", label: "Sections" },
-        { id: "students", label: "Students" },
-        { id: "settings", label: "Settings" }
+        { id: "students", label: "Students" }
     ];
+
+    if (user && user.role !== 'student') {
+        tabs.push({ id: "settings", label: "Settings" });
+    }
+
+    useEffect(() => {
+        if (user && user.role === 'student' && activeTab === 'settings') {
+            setActiveTab('sections');
+        }
+    }, [user, activeTab, setActiveTab]);
 
     if (loading) {
         return (
@@ -167,14 +176,14 @@ export default function CourseDetails({ courseId }) {
                         onCourseUpdated={handleCourseUpdated}
                     />
                 )}
-                {activeTab === "settings" && (
+                {activeTab === "settings" && user?.role !== 'student' && (
                     <Settings
                         course={course}
                         userRole={user?.role}
                         onCourseUpdated={handleCourseUpdated}
                     />
                 )}
-                {activeTab === "students"  && (
+                {activeTab === "students" && (
                     <StudentsTab
                         course={course}
                         onStudentUnenrolled={() => setRefreshTrigger(prev => prev + 1)}
