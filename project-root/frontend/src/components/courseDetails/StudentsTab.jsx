@@ -107,7 +107,7 @@ export default function StudentsTab({ course, onCourseUpdated }) {
                     <table className={styles.gradesTable}>
                         <thead>
                         <tr>
-                            <th>Section</th>
+                            <th>Test</th>
                             <th>Grade</th>
                         </tr>
                         </thead>

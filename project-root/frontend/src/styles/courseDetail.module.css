@@ -3,11 +3,12 @@
     width: 100%;
     background: #ffffff;
     overflow-y: auto;
+
     overflow-x: hidden;
     padding: 30px;
     box-sizing: border-box;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: auto;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     display: flex;
