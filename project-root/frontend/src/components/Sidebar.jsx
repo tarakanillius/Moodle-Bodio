@@ -1,13 +1,18 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import styles from "../styles/main.module.css";
 import getAvatarImage from "../utils/getAvatar";
 
 export default function Sidebar() {
-    const { selectedComponent, setSelectedComponent, user, theme, textColor } = useContext(GlobalContext);
+    const { selectedComponent, setSelectedComponent, user, loading, backgroundColor, textColor } = useContext(GlobalContext);
+
+    const getAvatarSrc = () => {
+        if (!user) return "/assets/default-avatar.png";
+        return getAvatarImage(user.role, user.sex);
+    };
 
     return (
-        <div className={styles.sidebar} style={{backgroundColor: theme === "Dark" ? "#000000" : "#ffffff"}}>
+        <div className={styles.sidebar} style={{backgroundColor}}>
             <img
                 className={styles.image}
                 src="/assets/logo_ameti.jpeg"
@@ -17,21 +22,21 @@ export default function Sidebar() {
                 <button
                     className={selectedComponent === "home" ? styles.active : ""}
                     onClick={() => setSelectedComponent("home")}
-                    style={{backgroundColor: theme === "Dark" ? "#000000" : "#ffffff", color: textColor}}
+                    style={{backgroundColor, color: textColor}}
                 >
                     Home
                 </button>
                 <button
                     className={selectedComponent === "modules" ? styles.active : ""}
                     onClick={() => setSelectedComponent("modules")}
-                    style={{backgroundColor: theme === "Dark" ? "#000000" : "#ffffff", color: textColor}}
+                    style={{backgroundColor, color: textColor}}
                 >
                     Moduli
                 </button>
                 <button
                     className={selectedComponent === "settings" ? styles.active : ""}
                     onClick={() => setSelectedComponent("settings")}
-                    style={{backgroundColor: theme === "Dark" ? "#000000" : "#ffffff", color: textColor}}
+                    style={{backgroundColor, color: textColor}}
                 >
                     Impostazioni
                 </button>
@@ -40,15 +45,19 @@ export default function Sidebar() {
                 <div
                     className={styles.account}
                     onClick={() => setSelectedComponent("userData")}
-                    style={{backgroundColor: theme === "Dark" ? "#000000" : "#ffffff", color: textColor}}>
+                    style={{backgroundColor, color: textColor}}>
                     <img
-                        src={getAvatarImage(user.role, user.gender)}
+                        src={getAvatarSrc()}
                         alt="User"
                         className={styles.avatar}
                     />
                     <div className={styles.accountInfo}>
-                        <span className={styles.name} style={{color: textColor}}>{user.name} {user.surname}</span>
-                        <span className={styles.role} style={{color: textColor}}>{user.role}</span>
+                        <span className={styles.name} style={{color: textColor}}>
+                            {loading ? 'Loading...' : user ? `${user.name} ${user.surname}` : 'Guest'}
+                        </span>
+                        <span className={styles.role} style={{color: textColor}}>
+                            {loading ? '' : user?.role || ''}
+                        </span>
                     </div>
                 </div>
             </div>

@@ -1,101 +1,75 @@
-import React, {useState, useContext, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { GlobalContext } from "../context/GlobalContext";
-import styles from "../styles/login.module.css";
+import React, { useState, useContext } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
+import { login } from '../handlers/userHandlers';
+import styles from '../styles/login.module.css';
 
 export default function Login() {
-    const navigate = useNavigate();
-    const { updateUser,BACKEND_URL } = useContext(GlobalContext);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const { updateUser, BACKEND_URL } = useContext(GlobalContext);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-        if (isLoggedIn) navigate("/main");
-    }, [navigate]);
-
-    const handleLogin = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!email || !password) {
-            setError("Please enter both email and password");
-            return;
+        setError('');
+        setLoading(true);
+
+        const result = await login(BACKEND_URL, email, password);
+
+        if (result.success) {
+            updateUser(result.user, result.token);
+        } else {
+            setError(result.error);
         }
-        try {
-            setLoading(true);
-            setError("");
-            const response = await axios.post(`${BACKEND_URL}/login`, {
-                email: email,
-                password: password
-            });
-            const token = response.data.token;
-            if (!token) {
-                console.warn("No token received from server");
-            }
-            const userDetailsResponse = await axios.get(`${BACKEND_URL}/user/${response.data.user_id}`);
-            const userData = userDetailsResponse.data.user;
-            updateUser({
-                id: userData.id,
-                name: userData.name,
-                surname: userData.surname,
-                email: userData.email,
-                role: userData.role,
-                gender: userData.sex,
-            }, token);
-            localStorage.setItem("isLoggedIn", "true");
-            navigate("/main");
-        } catch (error) {
-            console.error("Login error:", error);
-            if (error.response) {
-                if (error.response.status === 404) setError("User not found. Please check your email.");
-                else if (error.response.status === 401) setError("Invalid password. Please try again.");
-                else setError("Login failed: " + (error.response.data.error || "Unknown error"));
-            } else if (error.request) setError("No response from server. Please try again later.");
-            else setError("Error: " + error.message);
-        } finally {
-            setLoading(false);
-        }
+
+        setLoading(false);
     };
 
     return (
-        <div className={styles.body}>
-            <div className={styles.container}>
-                <div className={styles.content}>
-                    <h2 className={styles.title}>Login</h2>
-                    {error && (
-                        <div className={styles.errorMessage}>
-                            {error}
-                        </div>
-                    )}
-                    <form onSubmit={handleLogin}>
+        <div className={styles.loginContainer}>
+            <div className={styles.loginCard}>
+                <div className={styles.logoContainer}>
+                    <img src="/assets/logo_ameti.jpeg" alt="Logo" className={styles.logo} />
+                </div>
+
+                <h1 className={styles.title}>Login</h1>
+
+                {error && <div className={styles.errorMessage}>{error}</div>}
+
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.inputGroup}>
                         <input
                             type="email"
+                            id="email"
                             placeholder="Email"
-                            className={styles.input}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
+                    </div>
+
+                    <div className={styles.inputGroup}>
                         <input
                             type="password"
+                            id="password"
                             placeholder="Password"
-                            className={styles.input}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                        <button
-                            type="submit"
-                            className={styles.button}
-                            disabled={loading}
-                        >
-                            {loading ? "Logging in..." : "Accedi"}
-                        </button>
-                    </form>
-                </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        className={styles.loginButton}
+                        disabled={loading}
+                    >
+                        {loading ? 'Logging in...' : 'Login'}
+                    </button>
+                </form>
             </div>
         </div>
     );
 }
+

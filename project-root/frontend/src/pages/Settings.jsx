@@ -1,55 +1,37 @@
-import React, {useContext, useState} from "react";
-import styles from "../styles/settings.module.css";
-import GeneralSettings from "../components/settings/GeneralSettings";
-import NotificationSettings from "../components/settings/NotificationSettings";
-import SecuritySettings from "../components/settings/SecuritySettings";
-import PrivacySettings from "../components/settings/PrivacySettings";
-import TabNav from "../components/TabNav";
-import {GlobalContext} from "../context/GlobalContext";
+import React, { useState, useContext } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
+import TabNav from '../components/TabNav';
+import GeneralSettings from '../components/settings/GeneralSettings';
+import NotificationSettings from '../components/settings/NotificationSettings';
+import PrivacySettings from '../components/settings/PrivacySettings';
+import SecuritySettings from '../components/settings/SecuritySettings';
+import styles from '../styles/settings.module.css';
 
 export default function Settings() {
-    const [activeTab, setActiveTab] = useState("Generale");
-    const { backgroundColor, backgroundColor2, textColor } = useContext(GlobalContext);
+    const { backgroundColor2, textColor } = useContext(GlobalContext);
+    const [activeTab, setActiveTab] = useState("general");
 
-    const tabs = [
-        { id: "Generale", label: "Generale" },
-        { id: "Notifiche", label: "Notifiche" },
-        { id: "Sicurezza", label: "Sicurezza" },
-        { id: "Privacy", label: "Privacy" }
+    const settingsTabs = [
+        { id: "general", label: "General" },
+        { id: "notifications", label: "Notifications" },
+        { id: "privacy", label: "Privacy" },
+        { id: "security", label: "Security" }
     ];
 
     return (
-        <div className={styles.settingsWrapper} style={{ backgroundColor: backgroundColor }}>
-            <h2 style={{
-                color: textColor,
-                marginBottom: "20px",
-                fontSize: "28px",
-                borderBottom: `1px solid ${backgroundColor2}`,
-                paddingBottom: "15px"
-            }}>
-                Impostazioni
-            </h2>
-
+        <div className={styles.settingsContainer} style={{ backgroundColor: backgroundColor2 }}>
+            <h1 className={styles.settingsTitle} style={{ color: textColor }}>Settings</h1>
             <TabNav
-                tabs={tabs}
+                tabs={settingsTabs}
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
             />
-
             <div className={styles.settingsContent}>
-                <div style={{
-                    backgroundColor: backgroundColor,
-                    borderRadius: "12px",
-                    padding: "20px",
-                    marginTop: "20px",
-                    marginBottom: "20px"
-                }}>
-                    {activeTab === "Generale" && <GeneralSettings />}
-                    {activeTab === "Notifiche" && <NotificationSettings />}
-                    {activeTab === "Sicurezza" && <SecuritySettings />}
-                    {activeTab === "Privacy" && <PrivacySettings />}
-                </div>
+                {activeTab === "general" && <GeneralSettings />}
+                {activeTab === "notifications" && <NotificationSettings />}
+                {activeTab === "privacy" && <PrivacySettings />}
+                {activeTab === "security" && <SecuritySettings />}
             </div>
         </div>
     );
-};
+}

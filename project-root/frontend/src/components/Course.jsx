@@ -14,7 +14,7 @@ function hexToRgba(hex, opacity = 0.4) {
 }
 
 export default function Course({viewMode = 'grid', name, description, teachers, students, sections, color, courseId }) {
-    const { setSelectedComponent, setSelectedCourseId, refreshCourses, fetchCourses, backgroundColor2, textColor, BACKEND_URL } = useContext(GlobalContext);
+    const { setSelectedComponent, setSelectedCourseId, refreshCourses, fetchCourses, backgroundColor2, textColor, BACKEND_URL, setActiveTab } = useContext(GlobalContext);
     const [menuOpen, setMenuOpen] = useState(false);
 
     const handleViewCourse = () => {
@@ -26,6 +26,7 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
         e.stopPropagation();
         setSelectedCourseId(courseId);
         setSelectedComponent("course");
+        setActiveTab("settings");
         localStorage.setItem("openCourseTab", "settings");
     };
 
@@ -121,7 +122,7 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
             </div>
             <p className={styles.courseDescription}
                style={{color: textColor}}>{description}</p>
-            <div className={styles.courseSections}>
+            <div>
                 <h3 className={styles.sectionTitle}
                     style={{color: textColor}}>Sections:</h3>
                 {sections ? (
@@ -131,7 +132,7 @@ export default function Course({viewMode = 'grid', name, description, teachers, 
                         ))}
                     </ul>
                 ) : (
-                    <p className={styles.noSections}>No sections available</p>
+                    <p>No sections available</p>
                 )}
             </div>
             <div className={styles.courseFooter}>

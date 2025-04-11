@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb';
 import express from 'express';
 import {
     getCourses,
@@ -12,13 +13,13 @@ import { checkAuthorization } from '../utils/auth.js';
 
 const router = express.Router();
 
-router.get('/courses', async (req, res, next) => {
+router.get('/courses', checkAuthorization, async (req, res, next) => {
     try {
         const allCourses = await getCourses();
 
         const formattedCourses = await Promise.all(
             allCourses.map(async course => {
-                return await formatCourse(course);
+                return await formatCourse(course, true);
             })
         );
 
@@ -28,9 +29,15 @@ router.get('/courses', async (req, res, next) => {
     }
 });
 
-router.get('/course/:id', async (req, res, next) => {
+router.get('/course/:id', checkAuthorization, async (req, res, next) => {
     try {
-        const course = await getCourseById(req.params.id);
+        const courseId = req.params.id;
+
+        if (!ObjectId.isValid(courseId)) {
+            return res.status(400).json({ error: 'Invalid course ID format' });
+        }
+
+        const course = await getCourseById(courseId);
 
         if (!course) {
             return res.status(404).json({ error: 'Course not found' });
@@ -43,7 +50,7 @@ router.get('/course/:id', async (req, res, next) => {
     }
 });
 
-router.get('/student_courses/:id', async (req, res, next) => {
+router.get('/student_courses/:id', checkAuthorization, async (req, res, next) => {
     try {
         const courses = await getStudentCourses(req.params.id);
 

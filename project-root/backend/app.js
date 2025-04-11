@@ -7,6 +7,8 @@ import { router as userRouter } from './routes/users.js';
 import { router as sectionRouter } from './routes/sections.js';
 import { router as courseRouter } from './routes/courses.js';
 import { router as fileRouter } from './routes/files.js';
+import { router as quizRouter } from './routes/quizzes.js';
+import { router as linkRouter } from './routes/links.js';
 
 dotenv.config();
 
@@ -32,6 +34,8 @@ app.use(courseRouter);
 app.use(userRouter);
 app.use(sectionRouter);
 app.use(fileRouter);
+app.use(quizRouter);
+app.use(linkRouter);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

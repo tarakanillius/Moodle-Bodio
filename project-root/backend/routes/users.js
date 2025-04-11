@@ -1,20 +1,20 @@
 import express from 'express';
 import {
     getStudents,
-    getTeachers,
     getUserById,
     getUserByEmail,
     formatUser,
     updateUser,
     enrollStudent,
     unenrollStudent,
+    getUserCourses
 } from '../utils/user_utils.js';
 import { createJSONToken, isValidPassword, checkAuthorization } from '../utils/auth.js';
 console.log("Loading users routes...");
 
 const router = express.Router();
 
-router.get('/students', async (req, res, next) => {
+router.get('/students', checkAuthorization, async (req, res, next) => {
     try {
         const students = await getStudents();
         const formattedStudents = await Promise.all(
@@ -26,19 +26,7 @@ router.get('/students', async (req, res, next) => {
     }
 });
 
-router.get('/teachers', async (req, res, next) => {
-    try {
-        const teachers = await getTeachers();
-        const formattedTeachers = await Promise.all(
-            teachers.map(teacher => formatUser(teacher))
-        );
-        res.json({ teachers: formattedTeachers });
-    } catch (err) {
-        next(err);
-    }
-});
-
-router.get('/user/:id', async (req, res, next) => {
+router.get('/user/:id', checkAuthorization, async (req, res, next) => {
     try {
         const user = await getUserById(req.params.id);
         if (!user) {
@@ -51,7 +39,19 @@ router.get('/user/:id', async (req, res, next) => {
     }
 });
 
-router.get('/user_by_email/:email', async (req, res, next) => {
+router.get('/user/:id/courses', checkAuthorization, async (req, res, next) => {
+    try {
+        const courses = await getUserCourses(req.params.id);
+        res.json({ courses });
+    } catch (err) {
+        if (err.status) {
+            return res.status(err.status).json({ error: err.message });
+        }
+        next(err);
+    }
+});
+
+router.get('/user_by_email/:email', checkAuthorization, async (req, res, next) => {
     try {
         const user = await getUserByEmail(req.params.email);
         const formattedUser = await formatUser(user);
@@ -90,6 +90,7 @@ router.post('/login', async (req, res, next) => {
             user_id: user._id.toString(),
             name: user.name,
             role: user.role,
+            sex: user.sex,
             token
         });
     } catch (err) {

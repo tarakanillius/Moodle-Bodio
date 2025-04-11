@@ -8,14 +8,15 @@ import { checkAuthorization } from '../utils/auth.js';
 
 const router = express.Router();
 
-router.get('/sections', async (req, res, next) => {
+router.get('/sections', checkAuthorization, async (req, res, next) => {
     try {
         const allSections = await getSections();
 
         const formattedSections = allSections.map(section => ({
             id: section._id.toString(),
             name: section.name,
-            data: section.data
+            data: section.data,
+            quizzes: section.quizzes || []
         }));
 
         res.json({ sections: formattedSections });
@@ -24,7 +25,7 @@ router.get('/sections', async (req, res, next) => {
     }
 });
 
-router.get('/section/:id', async (req, res, next) => {
+router.get('/section/:id', checkAuthorization, async (req, res, next) => {
     try {
         const section = await getSectionById(req.params.id);
 
@@ -32,11 +33,25 @@ router.get('/section/:id', async (req, res, next) => {
             return res.status(404).json({ error: 'Section not found' });
         }
 
+        const formattedQuizzes = section.quizzes ? section.quizzes.map(quiz => {
+            if (typeof quiz === 'string') {
+                return { id: quiz, title: 'Unknown Quiz', description: '', timeLimit: 0 };
+            }
+            return {
+                id: quiz.id || (quiz._id ? quiz._id.toString() : ''),
+                title: quiz.title || 'Untitled Quiz',
+                description: quiz.description || '',
+                timeLimit: quiz.timeLimit || 0
+            };
+        }) : [];
+
         res.json({
             section: {
                 id: section._id.toString(),
                 name: section.name,
-                files: section.data
+                files: section.data || [],
+                links: section.links || [],
+                quizzes: formattedQuizzes
             }
         });
     } catch (err) {

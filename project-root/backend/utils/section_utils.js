@@ -8,7 +8,29 @@ async function getSections() {
 
 async function getSectionById(id) {
     const db = await connectToDatabase();
-    return await db.collection('sections').findOne({ _id: new ObjectId(id) });
+    const section = await db.collection('sections').findOne({ _id: new ObjectId(id) });
+
+    if (section && section.quizzes && section.quizzes.length > 0) {
+        const quizIds = section.quizzes.map(quizId => new ObjectId(quizId));
+        const quizzes = await db.collection('quiz').find({ _id: { $in: quizIds } }).toArray();
+
+        const quizDetailsMap = {};
+        quizzes.forEach(quiz => {
+            quizDetailsMap[quiz._id.toString()] = {
+                id: quiz._id.toString(),
+                title: quiz.title,
+                description: quiz.description,
+                timeLimit: quiz.timeLimit
+            };
+        });
+
+        section.quizzes = section.quizzes.map(quizId => {
+            const quizIdStr = quizId.toString();
+            return quizDetailsMap[quizIdStr] || { id: quizIdStr };
+        });
+    }
+
+    return section;
 }
 
 async function addSection({ name, courseId }) {
@@ -24,7 +46,9 @@ async function addSection({ name, courseId }) {
 
     const newSection = {
         name,
-        data: []
+        data: [],
+        quizzes: [],
+        links: []
     };
 
     const result = await db.collection('sections').insertOne(newSection);

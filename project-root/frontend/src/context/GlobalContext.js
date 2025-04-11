@@ -1,280 +1,172 @@
-import {createContext, useEffect, useState} from "react";
-import axiosInstance from "../utils/axiosConfig";
-import axios from "axios";
+import React, { createContext, useState, useEffect } from 'react';
+import { verifyToken, updateUserInContext, clearUserFromContext } from '../handlers/userHandlers';
+import { fetchCourses, getCourse, handleUnenrollStudent, filterCourses } from '../handlers/courseHandlers';
+import { submitQuiz, getQuizResults } from '../handlers/quizHandlers';
+import { getThemeSettings, toggleDarkMode as toggleTheme, initializeTheme} from '../handlers/themeHandlers';
+import axiosInstance from '../utils/axiosConfig';
 
 export const GlobalContext = createContext(undefined);
 
-export default function GlobalProvider({ children }) {
-    const [selectedComponent, setSelectedComponent] = useState("home");
+export const GlobalProvider = ({ children }) => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [selectedComponent, setSelectedComponent] = useState("modules");
     const [selectedCourseId, setSelectedCourseId] = useState(null);
-    const [theme, setTheme] = useState("Light");
-    const backgroundColor = theme === "Dark" ? "#1a1a1a" : "#ffffff";
-    const backgroundColor2 = theme === "Dark" ? "#393939" : "#f4f4f4";
-    const textColor = theme === "Dark" ? "#ffffff" : "#000000";
-    const [language, setLanguage] = useState("English");
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [twoFactor, setTwoFactor] = useState("Disabled");
-    const [saveStatus, setSaveStatus] = useState("");
     const [courses, setCourses] = useState([]);
     const [filteredCourses, setFilteredCourses] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const BACKEND_URL = "http://127.0.0.1:5010";
-    const [token, setToken] = useState(localStorage.getItem("token") || "");
-    const [notifications, setNotifications] = useState({
-        messages: true,
-        courseUpdates: false,
-        assignments: true,
-        announcements: false
-    });
-    const [privacySettings, setPrivacySettings] = useState({
-        profileVisible: false,
-        showOnlineStatus: false,
-        allowDataCollection: false,
-        dataSharing: "Minimal (Required Only)"
-    });
-    const [user, setUser] = useState({
-        id: "",
-        name: "",
-        surname: "",
-        email: "",
-        role: "",
-        gender: "",
-    });
+    const [coursesLoading, setCoursesLoading] = useState(false);
+    const [coursesLoaded, setCoursesLoaded] = useState(false);
+    const [coursesError, setCoursesError] = useState(null);
+    const [darkMode, setDarkMode] = useState(initializeTheme());
+    const [activeTab, setActiveTab] = useState("sections");
+    const { backgroundColor, backgroundColor2, textColor } = getThemeSettings(darkMode);
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
 
-    const fetchCourses = async () => {
-        try {
-            setLoading(true);
-            const userId = localStorage.getItem('userId');
-
-            if (!userId) {
-                setError("User not logged in");
-                setLoading(false);
-                return;
-            }
-
-            const response = await axiosInstance.get(`${BACKEND_URL}/student_courses/${userId}`);
-
-            if (response.data.courses) {
-                const coursesWithDetails = await Promise.all(
-                    response.data.courses.map(async (course) => {
-                        try {
-                            const detailsResponse = await axios.get(`${BACKEND_URL}/course/${course.id}`);
-                            return detailsResponse.data.course;
-                        } catch (err) {
-                            console.error(`Error fetching details for course ${course.id}:`, err);
-                            return course;
-                        }
-                    })
-                );
-
-                setCourses(coursesWithDetails);
-                setFilteredCourses(coursesWithDetails);
-            } else {
-                setCourses([]);
-                setFilteredCourses([]);
-            }
-        } catch (err) {
-            console.error("Error fetching courses:", err);
-            setError("Failed to load courses. Please try again later.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const updateUser = (userData, authToken) => {
-        setUser(userData);
-        localStorage.setItem("userId", userData.id);
-        localStorage.setItem("userName", userData.name);
-        localStorage.setItem("userSurname", userData.surname);
-        localStorage.setItem("userEmail", userData.email);
-        localStorage.setItem("userRole", userData.role);
-        localStorage.setItem("userGender", userData.gender);
-
-        if (authToken) {
-            localStorage.setItem("token", authToken);
-            setToken(authToken);
-        }
-    };
-
-    const refreshCourses = () => {
-        setLoading(false);
-    };
-
-    const handleUnenrollStudent = async (studentId, courseId) => {
-        try {
-            const response = await axiosInstance.post(`${BACKEND_URL}/unenroll_student`, {
-                student_id: studentId,
-                course_id: courseId
-            });
-
-            console.log("Unenroll response:", response.data);
-
-            setCourses(prevCourses =>
-                prevCourses.map(course => {
-                    if (course.id === courseId) {
-                        return {
-                            ...course,
-                            students: course.students.filter(student => student.id !== studentId)
-                        };
+    useEffect(() => {
+        const checkAuth = async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                try {
+                    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                    const result = await verifyToken(BACKEND_URL);
+                    if (result.success) {
+                        setUser(result.user);
+                        setIsAuthenticated(true);
+                    } else {
+                        clearUserFromContext();
+                        setIsAuthenticated(false);
+                        setUser(null);
                     }
-                    return course;
-                })
-            );
-
-            return { success: true };
-        } catch (error) {
-            console.error("Error unenrolling student:", error);
-            console.error("Error details:", error.response?.data);
-            return {
-                success: false,
-                error: error.response?.data?.error || "Failed to unenroll student"
-            };
-        }
-    };
-
-    const updateCourse = async (courseId, updatedData) => {
-        try {
-            await axiosInstance.put(`${BACKEND_URL}/update_course/${courseId}`, updatedData);
-            setCourses(prevCourses =>
-                prevCourses.map(course =>
-                    course.id === courseId
-                        ? { ...course, ...updatedData }
-                        : course
-                )
-            );
-            return { success: true };
-        } catch (error) {
-            console.error("Error updating course:", error);
-            return {
-                success: false,
-                error: error.response?.data?.error || "Failed to update course"
-            };
-        }
-    };
-
-    const clearUser = () => {
-        setUser({
-            id: "",
-            name: "",
-            surname: "",
-            email: "",
-            role: "",
-            gender: "",
-        });
-        setToken("");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("userName");
-        localStorage.removeItem("userSurname");
-        localStorage.removeItem("userEmail");
-        localStorage.removeItem("userRole");
-        localStorage.removeItem("userGender");
-        localStorage.removeItem("isLoggedIn");
-    };
-
-    const handleSave = () => {
-        setSaveStatus("Saving...");
-        setTimeout(() => {
-            setSaveStatus("Settings saved successfully!");
-            setTimeout(() => setSaveStatus(""), 3000);
-        }, 1000);
-    };
-
-    const handleNotificationChange = (type) => {
-        setNotifications({
-            ...notifications,
-            [type]: !notifications[type]
-        });
-    };
-
-    const terminateSession = (device) => {
-        alert(`Session terminated for ${device}`);
-    };
-
-    const handlePrivacyChange = (setting, value) => {
-        setPrivacySettings({
-            ...privacySettings,
-            [setting]: typeof value === 'boolean' ? value : value
-        });
-    };
-
-    const getCourse = (courseId) => {
-        return courses.find(course => course.id === courseId) || null;
-    };
+                } catch (error) {
+                    clearUserFromContext();
+                    setIsAuthenticated(false);
+                    setUser(null);
+                }
+            }
+            setLoading(false);
+        };
+        checkAuth();
+    }, [BACKEND_URL]);
 
     useEffect(() => {
-        if (localStorage.getItem("userId")) {
-            const userId = localStorage.getItem("userId");
-            const userName = localStorage.getItem("userName");
-            const userSurname = localStorage.getItem("userSurname");
-            const userEmail = localStorage.getItem("userEmail");
-            const userRole = localStorage.getItem("userRole");
-            const userGender = localStorage.getItem("userGender");
-            setUser({
-                id: userId,
-                name: userName || "",
-                surname: userSurname || "",
-                email: userEmail || "",
-                role: userRole || "",
-                gender: userGender || "male",
-            });
+        if (isAuthenticated && !coursesLoaded) {
+            handleInitialCourseLoad();
         }
-        setTheme(localStorage.getItem("theme"));
-    }, []);
+    }, [isAuthenticated, coursesLoaded]);
 
-    useEffect(() => {
-        if (token) {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const handleToggleDarkMode = () => {
+        const newDarkMode = toggleTheme(darkMode);
+        setDarkMode(newDarkMode);
+    };
+
+    const handleUpdateUser = (userData, token = null) => {
+        if (!userData.role || !userData.sex) {
+            console.error("User data missing required properties:", userData);
+        }
+
+        const updatedUser = updateUserInContext(userData, token);
+        setUser(updatedUser);
+        setIsAuthenticated(true);
+    };
+
+    const handleClearUser = () => {
+        clearUserFromContext();
+        setIsAuthenticated(false);
+        setUser(null);
+    };
+
+    const handleFetchCourses = async () => {
+        if (!isAuthenticated || coursesLoading) return;
+
+        setCoursesLoading(true);
+        setCoursesError(null);
+
+        const result = await fetchCourses(BACKEND_URL);
+        if (result.success) {
+            setCourses(result.courses);
+            setFilteredCourses(result.courses);
         } else {
-            delete axios.defaults.headers.common['Authorization'];
+            setCoursesError(result.error);
         }
-    }, [token]);
+
+        setCoursesLoading(false);
+    };
+
+    const handleInitialCourseLoad = async () => {
+        if (coursesLoaded || !isAuthenticated || coursesLoading) return;
+
+        setCoursesLoading(true);
+        setCoursesError(null);
+
+        const result = await fetchCourses(BACKEND_URL);
+        if (result.success) {
+            setCourses(result.courses);
+            setFilteredCourses(result.courses);
+            setCoursesLoaded(true);
+        } else {
+            setCoursesError(result.error);
+        }
+
+        setCoursesLoading(false);
+    };
+
+    const handleSearchCourses = (searchQuery) => {
+        const query = searchQuery || '';
+        const filtered = filterCourses(courses, query);
+        setFilteredCourses(filtered);
+    };
+
+    const handleGetCourse = (courseId) => {
+        return getCourse(courses, courseId);
+    };
+
+    const handleUnenrollStudentFromCourse = async (studentId, courseId) => {
+        return await handleUnenrollStudent(BACKEND_URL, studentId, courseId);
+    };
+
+    const handleSubmitQuiz = async (quizId, answers) => {
+        return await submitQuiz(BACKEND_URL, quizId, user.id, answers);
+    };
+
+    const handleGetQuizResults = async (quizId) => {
+        return await getQuizResults(BACKEND_URL, quizId, user.id);
+    };
 
     return (
-        <GlobalContext.Provider value={{
-            BACKEND_URL,
-            selectedComponent,
-            setSelectedComponent,
-            selectedCourseId,
-            setSelectedCourseId,
-            user,
-            updateUser,
-            clearUser,
-            theme,
-            setTheme,
-            language,
-            setLanguage,
-            notifications,
-            setNotifications,
-            handleNotificationChange,
-            newPassword,
-            setNewPassword,
-            confirmPassword,
-            setConfirmPassword,
-            twoFactor,
-            setTwoFactor,
-            saveStatus,
-            setSaveStatus,
-            handleSave,
-            terminateSession,
-            privacySettings,
-            handlePrivacyChange,
-            courses,
-            fetchCourses,
-            filteredCourses,
-            setFilteredCourses,
-            loading,
-            error,
-            getCourse,
-            updateCourse,
-            refreshCourses,
-            handleUnenrollStudent,
-            backgroundColor,
-            backgroundColor2,
-            textColor
-        }}>
+        <GlobalContext.Provider
+            value={{
+                isAuthenticated,
+                user,
+                loading,
+                updateUser: handleUpdateUser,
+                clearUser: handleClearUser,
+                selectedComponent,
+                setSelectedComponent,
+                selectedCourseId,
+                setSelectedCourseId,
+                courses,
+                filteredCourses,
+                setFilteredCourses: handleSearchCourses,
+                coursesLoading,
+                coursesError,
+                getCourse: handleGetCourse,
+                darkMode,
+                toggleDarkMode: handleToggleDarkMode,
+                backgroundColor,
+                backgroundColor2,
+                textColor,
+                BACKEND_URL,
+                handleUnenrollStudent: handleUnenrollStudentFromCourse,
+                submitQuiz: handleSubmitQuiz,
+                getQuizResults: handleGetQuizResults,
+                fetchCourses: handleFetchCourses,
+                initialLoadCourses: handleInitialCourseLoad,
+                refreshCourses: handleFetchCourses,
+                activeTab,
+                setActiveTab
+            }}
+        >
             {children}
         </GlobalContext.Provider>
     );

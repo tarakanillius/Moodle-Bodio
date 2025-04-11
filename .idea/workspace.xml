@@ -4,14 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aee2d6a0-10cc-49e7-8be7-a78490adad49" name="Changes" comment="updated visual aspect, theme color's now stored in GlobalContext and every change saves in localstorage">
-      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/components/Dropdown.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/dropdown.module.css" afterDir="false" />
+    <list default="true" id="aee2d6a0-10cc-49e7-8be7-a78490adad49" name="Changes" comment="little update">
+      <change afterPath="$PROJECT_DIR$/project-root/backend/routes/quizzes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/.env.development" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/components/QuizEditor.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/components/QuizTaker.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/components/modals/AddCourseModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/components/modals/AddLinkModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/components/modals/AddQuizModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/components/modals/AddSectionModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/components/modals/QuizEditorModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/components/modals/QuizTakerModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/components/modals/UploadFileModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/handlers/courseHandlers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/handlers/quizHandlers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/handlers/sectionHandlers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/handlers/themeHandlers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project-root/frontend/src/handlers/userHandlers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_03_04_2025_10_38_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_03_04_2025_10_38__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/db/connections.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/db/connections.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/routes/courses.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/routes/courses.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/routes/files.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/routes/files.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/routes/sections.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/routes/sections.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/routes/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/scripts/populate_db.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/scripts/populate_db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/utils/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/utils/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/utils/courses_utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/utils/courses_utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/utils/section_utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/utils/section_utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/backend/utils/user_utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/utils/user_utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/Course.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/Course.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/Modal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/Modal.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/TabNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/TabNav.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/courseDetails/SectionsTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/courseDetails/SectionsTab.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/courseDetails/SettingsTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/courseDetails/SettingsTab.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/courseDetails/StudentsTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/courseDetails/StudentsTab.jsx" afterDir="false" />
@@ -20,28 +47,36 @@
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/settings/PrivacySettings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/settings/PrivacySettings.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/components/settings/SecuritySettings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/components/settings/SecuritySettings.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/context/GlobalContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/context/GlobalContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/hooks/useFetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/backend/routes/links.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/pages/CourseDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/pages/CourseDetails.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/pages/Courses.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/pages/Courses.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/pages/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/pages/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/pages/Login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/pages/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/pages/Main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/pages/Quiz.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/pages/Quiz.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/pages/Settings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/pages/Settings.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/pages/UserData.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/pages/UserData.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/course.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/course.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/courseDetail.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/courseDetail.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/home.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/home.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/main.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/main.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/login.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/login.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/modal.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/modal.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/quiz.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/settings.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/settings.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/styles/userData.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/styles/userData.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/utils/axiosConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/utils/axiosConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-root/frontend/src/utils/getAvatar.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-root/frontend/src/utils/getAvatar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" show_ignored="true" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSX File" />
+        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -59,12 +94,15 @@
     &quot;assignee&quot;: &quot;Julie0411&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/tarakanillius/Moodle-Bodio.git",
-    "accountId": "00494423-83e4-4a57-a1f8-158a6f513413"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/tarakanillius/Moodle-Bodio.git&quot;,
+    &quot;accountId&quot;: &quot;00494423-83e4-4a57-a1f8-158a6f513413&quot;
   }
-}]]></component>
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -73,39 +111,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.app.executor": "Run",
-    "Python.populate_db.executor": "Run",
-    "RunOnceActivity.ChatTagsLlmMigration": "true",
-    "RunOnceActivity.CodyAccountHistoryMigration": "true",
-    "RunOnceActivity.CodyAccountsIdsRefresh": "true",
-    "RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount": "true",
-    "RunOnceActivity.CodyConvertUrlToCodebaseName": "true",
-    "RunOnceActivity.CodyHistoryLlmMigration": "true",
-    "RunOnceActivity.CodyMigrateChatHistory-v2": "true",
-    "RunOnceActivity.CodyProjectSettingsMigration": "true",
-    "RunOnceActivity.DeprecatedChatLlmMigration": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.ToggleCodyToolWindowAfterMigration": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/user/WebstormProjects/Moodle-Bodio",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "npm",
-    "npm.dev.executor": "Run",
-    "npm.start.executor": "Run",
-    "settings.editor.selected.configurable": "configurable.group.appearance",
-    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
-    "two.files.diff.last.used.file": "/Users/juliegambale/WebstormProjects/Moodle-Bodio/project-root/frontend/src/components/courseDetails/StudentsTab.jsx",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.populate_db.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ChatTagsLlmMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAccountHistoryMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAccountsIdsRefresh&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyAssignOrphanedChatsToActiveAccount&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyConvertUrlToCodebaseName&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyHistoryLlmMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyMigrateChatHistory-v2&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.CodyProjectSettingsMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.DeprecatedChatLlmMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ToggleCodyToolWindowAfterMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/WebstormProjects/Moodle-Bodio&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start (1).executor&quot;: &quot;Run&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;/Users/juliegambale/WebstormProjects/Moodle-Bodio/project-root/frontend/src/components/courseDetails/StudentsTab.jsx&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/project-root/backend" />
@@ -119,7 +158,7 @@
       <recent name="$PROJECT_DIR$/project-root/backend/src/utils" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.start">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Moodle-Bodio" />
       <option name="ENV_FILES" value="" />
@@ -152,6 +191,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/project-root/backend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/project-root/frontend/package.json" />
       <command value="run" />
@@ -164,8 +213,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.start (1)" />
         <item itemvalue="Python.app" />
         <item itemvalue="npm.start" />
       </list>
@@ -192,7 +242,13 @@
       <workItem from="1743681056756" duration="6615000" />
       <workItem from="1744007730576" duration="18270000" />
       <workItem from="1744094445284" duration="5910000" />
-      <workItem from="1744185391025" duration="5606000" />
+      <workItem from="1744185391025" duration="30092000" />
+      <workItem from="1744283932968" duration="922000" />
+      <workItem from="1744284863122" duration="5847000" />
+      <workItem from="1744290725418" duration="6337000" />
+      <workItem from="1744308831333" duration="8779000" />
+      <workItem from="1744317975430" duration="536000" />
+      <workItem from="1744353058655" duration="3444000" />
     </task>
     <task id="LOCAL-00001" summary="fixed homepage">
       <option name="closed" value="true" />
@@ -234,7 +290,39 @@
       <option name="project" value="LOCAL" />
       <updated>1744098753857</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="updated visual aspect, theme color's now stored in GlobalContext and every change saves in localstorage">
+      <option name="closed" value="true" />
+      <created>1744191033224</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744191033224</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix">
+      <option name="closed" value="true" />
+      <created>1744192718264</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744192718264</updated>
+    </task>
+    <task id="LOCAL-00008" summary="new color system for courses, dropdown menu fixed">
+      <option name="closed" value="true" />
+      <created>1744227189292</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744227189292</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix course cards and drop down style">
+      <option name="closed" value="true" />
+      <created>1744269134107</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744269134107</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,6 +368,10 @@
     <MESSAGE value="added modal" />
     <MESSAGE value="updated visual aspect" />
     <MESSAGE value="updated visual aspect, theme color's now stored in GlobalContext and every change saves in localstorage" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated visual aspect, theme color's now stored in GlobalContext and every change saves in localstorage" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="new color system for courses, dropdown menu fixed" />
+    <MESSAGE value="fix course cards and drop down style" />
+    <MESSAGE value="little update" />
+    <option name="LAST_COMMIT_MESSAGE" value="little update" />
   </component>
 </project>

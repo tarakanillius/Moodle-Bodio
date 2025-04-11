@@ -11,10 +11,6 @@ async function getStudents() {
     return getUsers('student');
 }
 
-async function getTeachers() {
-    return getUsers('teacher');
-}
-
 async function getUserById(id) {
     const db = await connectToDatabase();
     return await db.collection('users').findOne({ _id: new ObjectId(id) });
@@ -43,6 +39,38 @@ async function formatUser(user) {
         birth: birth ? birth.toISOString().split('T')[0] : null,
         courses: user.courses ? user.courses.map(c => c.toString()) : []
     };
+}
+
+async function getUserCourses(userId) {
+    const db = await connectToDatabase();
+
+    try {
+        const user = await db.collection('users').findOne({ _id: new ObjectId(userId) });
+
+        if (!user) {
+            throw { message: 'User not found', status: 404 };
+        }
+
+        if (!user.courses || user.courses.length === 0) {
+            return [];
+        }
+
+        const courseIds = user.courses.map(id => new ObjectId(id));
+        const courses = await db.collection('courses').find({ _id: { $in: courseIds } }).toArray();
+
+        return courses.map(course => ({
+            id: course._id.toString(),
+            name: course.name,
+            description: course.description,
+            teacher: course.teacher ? course.teacher.toString() : null
+        }));
+    } catch (error) {
+        if (error.status) {
+            throw error;
+        }
+        console.error('Error getting user courses:', error);
+        throw { message: 'Failed to retrieve user courses', status: 500 };
+    }
 }
 
 async function addUser({ name, surname, email, role, sex, birth, password }) {
@@ -181,7 +209,6 @@ async function unenrollStudent(student_id, course_id) {
 
 export {
     getStudents,
-    getTeachers,
     getUserById,
     getUserByEmail,
     formatUser,
@@ -189,5 +216,6 @@ export {
     updateUser,
     deleteUser,
     enrollStudent,
-    unenrollStudent
+    unenrollStudent,
+    getUserCourses
 };

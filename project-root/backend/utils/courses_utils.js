@@ -14,7 +14,7 @@ async function formatCourse(course, details = false) {
         id: course._id.toString(),
         name: course.name,
         description: course.description,
-        color: course.color || 'rgba(0, 0, 0, 0.05)'
+        color: course.color
     };
 
     if (details) {
@@ -31,7 +31,9 @@ async function formatCourse(course, details = false) {
                 result.sections.push({
                     id: section._id.toString(),
                     name: section.name,
-                    files: section.data
+                    files: section.files,
+                    quizzes: section.quizzes,
+                    links: section.links,
                 });
             }
         }
@@ -44,7 +46,7 @@ async function formatCourse(course, details = false) {
                     id: student._id.toString(),
                     name: `${student.name} ${student.surname}`,
                     email: student.email,
-                    gender: student.sex || 'male'
+                    sex: student.sex
                 });
             }
         }

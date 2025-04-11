@@ -1,41 +1,46 @@
-import React, { useContext } from "react";
-import { GlobalContext } from "../context/GlobalContext";
-import styles from "../styles/main.module.css";
-import Settings from "./Settings";
-import Sidebar from "../components/Sidebar";
+import React, { useContext, useEffect } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
+import Sidebar from '../components/Sidebar';
+import Courses from './Courses';
+import CourseDetail from './CourseDetails';
+import Settings from './Settings';
+import UserData from './UserData';
+import styles from '../styles/main.module.css';
 import Home from "./Home";
-import Courses from "./Courses";
-import UserData from "./UserData";
-import CourseDetail from "./CourseDetails";
 
 export default function Main() {
-    const { selectedComponent, selectedCourseId, theme } = useContext(GlobalContext);
+    const {
+        selectedComponent,
+        selectedCourseId,
+        initialLoadCourses,
+        backgroundColor,
+    } = useContext(GlobalContext);
+
+    useEffect(() => {
+        initialLoadCourses();
+    }, []);
 
     const renderComponent = () => {
         switch (selectedComponent) {
-            case "home":
-                return <Home />;
-            case "teachers":
-                return <h2>Docenti Component</h2>;
-            case "students":
-                return <h2>Studenti Component</h2>;
-            case "modules":
+            case 'home':
+                return <Home />
+            case 'modules':
                 return <Courses />;
-            case "settings":
-                return <Settings />;
-            case "userData":
-                return <UserData />;
-            case "course":
+            case 'course':
                 return <CourseDetail courseId={selectedCourseId} />;
+            case 'settings':
+                return <Settings />;
+            case 'userData':
+                return <UserData />;
             default:
-                return <Home />;
+                return <Courses />;
         }
     };
 
     return (
-        <div className={styles.wrapper} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
+        <div className={styles.wrapper}>
             <Sidebar />
-            <div className={styles.content} style={{ backgroundColor: theme === "Dark" ? "#000000" : "#ffffff" }}>
+            <div className={styles.content} style={{ backgroundColor}}>
                 {renderComponent()}
             </div>
         </div>

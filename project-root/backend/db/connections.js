@@ -24,7 +24,6 @@ async function connectToDatabase() {
     }
 }
 
-// Close the connection when the application terminates
 process.on('SIGINT', async () => {
     if (client) {
         await client.close()

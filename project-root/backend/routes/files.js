@@ -7,6 +7,7 @@ import {
 } from '../utils/file_utils.js';
 import { addFileToSection } from '../utils/section_utils.js';
 import { checkAuthorization } from '../utils/auth.js';
+import {connectToDatabase} from "../db/connections.js";
 
 const router = express.Router();
 
@@ -75,5 +76,35 @@ router.use((err, req, res, next) => {
 
     next(err);
 });
+
+router.delete('/delete_file/:id', checkAuthorization, async (req, res) => {
+    try {
+        const fileId = req.params.id;
+        const db = connectToDatabase();
+
+        const sections = await db.collection('sections').find({
+            "files.id": fileId
+        }).toArray();
+
+        if (!sections || sections.length === 0) {
+            return res.status(404).json({ error: 'File not found in any section' });
+        }
+
+        const updatePromises = sections.map(section => {
+            return db.collection('sections').updateOne(
+                { _id: section._id },
+                { $pull: { files: { id: fileId } } }
+            );
+        });
+
+        await Promise.all(updatePromises);
+
+        res.json({ message: 'File deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting file:', error);
+        res.status(500).json({ error: 'Failed to delete file' });
+    }
+});
+
 
 export { router };

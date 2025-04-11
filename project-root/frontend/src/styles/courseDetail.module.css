@@ -275,6 +275,7 @@
 
 .studentsContainer {
     padding: 20px;
+    border-radius: 8px;
 }
 
 .studentsTitle {
@@ -338,6 +339,7 @@
 
 .settingsContainer {
     padding: 20px;
+    border-radius: 8px;
 }
 
 .settingsTitle {
@@ -387,7 +389,7 @@
 }
 
 .button:hover {
-    background-color: #9f9f9f;
+    opacity: 0.7;
 }
 
 .courseActions {
@@ -396,37 +398,6 @@
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #e2e8f0;
-}
-
-.exportButton, .deleteButton {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.exportButton {
-    background-color: #4a6fa5;
-    color: white;
-    border: none;
-}
-
-.exportButton:hover {
-    background-color: #3a5a8a;
-}
-
-.deleteButton {
-    background-color: white;
-    color: #e53e3e;
-    border: 1px solid #e53e3e;
-}
-
-.deleteButton:hover {
-    background-color: #fff5f5;
 }
 
 .loadingMessage, .errorMessage {
@@ -666,3 +637,254 @@
 .dropdownMenu button.deleteButton:hover {
     background-color: #fff5f5;
 }
+
+/* Enhanced Sections Tab Styles */
+.sectionsTab {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.contentSections {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.contentBlock {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.sectionItem {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.sectionItem:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateX(2px);
+}
+
+.activeSection {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-left: 3px solid #636363;
+    font-weight: 500;
+}
+
+.completionIndicator {
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+}
+
+.completedIcon {
+    color: #48bb78;
+    font-size: 16px;
+}
+
+.incompleteIcon {
+    color: #a0aec0;
+    font-size: 16px;
+}
+
+.fileItem {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
+}
+
+.fileItem:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.fileIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.05);
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+.fileLink {
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.fileLink:hover {
+    text-decoration: underline;
+}
+
+.deleteFileIcon {
+    color: #a0aec0;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: all 0.2s;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.deleteFileIcon:hover {
+    color: #636363;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.addFileButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background-color: #636363;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.addFileButton:hover {
+    background-color: #4a4a4a;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.addFileButton:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.noSectionSelected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    color: #a0aec0;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    border: 1px dashed rgba(160, 174, 192, 0.3);
+}
+
+.filesTitle {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(160, 174, 192, 0.2);
+}
+
+.quizActions {
+    display: flex;
+    gap: 8px;
+}
+
+.editButton, .previewButton, .deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.editButton {
+    color: #3498db;
+}
+
+.previewButton {
+    color: #2ecc71;
+}
+
+.deleteButton {
+    color: #e74c3c;
+}
+
+.editButton:hover, .previewButton:hover, .deleteButton:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.linkActions {
+    display: flex;
+    gap: 8px;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background-color: #ffffff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.fileActions {
+    display: flex;
+    gap: 8px;
+}
+
+.actionIcon {
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    color: #718096;
+}
+
+.actionIcon:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.deleteIcon {
+    color: #e74c3c;
+}
+
+.deleteIcon:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
