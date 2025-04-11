@@ -41,9 +41,22 @@
 
     ```bash
     cd frontend
+    ```
+
+3. Create a `.env.development` file in the `frontend/src` directory with the following content:
+
+    ```env
+    REACT_APP_BACKEND_URL=http://localhost:5010
+    ```
+
+4. Install dependencies and start the frontend application:
+
+    ```bash
     npm install
     npm start
     ```
+
+> The frontend application will use the backend URL specified in the `.env.development` file, which is accessed in `project-root/frontend/src/context/GlobalContext.js`.
 
 ---
 
