@@ -33,6 +33,7 @@ async function populateDatabase() {
         await db.collection('courses').drop().catch(() => console.log('No courses collection to drop'));
         await db.collection('sections').drop().catch(() => console.log('No sections collection to drop'));
         await db.collection('quiz').drop().catch(() => console.log('No quiz collection to drop'));
+        await db.collection('quiz_results').drop().catch(() => console.log('No quiz_results collection to drop'));
 
         const teacher1_id = new ObjectId();
         const teacher2_id = new ObjectId();
@@ -228,9 +229,35 @@ async function populateDatabase() {
             }
         }
 
+        const quiz_data = [
+            { _id: new ObjectId(), title: "Test 1" },
+            { _id: new ObjectId(), title: "Test 2" },
+            { _id: new ObjectId(), title: "Test 3" },
+            { _id: new ObjectId(), title: "Test 4" },
+            { _id: new ObjectId(), title: "Test 5" }
+        ];
+
+        const quizResultsArray = [];
+
+        for (const student of students_data) {
+            for (const course of courses_data) {
+                const results = quiz_data.reduce((acc, quiz) => {
+                    const randomScore = (Math.random() * (6 - 1) + 1).toFixed(2);
+                    acc[quiz._id.toString()] = parseFloat(randomScore);
+                    return acc;
+                }, {});
+                quizResultsArray.push({
+                    user_id: student._id,
+                    course_id: course._id,
+                    results: results
+                });
+            }
+        }
+
         await db.collection('users').insertMany([...teachers_data, ...students_data]);
         await db.collection('sections').insertMany(sections_data);
         await db.collection('courses').insertMany(courses_data);
+        await db.collection('quiz_results').insertMany(quizResultsArray);
 
         console.log('Database populated successfully.');
     } catch (error) {

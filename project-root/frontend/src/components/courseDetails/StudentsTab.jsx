@@ -104,7 +104,33 @@ export default function StudentsTab({ course, onCourseUpdated }) {
                     <p><strong>Nome:</strong> {selectedStudent?.name.split(' ')[0]}</p>
                     <p><strong>Cognome:</strong> {selectedStudent?.name.split(' ')[1]}</p>
                     <p><strong>Email:</strong> {selectedStudent?.email}</p>
-                    <Button onClick={() => setUnenrStudent(true)}>Uenr</Button>
+                    <table className={styles.gradesTable}>
+                        <thead>
+                        <tr>
+                            <th>Test</th>
+                            <th>Grade</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Test 1</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>Test 2</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>Test 3</td>
+                                <td>5.5</td>
+                            </tr>
+                            <tr>
+                                <td>Test 4</td>
+                                <td>2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <Button onClick={() => setUnenrStudent(true)}>Drop student</Button>
                 </Modal.Body>
                 <Modal.Footer className={styles.modalFooter}>
                     <Button onClick={handleClose}>Cancel</Button>
