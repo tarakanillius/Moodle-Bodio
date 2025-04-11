@@ -813,7 +813,7 @@ export default function SectionsTab({
 
             {isQuizTakerModalOpen && selectedQuizId && (
                 <div className={modalStyles.modalOverlay}>
-                    <div className={`${modalStyles.modalContent} ${modalStyles.fullWidthModal}`}>
+                    <div className={`${modalStyles.modalContent} ${modalStyles.fullWidthModal}`} style={{backgroundColor: backgroundColor}}>
                         <QuizTaker
                             quizId={selectedQuizId}
                             onClose={() => {
