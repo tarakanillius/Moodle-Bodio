@@ -275,7 +275,6 @@
 
 .studentsContainer {
     padding: 20px;
-    border-radius: 8px;
 }
 
 .studentsTitle {
@@ -339,7 +338,6 @@
 
 .settingsContainer {
     padding: 20px;
-    border-radius: 8px;
 }
 
 .settingsTitle {
@@ -389,7 +387,7 @@
 }
 
 .button:hover {
-    opacity: 0.7;
+    background-color: #9f9f9f;
 }
 
 .courseActions {
@@ -398,6 +396,37 @@
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #e2e8f0;
+}
+
+.exportButton, .deleteButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.exportButton {
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+}
+
+.exportButton:hover {
+    background-color: #3a5a8a;
+}
+
+.deleteButton {
+    background-color: white;
+    color: #e53e3e;
+    border: 1px solid #e53e3e;
+}
+
+.deleteButton:hover {
+    background-color: #fff5f5;
 }
 
 .loadingMessage, .errorMessage {
@@ -638,7 +667,41 @@
     background-color: #fff5f5;
 }
 
-/* Enhanced Sections Tab Styles */
+
+.gradesTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.gradesTable th {
+    background-color: #f5f5f5;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd;
+}
+
+.gradesTable td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.gradesTable tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.gradesTable tr:last-child td {
+    border-bottom: none;
+}
+
 .sectionsTab {
     display: flex;
     height: 100%;
@@ -887,4 +950,3 @@
 .deleteIcon:hover {
     background-color: rgba(231, 76, 60, 0.1);
 }
-
